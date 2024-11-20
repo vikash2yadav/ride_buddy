@@ -40,10 +40,10 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/contact"
+                  to="/privacy-policy"
                   className="text-xs text-gray-500 hover:text-gray-800"
                 >
-                  Private Policy
+                  Privacy Policy
                 </Link>
               </li>
               <li>
@@ -184,8 +184,8 @@ const Footer = () => {
               <Link to="/privacy-policy" className="text-gray-500 hover:text-gray-800 mr-4">
                 Privacy Policy
               </Link>
-              <Link to="/terms-of-service" className="text-gray-500 hover:text-gray-800">
-                Terms of Service
+              <Link to="/terms-conditions" className="text-gray-500 hover:text-gray-800">
+                Terms & Conditions
               </Link>
             </div>
           </div>

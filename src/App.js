@@ -1,13 +1,16 @@
 import React from "react";
-import Header from "./components/layouts/Header";
-import Footer from "./components/layouts/Footer" 
+import { Routes, Route } from "react-router-dom";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Footer from "./components/layouts/Footer";
+import TermsConditions from "./pages/TermsConditions";
 
 const App = () => {
   return (
-    <>
-      <Header/>
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<Footer />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/terms-conditions" element={<TermsConditions />} />
+    </Routes>
   );
 };
 
