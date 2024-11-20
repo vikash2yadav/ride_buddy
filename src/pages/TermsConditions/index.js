@@ -7,7 +7,7 @@ const TermsConditions = () => {
   return (
     <>
       <Header />
-      <div className="bg-gray-50 border border-gray-300 rounded-xl lg:mx-60 mt-4 lg:mt-10 text-gray-800">
+      <div className="bg-white shadow-md border border-gray-300 rounded-2xl md:mx-20 lg:mr-96 lg:ml-40 mt-4 lg:mt-10 text-gray-800">
         <div className="max-w-full mx-auto px-6 py-6">
           <h1 className="text-2xl font-semibold text-left text-gray-800 mb-4">
             Terms And Conditions

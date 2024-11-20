@@ -94,11 +94,11 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-white shadow-md top-0 left-0 w-full z-50">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-20">
+            <header className="bg-white shadow-md top-0 left-0 w-full z-50">
+            <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
             <div className="flex items-center space-x-2">
-              <Link className="text-2xl font-semibold text-blue-900" to="/">
+              <Link className="text-2xl font-semibold text-orange-600" to="/">
                 RideBuddy
               </Link>
             </div>
@@ -348,7 +348,7 @@ const Header = () => {
 
         <div className="">
           {/* Desktop Navigation Menu */}
-          <nav className="hidden md:flex max-w-screen-xl mx-auto px-6 lg:px-20 text-gray-900">
+          <nav className="hidden md:flex max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-900">
             <ul className="flex space-x-8 flex-grow">
               {navLinks.map((items) => (
                 <li key={items.path} className="relative group">
@@ -358,7 +358,7 @@ const Header = () => {
                   >
                     {items.title} <ArrowDropDownIcon />
                     {/* Orange bar appears on hover */}
-                    <span className="absolute left-0 right-0 top-0 h-[2px] bg-orange-500 scale-x-0 group-hover:scale-x-100 transition-all duration-300"></span>
+                    <span className="absolute left-0 right-0 top-0 h-[2px] bg-orange-600 scale-x-0 group-hover:scale-x-100 transition-all duration-300"></span>
                   </Link>
 
                   {/* Dropdown Menu */}

@@ -92,3 +92,79 @@ export const account_deletion_step = [
   "6. Read through the warning and check the box and agree to the terms and conditions.",
   "7. Click on Delete Account button and you will get a pop up asking for confirmation. Click on Delete.",
 ];
+
+export const ridebuddyLinks = [
+{
+  title: "About",
+  url: "/about"
+},
+{
+  title: "Careers With Us",
+  url: ""
+},
+{
+  title: "Terms & Conditions",
+  url: "/terms-conditions"
+},
+{
+  title: "Privacy Policy",
+  url: "/privacy-policy"
+},
+{
+  title: "Investors",
+  url: "/investors"
+},
+{
+  title: "FAQs",
+  url: "/FAQ"
+}
+];
+
+export const connectWithUsLinks = [
+  {
+    title: " Facebook",
+    url: "/"
+  },
+  {
+    title: "Contact Us",
+    url: "/contact_us"
+  },
+  {
+    title: "Advertise With Us",
+    url: "/"
+  },
+  {
+    title: "Become Partner Dealer",
+    url: "/"
+  },
+ ];
+
+ export const quickLinks = [
+ {
+  title: 'Home',
+  url: '/'
+ }
+];
+
+export const faqs = [
+  {
+    id: 1,
+    question: "What is RideBuddy.com?",
+    answer: "RideBuddy is an online service community that offers auto enthusiasts a friendly home where they can find car or bike on rent."
+  },
+  {
+    id: 2,
+    question: "How do I access RideBuddy.com?",
+    answer: "Searching for cars or bike on our website is easier and faster than ever. To begin, just go to our home page and decide how you would like to rent. You can use the buttons ,you can specify several criteria at once, or you can search by keywords that you type in."
+  },
+  {
+    id: 3,
+    question: "How is RideBuddy content organized?",
+    answer: "RideBuddy.com consists of four sub-categories Car Details, New Car Search By Make, Vehicle Type and Price Range, Dealer Details and Latest Car Details."
+  },
+  {
+    id: 4,
+    question: "How frequently is RideBuddy updated?",
+    answer: "WCF is updated weekly !!"
+  }
+];
