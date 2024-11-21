@@ -83,7 +83,7 @@ const BecomePartnerDealer = () => {
           </div>
 
           <div className="flex justify-center mt-5 mb-5">
-            <button className="w-80 px-12 py-3 rounded-lg text-white bg-orange-600">
+            <button className="w-80 px-12 py-3 rounded-lg text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
               Submit
             </button>
           </div>
@@ -95,14 +95,14 @@ const BecomePartnerDealer = () => {
           Bussiness With RideBuddy
         </h1>
 
-        <div className="flex md:flex-row flex-col">
+        <div className="flex md:flex-row flex-col flex-wrap">
           {bussinessWithRidebuddyPartnerRequest.map((item, index) => (
             <>
               <div className="px-6 py-6">
                 <span className="text-orange-600"> {item?.icon} </span>
                 <span className="">{item?.title}</span>
                 
-                <p className={`${item?.monstor ? 'text-5xl' : 'text-xl'} mt-2 mx-7`}>
+                <p className={`${item?.monstor ? 'md:text-5xl text-3xl' : 'md:text-xl'} mt-2 mx-7`}>
                   <Link>{item?.link}</Link>
                 </p>
                 {

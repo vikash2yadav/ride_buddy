@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Menu as MenuIcon,
@@ -16,41 +16,9 @@ import {
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-
-export const navLinks = [
-  {
-    title: "TOP RENTALS",
-    path: "/",
-    submenu: [
-      { path: "/", title: "John" },
-      { path: "/", title: "Shade" },
-    ],
-  },
-  {
-    title: "MOSTLY ORDERED",
-    path: "/",
-    submenu: [
-      { path: "/home/feature1", title: "5 stars" },
-      { path: "/home/feature2", title: "4 stars" },
-    ],
-  },
-  {
-    title: "VEHICLES",
-    path: "/",
-    submenu: [
-      { path: "/home/feature1", title: "Porshe" },
-      { path: "/home/feature2", title: "Suzuki" },
-    ],
-  },
-  {
-    title: "REVIEWS & EXPERIENCES",
-    path: "/",
-    submenu: [
-      { path: "/home/feature1", title: "Excellent" },
-      { path: "/home/feature2", title: "Worst" },
-    ],
-  },
-];
+import { navLinks } from "../../../config/sampleData";
+import { CommonContext } from "../../../context/CommonContext";
+import Login from "../../../pages/auth/Login";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -58,8 +26,8 @@ const Header = () => {
   const [cityEl, setCityEl] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
   const isLogin = false;
+  const { setModelOpen } = useContext(CommonContext);
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -87,6 +55,10 @@ const Header = () => {
     setSearchQuery(event.target.value);
   };
 
+  const handleLoginFormOpen = () => {
+    setModelOpen(true);
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
     alert("Searching for:", searchQuery); // Here you can implement actual search logic
@@ -94,8 +66,8 @@ const Header = () => {
 
   return (
     <>
-            <header className="bg-white shadow-md top-0 left-0 w-full z-50">
-            <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header className="bg-white shadow-md top-0 left-0 w-full z-50">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
             <div className="flex items-center space-x-2">
               <Link className="text-2xl font-semibold text-orange-600" to="/">
@@ -160,7 +132,7 @@ const Header = () => {
                 <>
                   <button
                     className="text-gray-900"
-                    onClick={() => {}}
+                    onClick={handleLoginFormOpen}
                     size="large"
                   >
                     Register / Login
@@ -303,7 +275,7 @@ const Header = () => {
                     <>
                       <button
                         className="text-sm text-gray-900"
-                        onClick={() => {}}
+                        onClick={handleLoginFormOpen}
                         size="large"
                       >
                         Register / Login
@@ -433,6 +405,7 @@ const Header = () => {
           </nav>
         )}
       </header>
+      <Login/>
     </>
   );
 };

@@ -7,7 +7,6 @@ import SelectBox from "../../components/form/SelectBox";
 import TextArea from "../../components/form/TextArea";
 import { CheckBox } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import HandshakeIcon from "@mui/icons-material/Handshake";
 import { bussinessWithRidebuddy, ourOffices } from "../../config/sampleData";
 
 const ContactUs = () => {
@@ -85,7 +84,7 @@ const ContactUs = () => {
           </div>
 
           <div className="flex justify-center mt-10 mb-5">
-            <button className="w-64 px-12 py-3 rounded-lg text-white bg-orange-600">
+            <button className="w-64 px-12 py-3 rounded-lg text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
               Submit
             </button>
           </div>
