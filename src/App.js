@@ -7,6 +7,7 @@ import FAQ from './pages/FAQ';
 import About from "./pages/About";
 import Investor from "./pages/Investor";
 import ContactUs from './pages/ContactUs';
+import BecomePartnerDealer from './pages/BecomePartnerDealer';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
       <Route path="/about" element={<About />} />
       <Route path="/contact_us" element={<ContactUs />} />
       <Route path="/investors" element={<Investor />} />
+      <Route path="/partner_request" element={<BecomePartnerDealer />} />
       <Route path="/terms-conditions" element={<TermsConditions />} />
     </Routes>
   );

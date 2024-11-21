@@ -13,12 +13,12 @@ const Investor = () => {
             Our Investors
           </h1>
 
-          <div className="flex">
-            <p className="text-lg">Year 2024-25</p>
+          <div className="md:flex block">
+            <p className="text-lg mb-3 md:mb-0">Year 2024-25</p>
 
-            <p className="text-lg px-8">RideBuddy Software Private Limited</p>
+            <p className="text-lg md:px-8 mb-3 md:mb-0">RideBuddy Software Private Limited</p>
 
-            <p className="text-orange-600 hover:text-orange-500 hover:underline">
+            <p className="text-orange-600 hover:text-orange-500 hover:underline mb-3 md:mb-0">
               <Link href="#">Go To Download</Link>
             </p>
           </div>
