@@ -2,6 +2,41 @@ import EmailIcon from "@mui/icons-material/Email";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import CallIcon from '@mui/icons-material/Call';
 
+export const navLinks = [
+  {
+    title: "TOP RENTALS",
+    path: "/",
+    submenu: [
+      { path: "/", title: "John" },
+      { path: "/", title: "Shade" },
+    ],
+  },
+  {
+    title: "MOSTLY ORDERED",
+    path: "/",
+    submenu: [
+      { path: "/home/feature1", title: "5 stars" },
+      { path: "/home/feature2", title: "4 stars" },
+    ],
+  },
+  {
+    title: "VEHICLES",
+    path: "/",
+    submenu: [
+      { path: "/home/feature1", title: "Porshe" },
+      { path: "/home/feature2", title: "Suzuki" },
+    ],
+  },
+  {
+    title: "REVIEWS & EXPERIENCES",
+    path: "/",
+    submenu: [
+      { path: "/home/feature1", title: "Excellent" },
+      { path: "/home/feature2", title: "Worst" },
+    ],
+  },
+];
+
 export const topicCovered = [
   "The type of information which You share with Us or which We collect during Your usage of our Platform or availing any Product or Services from Our Platform.",
   "The purpose of collection, storage, processing and transferring of Your Information by Us.",
