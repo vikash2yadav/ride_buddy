@@ -93,10 +93,9 @@ const Home = () => {
             </div>
           ))}
         </div>
-      </div>
 
-      {/* Dot Navigation (for Mobile) */}
-      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20 md:hidden">
+      </div>
+      <div className="absolute top-200 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20 md:hidden">
         {slides.map((slide, index) => (
           <div
             key={index}
@@ -111,7 +110,6 @@ const Home = () => {
           </div>
         ))}
       </div>
-
       <Footer />
     </>
   );
