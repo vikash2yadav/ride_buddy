@@ -66,7 +66,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-white shadow-md top-0 left-0 w-full z-50">
+      <header className="bg-white sticky shadow-md top-0 left-0 w-full z-50">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
             <div className="flex items-center space-x-2">
@@ -334,7 +334,7 @@ const Header = () => {
                   </Link>
 
                   {/* Dropdown Menu */}
-                  <div className="absolute left-0 right-0 bg-white w-48 border border-gray-300 rounded hidden group-hover:block">
+                  <div className="absolute z-50 left-0 right-0 bg-white w-48 border border-gray-300 rounded hidden group-hover:block">
                     <ul className="p-1">
                       {items.submenu &&
                         items.submenu.map((subItem, idx) => (

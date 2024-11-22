@@ -9,6 +9,8 @@ export const navLinks = [
     submenu: [
       { path: "/", title: "John" },
       { path: "/", title: "Shade" },
+      { path: "/", title: "John" },
+      { path: "/", title: "Shade" },
     ],
   },
   {
@@ -260,5 +262,34 @@ export const bussinessWithRidebuddyPartnerRequest = [
     title: "Rental Bussiness",
     link: "Become Partner Dealer",
     url: "",
+  },
+];
+
+export const slides = [
+  {
+    id: 1,
+    image: "./Untitled.jpeg",
+    title: "Drive in Style - Luxury Cars Available Now",
+    cta: "Know More",
+    link: "#luxury",
+    slideTitle: "Maruti Suzuki Maruti ",
+    modelName: '2024 Maruti',
+    premiumTitle: 'Launched'
+  },
+  {
+    id: 2,
+    image: "./Untitled2.jpeg",
+    title: "Perfect for Families – Spacious and Comfortable",
+    cta: "Know More",
+    link: "#family",
+    slideTitle: "Tesla",
+  },
+  {
+    id: 3,
+    image: "./Untitled2.jpeg",
+    title: "Perfect for Families – Spacious and Comfortable",
+    cta: "Know More",
+    link: "#family",
+    slideTitle: "Hyundai Creta",
   },
 ];
