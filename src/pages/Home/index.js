@@ -3,7 +3,9 @@ import Header from "../../components/layouts/Header";
 import Footer from "../../components/layouts/Footer";
 import { Link } from "react-router-dom";
 import { slides } from "../../config/sampleData";
+import List from "../../components/List";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -23,7 +25,7 @@ const Home = () => {
     <>
       <Header />
 
-      <div className=" md:mx-20 md:m-0 m-2 relative md:h-[550px] h-[300px] overflow-hidden rounded-2xl">
+      <div className="md:mx-20 md:m-0 m-2 relative md:h-[550px] h-[300px] overflow-hidden rounded-2xl md:rounded-none">
         <div className="absolute top-0 left-0 w-full h-full transition-transform duration-1000">
           <Link to="/">
             <div className="relative w-full h-full">
@@ -57,18 +59,19 @@ const Home = () => {
                   <ChevronRightIcon className="mx-1 bg-orange-600 rounded-2xl" />{" "}
                 </p>
               </div>
+
               {/* Navigation Buttons (Left and Right) */}
               <button
                 onClick={handlePrevSlide}
-                className="absolute md:flex hidden top-1/2 left-4 transform -translate-y-1/2 text-white text-3xl bg-orange-600 bg-opacity-50 z-10 rounded-full p-3 hover:bg-opacity-75 transition"
+                className="absolute top-1/2 md:left-4 left-2 transform -translate-y-1/2 text-white bg-orange-600 bg-opacity-50 z-10 rounded-full md:p-3 p-2 hover:bg-opacity-75 transition"
               >
-                &#60;
+                <ChevronLeftIcon />
               </button>
               <button
                 onClick={handleNextSlide}
-                className="absolute md:flex hidden top-1/2 right-4 transform -translate-y-1/2 text-white text-3xl bg-orange-600  bg-opacity-50 z-10 rounded-full p-3 hover:bg-opacity-75 transition"
+                className="absolute top-1/2 md:right-4 right-2 transform -translate-y-1/2 text-white bg-orange-600  bg-opacity-50 z-10 rounded-full md:p-3 p-2 hover:bg-opacity-75 transition"
               >
-                &#62;
+                <ChevronRightIcon />
               </button>
             </div>
           </Link>
@@ -93,7 +96,6 @@ const Home = () => {
             </div>
           ))}
         </div>
-
       </div>
       <div className="absolute top-200 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20 md:hidden">
         {slides.map((slide, index) => (
@@ -110,6 +112,8 @@ const Home = () => {
           </div>
         ))}
       </div>
+
+      <List />
       <Footer />
     </>
   );
