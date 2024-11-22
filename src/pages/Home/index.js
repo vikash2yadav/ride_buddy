@@ -23,7 +23,7 @@ const Home = () => {
     <>
       <Header />
 
-      <div className=" md:mx-20 m-2 relative md:h-[550px] h-[300px] overflow-hidden rounded-2xl">
+      <div className=" md:mx-20 md:m-0 m-2 relative md:h-[550px] h-[300px] overflow-hidden rounded-2xl">
         <div className="absolute top-0 left-0 w-full h-full transition-transform duration-1000">
           <Link to="/">
             <div className="relative w-full h-full">
