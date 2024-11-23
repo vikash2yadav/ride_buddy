@@ -1,6 +1,6 @@
 import EmailIcon from "@mui/icons-material/Email";
 import HandshakeIcon from "@mui/icons-material/Handshake";
-import CallIcon from '@mui/icons-material/Call';
+import CallIcon from "@mui/icons-material/Call";
 
 export const navLinks = [
   {
@@ -248,8 +248,8 @@ export const bussinessWithRidebuddyPartnerRequest = [
     icon: <CallIcon />,
     title: "CALL US",
     link: "76986 61812",
-    description: 'Mon to Sat 9:30 AM to 6 PM',
-    monstor: true
+    description: "Mon to Sat 9:30 AM to 6 PM",
+    monstor: true,
   },
   {
     icon: <EmailIcon />,
@@ -273,8 +273,8 @@ export const slides = [
     cta: "Know More",
     link: "#luxury",
     slideTitle: "Maruti Suzuki Maruti ",
-    modelName: '2024 Maruti',
-    premiumTitle: 'Launched'
+    modelName: "2024 Maruti",
+    premiumTitle: "Launched",
   },
   {
     id: 2,
@@ -292,4 +292,144 @@ export const slides = [
     link: "#family",
     slideTitle: "Hyundai Creta",
   },
+];
+
+export const mostlySearchedCars = [
+  {
+    image: "./Untitled.jpeg",
+    name: "2023 Toyota Corolla",
+    price: "39.90 Lakh",
+    rate: "",
+    url: "",
+    go: "Explore",
+  },
+  {
+    image: "./Untitled2.jpeg",
+    name: "2023 Toyota Corolla",
+    price: "39.90 Lakh",
+    rate: "",
+    url: "",
+    go: "Go",
+  },
+  {
+    image: "./download.jpeg",
+    name: "2023 Toyota",
+    price: "39.90 Lakh",
+    rate: "",
+    url: "",
+    go: "Rent",
+  },
+];
+
+export const CarCategories = [
+  {
+    id: "1",
+    name: "Xuv",
+  },
+  {
+    id: "1",
+    name: "Sedan",
+  },
+  {
+    id: "1",
+    name: "Luxury",
+  },
+  {
+    id: "1",
+    name: "Muv",
+  },
+];
+
+export const mostlySearchedBikes = [
+  {
+    image: "./bike1.jpeg",
+    name: "Bike 1",
+    price: "2 Lakh",
+    rate: "",
+    url: "",
+    go: "Explore",
+  },
+  {
+    image: "./bike2.jpeg",
+    name: "Bike 2",
+    price: "2.40 Lakh",
+    rate: "",
+    url: "",
+    go: "Go",
+  },
+  {
+    image: "./bike3.jpeg",
+    name: "2024 Bike 3",
+    price: "19.90 Lakh",
+    rate: "",
+    url: "",
+    go: "Rent",
+  },
+  {
+    image: "./bike3.jpeg",
+    name: "2024 Bike 3",
+    price: "19.90 Lakh",
+    rate: "",
+    url: "",
+    go: "Rent",
+  },
+  {
+    image: "./bike5.jpeg",
+    name: "2022 New Bike ",
+    price: "19.90 Lakh",
+    rate: "",
+    url: "",
+    go: "Rent",
+  },
+  {
+    image: "./bike6.jpeg",
+    name: "2022 Bike ",
+    price: "12.22",
+    rate: "",
+    url: "",
+    go: "Rent",
+  },
+];
+
+export const cities = [
+  {
+    name: "Ahmedabad",
+    icon: "./ahmedabad_logo.jpeg"
+  },
+  {
+    name: "Banglore",
+    icon: "./banglore_logo.jpeg",
+  },
+  {
+    name: "Chennai",
+    icon: "./chennai_logo.jpeg",
+  },
+  {
+    name: "Delhi NCR",
+    icon: "./delhi_ncr_logo.jpeg",
+  },
+  {
+    name: "New Delhi",
+    icon: "./new_delhi_logo.jpeg",
+  },
+  {
+    name: "Gurugram",
+    icon: "./gurugram_logo.jpeg",
+  },
+  {
+    name: "Jaipur",
+    icon: "./jaipur_logo.jpeg",
+  },
+  {
+    name: "Pune",
+    icon: "./pune_logo.jpeg",
+  },
+  {
+    name: 'Noida',
+    icon: "./noida_logo.jpeg"
+  },
+  {
+    name: 'Mumbai',
+    icon: "./mumbai_logo.jpeg"
+  }
 ];

@@ -11,3 +11,13 @@
 body{
   background-color: rgb(250, 250 , 250);
 }
+
+/* Hide scrollbar but keep scrolling */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;      /* Firefox */
+}

@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import Header from "../../components/layouts/Header";
 import Footer from "../../components/layouts/Footer";
 import { Link } from "react-router-dom";
-import { slides } from "../../config/sampleData";
+import {
+  CarCategories,
+  mostlySearchedCars,
+  slides,
+  cities
+} from "../../config/sampleData";
 import List from "../../components/List";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import Location from "../../components/Location";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -113,7 +119,14 @@ const Home = () => {
         ))}
       </div>
 
-      <List />
+      {/* mostly Searched Vehicles */}
+      <List
+        title="The most searched cars"
+        categories={CarCategories}
+        vehicleList={mostlySearchedCars}
+      />
+
+      <Location title="Get trusted rents nearby" locationList={cities} />
       <Footer />
     </>
   );
