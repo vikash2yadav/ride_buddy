@@ -12,7 +12,7 @@ const Location = ({ title, locationList }) => {
           {locationList?.map((city) => (
             <div
               key={city?.id}
-              className="hover:md:border hover:md:border-gray-300 md:shadow-md hover:shadow-xl rounded-xl cursor-pointer flex flex-col justify-center items-center md:p-4 p-2 mb-3"
+              className="md:border hover:md:border-gray-300 md:shadow-md hover:shadow-xl rounded-xl cursor-pointer flex flex-col justify-center items-center md:p-4 p-2 mb-3"
             >
               {/* City Icon */}
               {/* <div className="md:w-[90px] md:h-[90px] h-16"> */}

@@ -394,7 +394,7 @@ export const mostlySearchedBikes = [
 export const cities = [
   {
     name: "Ahmedabad",
-    icon: "./ahmedabad_logo.jpeg"
+    icon: "./ahmedabad_logo.jpeg",
   },
   {
     name: "Banglore",
@@ -425,11 +425,69 @@ export const cities = [
     icon: "./pune_logo.jpeg",
   },
   {
-    name: 'Noida',
-    icon: "./noida_logo.jpeg"
+    name: "Noida",
+    icon: "./noida_logo.jpeg",
   },
   {
-    name: 'Mumbai',
-    icon: "./mumbai_logo.jpeg"
-  }
+    name: "Mumbai",
+    icon: "./mumbai_logo.jpeg",
+  },
+];
+
+export const brands = [
+  {
+    name: "TATA",
+    icon: "./tata.png",
+    url: "",
+  },
+  {
+    name: "Hyundai",
+    icon: "./hyundai.jpeg",
+    url: "",
+  },
+  {
+    name: "Maruti",
+    icon: "./maruti.jpeg",
+    url: "",
+  },
+  {
+    name: "Kia",
+    icon: "./kia.png",
+    url: "",
+  },
+  {
+    name: "Toyota",
+    icon: "./toyota.jpeg",
+    url: "",
+  },
+  {
+    name: "Mahindra",
+    icon: "./mahindra.jpeg",
+    url: "",
+  },
+  {
+    name: "Honda",
+    icon: "./honda.jpeg",
+    url: "",
+  },
+  {
+    name: "MG",
+    icon: "./mg.png",
+    url: "",
+  },
+  {
+    name: "Scoda",
+    icon: "./scoda.jpeg",
+    url: "",
+  },
+  {
+    name: "Jeep",
+    icon: "./jeep.png",
+    url: "",
+  },
+  {
+    name: "Nissan",
+    icon: "./nissan.jpeg",
+    url: "",
+  },
 ];

@@ -23,7 +23,7 @@ const List = ({ title, categories, vehicleList }) => {
 
   return (
     <>
-      <div className="relative bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mx-40 mt-20 text-gray-800">
+      <div className="relative bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mx-40 md:mt-8 mt-3 text-gray-800">
         {/* Left button */}
         <button
           onClick={scrollLeft}
@@ -60,11 +60,11 @@ const List = ({ title, categories, vehicleList }) => {
           >
             {/* Add more vehicle items here */}
             {vehicleList?.map((item) => (
-              <div className="border border-gray-300 md:min-w-[280px] md:min-w-[280px] min-w-44 max-w-full rounded-lg items-center justify-center shadow-md">
+              <div className="border border-gray-300 md:min-w-[280px] md:max-w-[280px] min-w-44 max-w-full rounded-lg items-center justify-center shadow-md">
                 <img
                   src={item?.image}
                   alt="Vehicle 2"
-                  className=" md:min-w-[280px] md:max-w-[280px] min-w-28 max-w-full h-[180px] object-cover rounded-t-lg md:mb-5 mb-3"
+                  className="w-full min-w-28 max-w-full md:h-[200px] h-[140px] object-cover rounded-t-lg md:mb-5 mb-3"
                 />
                 <p className="mx-4 text-sm md:text-base mb-2 md:mb-1">
                   {item?.name}

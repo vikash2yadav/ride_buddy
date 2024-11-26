@@ -6,12 +6,15 @@ import {
   CarCategories,
   mostlySearchedCars,
   slides,
-  cities
+  cities,
+  brands,
+  mostlySearchedBikes
 } from "../../config/sampleData";
 import List from "../../components/List";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Location from "../../components/Location";
+import Brand from "../../components/Brand";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -126,6 +129,14 @@ const Home = () => {
         vehicleList={mostlySearchedCars}
       />
 
+ {/* mostly Searched bikes */}
+ <List
+        title="The most searched bikes"
+        categories={CarCategories}
+        vehicleList={mostlySearchedBikes}
+      />
+
+      <Brand title="Popular brands" brandList={brands}/>
       <Location title="Get trusted rents nearby" locationList={cities} />
       <Footer />
     </>
