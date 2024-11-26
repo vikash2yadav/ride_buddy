@@ -1,6 +1,52 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 const Brand = ({ title, brandList }) => {
+  const listRef = useRef(null);
+  const [showLeft, setShowLeft] = useState(false);
+  const [showRight, setShowRight] = useState(true);
+
+  // Function to handle left scroll
+  const scrollLeft = () => {
+    if (listRef.current) {
+      listRef.current.scrollBy({ left: -800, behavior: "smooth" });
+    }
+  };
+
+  // Function to handle right scroll
+  const scrollRight = () => {
+    if (listRef.current) {
+      listRef.current.scrollBy({ left: 800, behavior: "smooth" });
+    }
+  };
+
+  // Handle visibility of left and right buttons based on scroll position
+  useEffect(() => {
+    const checkScrollButtons = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = listRef.current;
+      setShowLeft(scrollLeft > 0); // Show left button only if scrolled right
+      setShowRight(scrollLeft < scrollWidth - clientWidth); // Show right button only if scrolled left
+    };
+
+    // Initial check
+    checkScrollButtons();
+
+    // Add event listener to update buttons visibility on scroll
+    const handleScroll = () => {
+      checkScrollButtons();
+    };
+
+    listRef.current.addEventListener("scroll", handleScroll);
+
+    // Cleanup event listener
+    return () => {
+      if (listRef.current) {
+        listRef.current.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [brandList]);
+
   return (
     <div className="relative bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mx-40 md:mt-8 mt-3 text-gray-800">
       <div className="max-w-full mx-auto py-4">
@@ -10,7 +56,10 @@ const Brand = ({ title, brandList }) => {
         </h1>
 
         {/* Brand List Section */}
-        <div className="w-full overflow-x-auto flex items-center space-x-4 p-4 mb-3">
+        <div
+          ref={listRef}
+          className="w-full flex items-center space-x-4 overflow-x-auto scrollbar-hidden p-4 mb-3"
+        >
           {brandList?.map((brand) => (
             <div
               key={brand?.id}
@@ -20,7 +69,7 @@ const Brand = ({ title, brandList }) => {
               <img
                 src={brand?.icon}
                 alt={brand?.name}
-                className="w-20 h-20 md:w-24 md:h-24 object-cover mb-3" // Ensures consistent size across screen sizes
+                className="w-20 h-20 md:w-24 md:h-24 object-cover mb-3"
               />
               {/* Brand Name */}
               <p className="text-center text-xs md:text-base text-gray-800">
@@ -29,6 +78,27 @@ const Brand = ({ title, brandList }) => {
             </div>
           ))}
         </div>
+
+        {/* Navigation Buttons (Left and Right) */}
+        {showLeft && (
+          <button
+            onClick={scrollLeft}
+            className="absolute shadow-md md:flex hidden top-1/2 left-2 transform -translate-y-1/2 text-black bg-white z-10 rounded-full p-3 hover:bg-opacity-75 transition"
+            aria-label="Scroll Left"
+          >
+            <ChevronLeftIcon />
+          </button>
+        )}
+
+        {showRight && (
+          <button
+            onClick={scrollRight}
+            className="absolute shadow-md md:flex hidden top-1/2 right-2 transform -translate-y-1/2 text-black bg-white z-10 rounded-full p-3 hover:bg-opacity-75 transition"
+            aria-label="Scroll Right"
+          >
+            <ChevronRightIcon />
+          </button>
+        )}
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import {
   slides,
   cities,
   brands,
-  mostlySearchedBikes
+  mostlySearchedBikes,
 } from "../../config/sampleData";
 import List from "../../components/List";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -72,13 +72,13 @@ const Home = () => {
               {/* Navigation Buttons (Left and Right) */}
               <button
                 onClick={handlePrevSlide}
-                className="absolute top-1/2 md:left-4 left-2 transform -translate-y-1/2 text-white bg-orange-600 bg-opacity-50 z-10 rounded-full md:p-3 p-2 hover:bg-opacity-75 transition"
+                className="absolute md:hidden flex top-1/2 left-1 transform -translate-y-1/2 text-black bg-white z-10 rounded-full p-2 hover:bg-opacity-90 transition"
               >
                 <ChevronLeftIcon />
               </button>
               <button
                 onClick={handleNextSlide}
-                className="absolute top-1/2 md:right-4 right-2 transform -translate-y-1/2 text-white bg-orange-600  bg-opacity-50 z-10 rounded-full md:p-3 p-2 hover:bg-opacity-75 transition"
+                className="absolute md:hidden flex top-1/2 right-1 transform -translate-y-1/2 text-black bg-white z-10 rounded-full p-2 hover:bg-opacity-90 transition"
               >
                 <ChevronRightIcon />
               </button>
@@ -106,7 +106,8 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <div className="absolute top-200 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20 md:hidden">
+
+      {/* <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20 md:hidden">
         {slides.map((slide, index) => (
           <div
             key={index}
@@ -120,7 +121,7 @@ const Home = () => {
             />
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* mostly Searched Vehicles */}
       <List
@@ -129,14 +130,14 @@ const Home = () => {
         vehicleList={mostlySearchedCars}
       />
 
- {/* mostly Searched bikes */}
- <List
+      {/* mostly Searched bikes */}
+      <List
         title="The most searched bikes"
         categories={CarCategories}
         vehicleList={mostlySearchedBikes}
       />
 
-      <Brand title="Popular brands" brandList={brands}/>
+      <Brand title="Popular brands" brandList={brands} />
       <Location title="Get trusted rents nearby" locationList={cities} />
       <Footer />
     </>
