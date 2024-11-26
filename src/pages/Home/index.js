@@ -72,13 +72,13 @@ const Home = () => {
               {/* Navigation Buttons (Left and Right) */}
               <button
                 onClick={handlePrevSlide}
-                className="absolute md:hidden flex top-1/2 left-1 transform -translate-y-1/2 text-black bg-white z-10 rounded-full p-2 hover:bg-opacity-90 transition"
+                className="absolute md:hidden flex top-1/2 left-1 transform -translate-y-1/2 text-black bg-gray-400 z-10 rounded-full p-1 hover:bg-opacity-90 transition"
               >
                 <ChevronLeftIcon />
               </button>
               <button
                 onClick={handleNextSlide}
-                className="absolute md:hidden flex top-1/2 right-1 transform -translate-y-1/2 text-black bg-white z-10 rounded-full p-2 hover:bg-opacity-90 transition"
+                className="absolute md:hidden flex top-1/2 right-1 transform -translate-y-1/2 text-black bg-gray-400 z-10 rounded-full p-1 hover:bg-opacity-90 transition"
               >
                 <ChevronRightIcon />
               </button>

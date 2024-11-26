@@ -105,11 +105,13 @@ const List = ({ title, categories, vehicleList }) => {
                 key={item?.id}
                 className="border border-gray-300 md:min-w-[280px] md:max-w-[280px] min-w-44 max-w-full rounded-lg items-center justify-center shadow-md"
               >
-                <img
-                  src={item?.image}
-                  alt="Vehicle 2"
-                  className="w-full min-w-28 max-w-full md:h-[200px] h-[140px] object-cover rounded-t-lg md:mb-5 mb-3"
-                />
+                <Link to={`/hero/splendor/2`}>
+                  <img
+                    src={item?.image}
+                    alt="Vehicle 2"
+                    className="w-full min-w-28 max-w-full md:h-[200px] h-[140px] object-cover rounded-t-lg md:mb-5 mb-3"
+                  />
+                </Link>
                 <p className="mx-4 text-sm md:text-base mb-2 md:mb-1">
                   {item?.name}
                 </p>

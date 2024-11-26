@@ -286,7 +286,7 @@ export const slides = [
   },
   {
     id: 3,
-    image: "./Untitled2.jpeg",
+    image: "./fortuner.jpeg",
     title: "Perfect for Families – Spacious and Comfortable",
     cta: "Know More",
     link: "#family",
@@ -312,8 +312,24 @@ export const mostlySearchedCars = [
     go: "Go",
   },
   {
-    image: "./download.jpeg",
+    image: "./fortuner.jpeg",
     name: "2023 Toyota",
+    price: "39.90 Lakh",
+    rate: "",
+    url: "",
+    go: "Rent",
+  },
+  {
+    image: "./suzuki.jpeg",
+    name: "2024 Maruti Suzuki",
+    price: "3 Lakh",
+    rate: "",
+    url: "",
+    go: "Rent",
+  },
+  {
+    image: "./bmw.jpeg",
+    name: "2020 BMW",
     price: "39.90 Lakh",
     rate: "",
     url: "",
@@ -491,3 +507,36 @@ export const brands = [
     url: "",
   },
 ];
+
+export const vehicleDetailKeyFeatures = [
+  {
+    title: "OVERVIEW",
+    Value: "overview",
+  },
+  {
+    title: "SPACE & FEATURES",
+    Value: "space_features",
+  },
+  {
+    title: "RECOMMENDED",
+    Value: "recommended",
+  },
+  {
+    title: "REVIEWS",
+    Value: "reviews",
+  },
+];
+
+export const overviewDetails = {
+  register_no: 23323232323,
+  fuel_type: 'Petrol',
+  insurance: 'Expired',
+  seats: 4,
+  total_km: 20000,
+  rto: 'ahmedabad',
+  ownership: 'first',
+  engine_displacement: "200 cc",
+  transmission: 'Manual',
+  manufacture_year: 2002
+
+};

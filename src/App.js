@@ -9,6 +9,7 @@ import ContactUs from './pages/ContactUs';
 import BecomePartnerDealer from './pages/BecomePartnerDealer';
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
+import VehicleDetails from './pages/VehicleDetails'
 import Home from "./pages/Home";
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/:brand/:model/:id" element={<VehicleDetails />} />
       <Route path="/FAQ" element={<FAQ />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact_us" element={<ContactUs />} />
