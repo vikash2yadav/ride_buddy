@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { Link } from "react-router-dom";
 
 const Brand = ({ title, brandList }) => {
   const listRef = useRef(null);
@@ -61,21 +62,23 @@ const Brand = ({ title, brandList }) => {
           className="w-full flex items-center space-x-4 overflow-x-auto scrollbar-hidden p-4 mb-3"
         >
           {brandList?.map((brand) => (
-            <div
-              key={brand?.id}
-              className="flex-shrink-0 md:w-48 md:h-48 border border-gray-300 rounded-xl cursor-pointer flex flex-col justify-center items-center p-4 mb-3"
-            >
-              {/* Brand Icon */}
-              <img
-                src={brand?.icon}
-                alt={brand?.name}
-                className="w-20 h-20 md:w-24 md:h-24 object-cover mb-3"
-              />
-              {/* Brand Name */}
-              <p className="text-center text-xs md:text-base text-gray-800">
-                {brand?.name}
-              </p>
-            </div>
+            <Link to={brand?.website_url} target="_blank">
+              <div
+                key={brand?.id}
+                className="flex-shrink-0 md:w-48 md:h-48 border border-gray-300 rounded-xl cursor-pointer flex flex-col justify-center items-center p-4 mb-3"
+              >
+                {/* Brand Icon */}
+                <img
+                  src={brand?.logo_url}
+                  alt={brand?.name}
+                  className="w-20 h-20 md:w-24 md:h-24 object-cover mb-3"
+                />
+                {/* Brand Name */}
+                <p className="text-center text-xs md:text-base text-gray-800">
+                  {brand?.name}
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
 

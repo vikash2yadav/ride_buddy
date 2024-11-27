@@ -538,5 +538,8 @@ export const overviewDetails = {
   engine_displacement: "200 cc",
   transmission: 'Manual',
   manufacture_year: 2002
-
 };
+
+export const features = [
+  
+]

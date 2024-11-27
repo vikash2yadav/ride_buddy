@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../../components/layouts/Header";
 import Footer from "../../components/layouts/Footer";
 import { Link } from "react-router-dom";
@@ -6,8 +6,6 @@ import {
   CarCategories,
   mostlySearchedCars,
   slides,
-  cities,
-  brands,
   mostlySearchedBikes,
 } from "../../config/sampleData";
 import List from "../../components/List";
@@ -15,9 +13,13 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Location from "../../components/Location";
 import Brand from "../../components/Brand";
+import { BrandContext } from "../../context/BrandContext";
+import { LocationContext } from "../../context/LocationContext";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { brandList, allBrands } = useContext(BrandContext);
+  const { cityList, allCities } = useContext(LocationContext);
 
   const handleNextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length); // Loop back to first slide
@@ -29,6 +31,11 @@ const Home = () => {
       (prevSlide) => (prevSlide - 1 + slides.length) % slides.length
     ); // Loop back to last slide
   };
+
+  useEffect(() => {
+    allBrands();
+    allCities();
+  }, []);
 
   return (
     <>
@@ -107,22 +114,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20 md:hidden">
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`relative flex flex-col items-center justify-center w-6 h-6 rounded-full cursor-pointer transition-all duration-300 
-                ${currentSlide === index ? "bg-orange-600" : "bg-gray-400"}`}
-          >
-            <div
-              className={`w-full transition-all duration-300 
-                  ${currentSlide === index ? "h-2" : "h-1"}`}
-            />
-          </div>
-        ))}
-      </div> */}
-
       {/* mostly Searched Vehicles */}
       <List
         title="The most searched cars"
@@ -137,8 +128,9 @@ const Home = () => {
         vehicleList={mostlySearchedBikes}
       />
 
-      <Brand title="Popular brands" brandList={brands} />
-      <Location title="Get trusted rents nearby" locationList={cities} />
+      <Brand title="Popular brands" brandList={brandList} />
+
+      <Location title="Get trusted rents nearby" locationList={cityList} />
       <Footer />
     </>
   );

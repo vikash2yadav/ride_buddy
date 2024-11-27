@@ -1,10 +1,14 @@
 import React from "react";
 import { CommonContextProvider } from "./CommonContext";
+import { BrandContextProvider } from "./BrandContext";
+import { LocationContextProvider } from "./LocationContext";
 
 const MainContext = ({ children }) => {
   return (
     <CommonContextProvider>
-      {children}
+      <BrandContextProvider>
+        <LocationContextProvider>{children}</LocationContextProvider>
+      </BrandContextProvider>
     </CommonContextProvider>
   );
 };
