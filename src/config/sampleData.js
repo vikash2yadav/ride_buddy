@@ -518,10 +518,6 @@ export const vehicleDetailKeyFeatures = [
     Value: "space_features",
   },
   {
-    title: "RECOMMENDED",
-    Value: "recommended",
-  },
-  {
     title: "REVIEWS",
     Value: "reviews",
   },

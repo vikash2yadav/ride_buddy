@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import CheckIcon from "@mui/icons-material/Check";
+import Rows from "../Overview/Rows";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-const Features = ({ title, data }) => {
-  const [openSections, setOpenSections] = useState(new Set());
+const Specifications = ({ title, data }) => {
+  const [openSections, setOpenSections] = useState(new Set()); // Use Set to store open sections
   const [show, setShow] = useState(false);
 
   const groupedData =
     data.length > 0 &&
     data.reduce((acc, item) => {
-      const specType = item?.feature_type?.name;
+      const specType = item?.specification_type?.name;
 
       if (!acc[specType]) {
         acc[specType] = [];
@@ -23,16 +23,16 @@ const Features = ({ title, data }) => {
     setOpenSections((prevSections) => {
       const newSections = new Set(prevSections);
       if (newSections.has(specType)) {
-        newSections.delete(specType);
+        newSections.delete(specType); // If the section is open, close it
       } else {
-        newSections.add(specType);
+        newSections.add(specType); // If the section is closed, open it
       }
       return newSections;
     });
   };
 
   return (
-    <div className="border border-gray-300  text-gray-800 py-4 rounded-2xl shadow-sm mb-3">
+    <div className="border border-gray-300 py-4 text-gray-800 rounded-2xl shadow-sm mb-3">
       <h1 className="text-xl font-medium mx-8 mb-5">{title}</h1>
 
       <div className="mx-8">
@@ -48,9 +48,9 @@ const Features = ({ title, data }) => {
                       </h2>
                       <button onClick={() => handleToggle(specType)}>
                         {openSections.has(specType) ? (
-                          <span className="text-orange-600">&#9650;</span>
+                          <span className="text-orange-600">&#9650;</span> // "Up" arrow
                         ) : (
-                          <span className="text-orange-600">&#9660;</span>
+                          <span className="text-orange-600">&#9660;</span> // "Down" arrow
                         )}
                       </button>
                     </>
@@ -60,17 +60,14 @@ const Features = ({ title, data }) => {
 
               {/* Render items if the section is open or if it's "Basic" */}
               {(openSections.has(specType) || specType === "Basic") && (
-                <div className="grid grid-cols-3 text-sm gap-4 text-gray-600 mt-1">
+                <div className="grid grid-cols-2 gap-4 text-gray-800 mt-1">
                   {groupedData[specType].map((item) => (
-                    <div className="flex">
-                      <span>
-                        {React.cloneElement(<CheckIcon />, {
-                          className: `text-sm mr-2 text-green-600`,
-                          style: { fontSize: "15px" },
-                        })}
-                      </span>
-                      <span>{item?.title}</span>
-                    </div>
+                    <Rows
+                      key={item.id}
+                      title={item.key}
+                      value={item.value}
+                      ext={item.ext}
+                    />
                   ))}
                 </div>
               )}
@@ -86,11 +83,11 @@ const Features = ({ title, data }) => {
         onClick={() => setShow(!show)}
         className="mx-8 text-orange-600 text-sm font-medium cursor-pointer mt-6"
       >
-        {show ? "Collapse" : "View All Features"}
+        {show ? "Collapse" : "View All Specifications"}
         <ChevronRightIcon className="text-orange-600 rounded-2xl" />
       </p>
     </div>
   );
 };
 
-export default Features;
+export default Specifications;
