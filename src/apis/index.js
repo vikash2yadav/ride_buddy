@@ -16,9 +16,9 @@ export async function callApi({ url, body, method, headers }) {
     return result;
   } catch (error) {
     if (error?.response?.status === 401) {
-      localStorage.removeItem("authorization");
-      localStorage.setItem("IsLoging", false);
-      window.location.href = "/login";
+      // localStorage.removeItem("authorization");
+      // localStorage.setItem("IsLoging", false);
+      // window.location.href = "/login";
     } else if (error.response) {
       return error.response;
     } else {

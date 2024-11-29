@@ -15,11 +15,13 @@ import Location from "../../components/Location";
 import Brand from "../../components/Brand";
 import { BrandContext } from "../../context/BrandContext";
 import { LocationContext } from "../../context/LocationContext";
+import { VehicleContext } from "../../context/VehicleContext";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { brandList, allBrands } = useContext(BrandContext);
   const { cityList, allCities } = useContext(LocationContext);
+  const { mostlySearchedVehicles, getVehicleList } = useContext(VehicleContext);
 
   const handleNextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length); // Loop back to first slide
@@ -35,6 +37,7 @@ const Home = () => {
   useEffect(() => {
     allBrands();
     allCities();
+    getVehicleList();
   }, []);
 
   return (
@@ -116,16 +119,9 @@ const Home = () => {
 
       {/* mostly Searched Vehicles */}
       <List
-        title="The most searched cars"
+        title="The most searched Vehicles"
         categories={CarCategories}
-        vehicleList={mostlySearchedCars}
-      />
-
-      {/* mostly Searched bikes */}
-      <List
-        title="The most searched bikes"
-        categories={CarCategories}
-        vehicleList={mostlySearchedBikes}
+        vehicleList={mostlySearchedVehicles}
       />
 
       <Brand title="Popular brands" brandList={brandList} />

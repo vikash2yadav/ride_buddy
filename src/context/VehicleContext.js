@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { getVehicleDataApi } from "../apis/vehicle";
+import { getVehicleDataApi, mostlySearchedVehiclesList } from "../apis/vehicle";
 export const VehicleContext = createContext();
 
 export const VehicleContextProvider = ({ children }) => {
@@ -7,6 +7,7 @@ export const VehicleContextProvider = ({ children }) => {
   const [vehicleSpecification, setVehicleSpecification] = useState({});
   const [vehicleFeature, setVehicleFeature] = useState({});
   const [vehicleReview, setVehicleReview] = useState({});
+  const [mostlySearchedVehicles, setMostlySearchedVehicles] = useState([]);
 
   const getVehicleDetail = async (id) => {
     let response = await getVehicleDataApi(
@@ -22,6 +23,13 @@ export const VehicleContextProvider = ({ children }) => {
     }
   };
 
+  const getVehicleList = async () => {
+    let response = await mostlySearchedVehiclesList("vehicle/list", undefined, 'POST');
+    if (response?.status === 200) {
+      setMostlySearchedVehicles(response?.data?.data);
+    }
+  };
+
   return (
     <VehicleContext.Provider
       value={{
@@ -32,7 +40,11 @@ export const VehicleContextProvider = ({ children }) => {
         setVehicleSpecification,
         vehicleFeature,
         setVehicleFeature,
-        vehicleReview, setVehicleReview
+        vehicleReview,
+        setVehicleReview,
+        mostlySearchedVehicles,
+        setMostlySearchedVehicles,
+        getVehicleList,
       }}
     >
       {children}

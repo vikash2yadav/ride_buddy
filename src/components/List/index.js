@@ -107,20 +107,20 @@ const List = ({ title, categories, vehicleList }) => {
               >
                 <Link to={`/hero/splendor/2`}>
                   <img
-                    src={item?.image}
+                    src={item?.vehicle_images[0]?.image_url}
                     alt="Vehicle 2"
                     className="w-full min-w-28 max-w-full md:h-[200px] h-[140px] object-cover rounded-t-lg md:mb-5 mb-3"
                   />
                 </Link>
                 <p className="mx-4 text-sm md:text-base mb-2 md:mb-1">
-                  {item?.name}
+                  {item?.brand?.name}
                 </p>
                 <p className="mx-4 text-xs md:text-base mb-2 md:mb-1">
-                  ₹ {item?.price} *
+                  ₹ {item?.price_per_day} *
                 </p>
                 <div className="flex justify-center items-center mt-5 md:mb-4 mb-3">
                   <button className="w-full mx-4 md:py-2 py-1 rounded-lg text-orange-600 bg-white border border-orange-600 hover:bg-orange-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-500">
-                    {item?.go}
+                    Explore
                   </button>
                 </div>
               </div>
