@@ -8,13 +8,14 @@ import ImageBox from "../../components/layouts/VehicleDetail/ImageBox";
 import Features from "../../components/layouts/VehicleDetail/Features";
 import Specifications from "../../components/layouts/VehicleDetail/Specifications";
 import { VehicleContext } from "../../context/VehicleContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReviewBox from "../../components/layouts/VehicleDetail/ReviewBox";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import SelectBox from "../../components/form/SelectBox";
 
 const VehicleDetails = () => {
   const params = useParams();
+  const navigate = useNavigate();
   const {
     vehicleSpecification,
     vehicleData,
@@ -111,6 +112,7 @@ const VehicleDetails = () => {
               disabled={
                 vehicleData?.availability_status !== "Available" ? true : false
               }
+              onClick={()=> navigate('checkout')}
               className={`w-full font-medium py-3 ${
                 vehicleData?.availability_status !== "Available"
                   ? "bg-white text-dark"

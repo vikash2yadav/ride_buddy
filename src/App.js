@@ -14,6 +14,7 @@ const Login = lazy(() => import("./pages/auth/Login"));
 const VehicleDetails = lazy(() => import("./pages/VehicleDetails"));
 const Home = lazy(() => import("./pages/Home"));
 const Loader = lazy(() => import("./components/layouts/Loader"));
+const Checkout = lazy(()=> import("./pages/Checkout"));
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/investors" element={<Investor />} />
         <Route path="/partner_request" element={<BecomePartnerDealer />} />
         <Route path="/terms-conditions" element={<TermsConditions />} />
+        <Route path="/:brand/:model/:id/checkout" element={<Checkout />} />
       </Routes>
     </Suspense>
   );
