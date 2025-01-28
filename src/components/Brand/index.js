@@ -1,12 +1,15 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { Link } from "react-router-dom";
+import { CommonContext } from "../../context/CommonContext";
+import Loader from "../layouts/Loader";
 
 const Brand = ({ title, brandList }) => {
   const listRef = useRef(null);
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(true);
+  const { isLoading } = useContext(CommonContext);
 
   // Function to handle left scroll
   const scrollLeft = () => {
@@ -61,7 +64,9 @@ const Brand = ({ title, brandList }) => {
           ref={listRef}
           className="w-full flex items-center space-x-4 overflow-x-auto scrollbar-hidden p-4 mb-3"
         >
-          {brandList?.map((brand) => (
+       {
+        !isLoading ? (
+          brandList?.map((brand) => (
             <Link to={brand?.website_url} target="_blank">
               <div
                 key={brand?.id}
@@ -79,7 +84,11 @@ const Brand = ({ title, brandList }) => {
                 </p>
               </div>
             </Link>
-          ))}
+          ))
+        ): ( 
+          <Loader/>
+        )
+       }
         </div>
 
         {/* Navigation Buttons (Left and Right) */}

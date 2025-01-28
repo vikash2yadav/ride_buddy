@@ -26,7 +26,7 @@ const VehicleDetails = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [current_amount, setCurrentPrice] = useState();
   const [loadingPrice, setLoadingPrice] = useState(true);
-
+  
   useMemo(() => {
     setTimeout(() => {
       setCurrentPrice(vehicleData?.price_per_day);
@@ -42,11 +42,9 @@ const VehicleDetails = () => {
     <>
       <Header />
       <div className="relative grid grid-cols-8 gap-3 mt-4 mx-40">
-        <div className="col-span-5 mx-10"> 
+        <div className="col-span-5 mx-10">
           {/* {image box } */}
-          <ImageBox
-            images={vehicleData?.vehicle_images}
-          />
+          <ImageBox images={vehicleData?.vehicle_images} />
           {/* {detail keys} */}
           <Detailkeys
             keys={vehicleDetailKeyFeatures}
@@ -56,9 +54,9 @@ const VehicleDetails = () => {
           {/* overview */}
           <Overview title="Overview" data={vehicleData} />
           {/* {features} */}
-          <Features title={"Features"} data={vehicleFeature} />
+          {/* <Features title={"Features"} data={vehicleFeature} /> */}
           {/* Specifications */}
-          <Specifications title="Specifications" data={vehicleSpecification} />
+          {/* <Specifications title="Specifications" data={vehicleSpecification} /> */}
 
           {/* Review */}
           <ReviewBox title="Rewiews & Ratings" data={vehicleReview} />
@@ -112,7 +110,7 @@ const VehicleDetails = () => {
               disabled={
                 vehicleData?.availability_status !== "Available" ? true : false
               }
-              onClick={()=> navigate('checkout')}
+              onClick={() => navigate("checkout")}
               className={`w-full font-medium py-3 ${
                 vehicleData?.availability_status !== "Available"
                   ? "bg-white text-dark"

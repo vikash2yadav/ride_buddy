@@ -1,7 +1,9 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link } from "react-router-dom";
+import { CommonContext } from "../../context/CommonContext";
+import Loader from "../../components/layouts/Loader";
 
 const List = ({ title, categories, vehicleList }) => {
   const listRef = useRef(null);
@@ -9,6 +11,7 @@ const List = ({ title, categories, vehicleList }) => {
   // State to control the visibility of the left and right buttons
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(true);
+  const { isLoading } = useContext(CommonContext);
 
   // Function to scroll the container left
   const scrollLeft = () => {
@@ -100,31 +103,33 @@ const List = ({ title, categories, vehicleList }) => {
             className="flex flex-row md:space-x-4 space-x-2 p-4 md:overflow-hidden overflow-x-auto scrollbar-hidden mb-3"
           >
             {/* Add more vehicle items here */}
-            {vehicleList?.map((item) => (
-              <div
-                key={item?.id}
-                className="border border-gray-300 md:min-w-[280px] md:max-w-[280px] min-w-44 max-w-full rounded-lg items-center justify-center shadow-md"
-              >
-                <Link to={`/hero/splendor/2`}>
-                  <img
-                    src={item?.vehicle_images[0]?.image_url}
-                    alt="Vehicle 2"
-                    className="w-full min-w-28 max-w-full md:h-[200px] h-[140px] object-cover rounded-t-lg md:mb-5 mb-3"
-                  />
-                </Link>
-                <p className="mx-4 text-sm md:text-base mb-2 md:mb-1">
-                  {item?.brand?.name}
-                </p>
-                <p className="mx-4 text-xs md:text-base mb-2 md:mb-1">
-                  ₹ {item?.price_per_day} *
-                </p>
-                <div className="flex justify-center items-center mt-5 md:mb-4 mb-3">
-                  <button className="w-full mx-4 md:py-2 py-1 rounded-lg text-orange-600 bg-white border border-orange-600 hover:bg-orange-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-500">
-                    Explore
-                  </button>
-                </div>
-              </div>
-            ))}
+            {!isLoading
+              ? vehicleList?.map((item) => (
+                  <div
+                    key={item?.id}
+                    className="border border-gray-300 md:min-w-[280px] md:max-w-[280px] min-w-44 max-w-full rounded-lg items-center justify-center shadow-md"
+                  >
+                    <Link to={`/hero/splendor/2`}>
+                      <img
+                        src={item?.vehicle_images[0]?.image_url}
+                        alt="Vehicle 2"
+                        className="w-full min-w-28 max-w-full md:h-[200px] h-[140px] object-cover rounded-t-lg md:mb-5 mb-3"
+                      />
+                    </Link>
+                    <p className="mx-4 text-sm md:text-base mb-2 md:mb-1">
+                      {item?.brand?.name}
+                    </p>
+                    <p className="mx-4 text-xs md:text-base mb-2 md:mb-1">
+                      ₹ {item?.price_per_day} *
+                    </p>
+                    <div className="flex justify-center items-center mt-5 md:mb-4 mb-3">
+                      <button className="w-full mx-4 md:py-2 py-1 rounded-lg text-orange-600 bg-white border border-orange-600 hover:bg-orange-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        Explore
+                      </button>
+                    </div>
+                  </div>
+                ))
+              : <Loader/>}
           </div>
 
           {/* View All Button */}
