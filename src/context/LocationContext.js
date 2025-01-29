@@ -10,8 +10,7 @@ export const LocationContextProvider = ({ children }) => {
 
   const allCities = async () => {
     let response = await allCityList(
-      "city/list",
-      { filters: { imp: `${isImp ? 1 : null}` } },
+      "city/imp/list",
       "POST"
     );
     if (response?.status === 200) {

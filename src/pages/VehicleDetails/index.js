@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState, useRef } from "react";
 import Header from "../../components/layouts/Header";
 import Footer from "../../components/layouts/Footer";
 import { vehicleDetailKeyFeatures } from "../../config/sampleData";
@@ -12,9 +12,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import ReviewBox from "../../components/layouts/VehicleDetail/ReviewBox";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import SelectBox from "../../components/form/SelectBox";
+import Loader from "../../components/layouts/Loader";
+import { CommonContext } from "../../context/CommonContext";
 
 const VehicleDetails = () => {
   const params = useParams();
+  const { isLoading } = useContext(CommonContext);
   const navigate = useNavigate();
   const {
     vehicleSpecification,
@@ -26,7 +29,12 @@ const VehicleDetails = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [current_amount, setCurrentPrice] = useState();
   const [loadingPrice, setLoadingPrice] = useState(true);
-  
+
+  // Refs for each section
+  const overviewRef = useRef();
+  const featuresRef = useRef();
+  const reviewsRef = useRef();
+
   useMemo(() => {
     setTimeout(() => {
       setCurrentPrice(vehicleData?.price_per_day);
@@ -36,9 +44,28 @@ const VehicleDetails = () => {
 
   useEffect(() => {
     getVehicleDetail(params?.id);
-  }, []);
+  }, [params?.id]);
 
-  return (
+  useEffect(() => {
+    if (activeIndex === 0 && overviewRef.current) {
+      window.scrollTo({
+        top: overviewRef.current.offsetTop - 60,
+        behavior: "smooth",
+      });
+    } else if (activeIndex === 1 && featuresRef.current) {
+      window.scrollTo({
+        top: featuresRef.current.offsetTop,
+        behavior: "smooth",
+      });
+    } else if (activeIndex === 2 && reviewsRef.current) {
+      window.scrollTo({
+        top: reviewsRef.current.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  }, [activeIndex]);
+
+  return !isLoading ? (
     <>
       <Header />
       <div className="relative grid grid-cols-8 gap-3 mt-4 mx-40">
@@ -51,15 +78,29 @@ const VehicleDetails = () => {
             activeIndex={activeIndex}
             setActiveIndex={setActiveIndex}
           />
+
           {/* overview */}
-          <Overview title="Overview" data={vehicleData} />
+          <div ref={overviewRef}>
+            <Overview title="Overview" data={vehicleData} />
+          </div>
+
           {/* {features} */}
-          {/* <Features title={"Features"} data={vehicleFeature} /> */}
+          <div ref={featuresRef}>
+            <Features title={"Features"} data={vehicleFeature} />
+          </div>
+
           {/* Specifications */}
-          {/* <Specifications title="Specifications" data={vehicleSpecification} /> */}
+          <div>
+            <Specifications
+              title="Specifications"
+              data={vehicleSpecification}
+            />
+          </div>
 
           {/* Review */}
-          <ReviewBox title="Rewiews & Ratings" data={vehicleReview} />
+          <div ref={reviewsRef}>
+            <ReviewBox title="Reviews & Ratings" data={vehicleReview} />
+          </div>
         </div>
 
         {!loadingPrice ? (
@@ -135,9 +176,10 @@ const VehicleDetails = () => {
           <p>Loading..</p>
         )}
       </div>
-
       <Footer />
     </>
+  ) : (
+    <Loader />
   );
 };
 

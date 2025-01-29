@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/layouts/Header";
 import Footer from "../../components/layouts/Footer";
 import EmailIcon from "@mui/icons-material/Email";
@@ -10,6 +10,13 @@ import { Link } from "react-router-dom";
 import { bussinessWithRidebuddy, ourOffices } from "../../config/sampleData";
 
 const ContactUs = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Add smooth scroll animation
+    });
+  }, []);
+
   const handleShowForTerms = () => {
     alert(
       "This form have some fields and you are sharing your personal data with us, Please share your right information that we will contact you."

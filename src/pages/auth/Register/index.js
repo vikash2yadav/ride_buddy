@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import InputBox from "../../../components/form/InputBox";
 import { Link, useNavigate } from "react-router-dom";
 import { CheckBox } from "@mui/icons-material";
+import { useFormik } from "formik";
+import { initialValues, validationSchema } from "./Schema";
 
 const Register = () => {
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+  
   const navigate = useNavigate();
   const handleShowForTerms = () => {
     alert(
       "This form have some fields and you are sharing your personal data with us, Please share your right information that we will contact you."
     );
   };
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-  };
 
   return (
     <>
-      <div className="fixed inset-0 bg-gray-800 bg-opacity-60 flex justify-center items-center z-50">
+      <div className="w-full md:h-screen inset-0 bg-gray-800 bg-opacity-60 flex justify-center items-center z-50 overflow-y-auto">
         <div
           className="bg-white rounded-lg p-8 shadow-lg relative"
           onClick={(e) => e.stopPropagation()}
@@ -33,29 +35,35 @@ const Register = () => {
             Create a new account by filling the form below.
           </p>
 
-          <form onSubmit={handleLogin}>
+          <form onSubmit={formik.handleSubmit}>
             <div className="mb-3 grid md:grid-cols-2 gap-4">
               <InputBox
-                // onChange={(e) => setEmail(e.target.value)}
+                name="first_name"
+                value={formik.values.first_name}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 className="w-64"
                 label="Enter First Name"
-                options={[{ title: "Email" }, { title: "Username" }]}
                 required
               />
               <InputBox
-                // onChange={(e) => setEmail(e.target.value)}
+                name="last_name"
+                value={formik.values.last_name}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 className="w-64"
                 label="Enter Last Name"
-                options={[{ title: "Email" }, { title: "Username" }]}
                 required
               />
             </div>
 
             <div className="mb-3">
               <InputBox
+                name="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
                 className="w-full"
                 label="Enter email"
                 required
@@ -64,9 +72,11 @@ const Register = () => {
 
             <div className="mb-3">
               <InputBox
+                name="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
                 className="w-full"
                 label="Enter Password"
                 required
@@ -75,9 +85,11 @@ const Register = () => {
 
             <div className="mb-3">
               <InputBox
+                name="confirm_password"
+                value={formik.values.confirm_password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
                 className="w-full"
                 label="Enter Confirm Password"
                 required
@@ -97,9 +109,8 @@ const Register = () => {
             </div>
 
             <div className="grid md:grid-cols-2 gap-2">
-            <button
-                type="submit"
-                onClick={()=> navigate('/')}
+              <button
+                onClick={() => navigate("/")}
                 className="w-full py-3 bg-white text-black border border-gray-300 rounded-lg shadow-md mb-5"
               >
                 Back

@@ -7,8 +7,8 @@ const Features = ({ title, data }) => {
   const [show, setShow] = useState(false);
 
   const groupedData =
-    data.length > 0 &&
-    data.reduce((acc, item) => {
+    data?.length > 0 &&
+    data?.reduce((acc, item) => {
       const specType = item?.feature_type?.name;
 
       if (!acc[specType]) {
@@ -36,7 +36,7 @@ const Features = ({ title, data }) => {
       <h1 className="text-xl font-medium mx-8 mb-5">{title}</h1>
 
       <div className="mx-8">
-        {Object.keys(groupedData).length > 0 ? (
+        {Object.keys(groupedData)?.length > 0 ? (
           Object.keys(groupedData).map((specType, index) => (
             <div key={index} className="mb-4">
               {show && (

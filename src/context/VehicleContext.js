@@ -1,20 +1,18 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import { getVehicleDataApi, mostlySearchedVehiclesList } from "../apis/vehicle";
-import { CommonContext } from "./CommonContext";
 export const VehicleContext = createContext();
 
 export const VehicleContextProvider = ({ children }) => {
-  // const {} = useContext(CommonCon);
+  const [isVehicleLoading, setIsVehicleLoading] = useState(false);
   const [vehicleData, setVehicleData] = useState({});
   const [vehicleSpecification, setVehicleSpecification] = useState({});
   const [vehicleFeature, setVehicleFeature] = useState({});
   const [vehicleReview, setVehicleReview] = useState({});
   const [mostlySearchedVehicles, setMostlySearchedVehicles] = useState([]);
-  const {setIsLoading} = useContext(CommonContext);
 
   const getVehicleDetail = async (id) => {
     let response = await getVehicleDataApi(
-      `vehicle/get/${1}`,
+      `vehicle/get/${id}`,
       undefined,
       "GET"
     );
@@ -26,12 +24,14 @@ export const VehicleContextProvider = ({ children }) => {
     }
   };
 
-  const getVehicleList = async () => {
-    let response = await mostlySearchedVehiclesList("vehicle/list", undefined, 'POST');
+  const getVehicleList = async (values) => {
+    setIsVehicleLoading(true)
+    let response = await mostlySearchedVehiclesList("vehicle/list", values, 'POST');
     if (response?.status === 200) {
       setMostlySearchedVehicles(response?.data?.data);
+      setIsVehicleLoading(false);
     }else{
-      setIsLoading(true);
+      setIsVehicleLoading(true);
     }
   };
 
@@ -50,6 +50,8 @@ export const VehicleContextProvider = ({ children }) => {
         mostlySearchedVehicles,
         setMostlySearchedVehicles,
         getVehicleList,
+        isVehicleLoading, 
+        setIsVehicleLoading
       }}
     >
       {children}

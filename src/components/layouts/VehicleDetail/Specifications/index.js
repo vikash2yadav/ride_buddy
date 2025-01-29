@@ -7,8 +7,8 @@ const Specifications = ({ title, data }) => {
   const [show, setShow] = useState(false);
 
   const groupedData =
-    data.length > 0 &&
-    data.reduce((acc, item) => {
+    data?.length > 0 &&
+    data?.reduce((acc, item) => {
       const specType = item?.specification_type?.name;
 
       if (!acc[specType]) {

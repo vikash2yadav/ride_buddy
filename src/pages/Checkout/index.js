@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/layouts/Header";
 import Footer from "../../components/layouts/Footer";
 import InputBox from "../../components/form/InputBox";
@@ -65,6 +65,13 @@ const Checkout = () => {
     alert("Order placed successfully!");
   };
 
+   useEffect(()=> {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth", // Add smooth scroll animation
+        });
+      }, []);
+      
   return (
     <>
       <Header />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
 import {
@@ -9,6 +9,12 @@ import {
 } from "../../config/sampleData";
 
 const PrivacyPolicy = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Add smooth scroll animation
+    });
+  }, []);
   return (
     <>
       <Header />

@@ -2,12 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Header from "../../components/layouts/Header";
 import Footer from "../../components/layouts/Footer";
 import { Link } from "react-router-dom";
-import {
-  CarCategories,
-  mostlySearchedCars,
-  slides,
-  mostlySearchedBikes,
-} from "../../config/sampleData";
+import { CarCategories, slides } from "../../config/sampleData";
 import List from "../../components/List";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -16,9 +11,12 @@ import Brand from "../../components/Brand";
 import { BrandContext } from "../../context/BrandContext";
 import { LocationContext } from "../../context/LocationContext";
 import { VehicleContext } from "../../context/VehicleContext";
+import { CommonContext } from "../../context/CommonContext";
+import Loader from "../../components/layouts/Loader";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { isLoading } = useContext(CommonContext);
   const { brandList, allBrands } = useContext(BrandContext);
   const { cityList, allCities } = useContext(LocationContext);
   const { mostlySearchedVehicles, getVehicleList } = useContext(VehicleContext);
@@ -40,7 +38,14 @@ const Home = () => {
     getVehicleList();
   }, []);
 
-  return (
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Add smooth scroll animation
+    });
+  }, []);
+
+  return !isLoading ? (
     <>
       <Header />
 
@@ -102,7 +107,7 @@ const Home = () => {
               key={index}
               onClick={() => setCurrentSlide(index)}
               className={`relative flex flex-col items-start justify-center md:w-32 w-24  rounded-full py-2 px-1 cursor-pointer transition-all duration-300 
-        text-white shadow-lg`}
+      text-white shadow-lg`}
             >
               <span className="text-sm font-semibold md:mb-2 mb-1">
                 {slide.slideTitle}
@@ -110,7 +115,7 @@ const Home = () => {
 
               <div
                 className={`w-full transition-all duration-300 
-          ${currentSlide === index ? "bg-white h-1.5" : "bg-gray-400 h-0.5"}`}
+        ${currentSlide === index ? "bg-white h-1.5" : "bg-gray-400 h-0.5"}`}
               />
             </div>
           ))}
@@ -129,6 +134,8 @@ const Home = () => {
       <Location title="Get trusted rents nearby" locationList={cityList} />
       <Footer />
     </>
+  ) : (
+    <Loader />
   );
 };
 

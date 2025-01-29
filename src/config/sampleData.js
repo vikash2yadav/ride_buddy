@@ -343,15 +343,15 @@ export const CarCategories = [
     name: "Xuv",
   },
   {
-    id: "1",
+    id: "2",
     name: "Sedan",
   },
   {
-    id: "1",
+    id: "3",
     name: "Luxury",
   },
   {
-    id: "1",
+    id: "4",
     name: "Muv",
   },
 ];
