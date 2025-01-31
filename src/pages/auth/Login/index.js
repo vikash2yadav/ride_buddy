@@ -5,19 +5,46 @@ import CloseIcon from "@mui/icons-material/Close";
 import InputBox from "../../../components/form/InputBox";
 import SelectBox from "../../../components/form/SelectBox";
 import { Link, useNavigate, useLocation } from "react-router-dom"; // Import Link from react-router-dom
+import { useFormik } from "formik";
+import {
+  loginByUsernameInitialValues,
+  loginByUsernameValidationSchema,
+  loginInitialValues,
+  loginValidationSchema,
+} from "./Schema";
+import { loginAPi } from "../../../apis/auth";
+import ErrorMessage from "../../../components/form/ErrorMessage";
+import { authenticationOptions } from "../../../utils/helper";
 
 const Login = () => {
+  const [type, setType] = useState("email");
+  const { setSnackOpen, setSnackMessage, setMessageType } =
+    useContext(CommonContext);
+
+  const formik = useFormik({
+    initialValues:
+      type === "email" ? loginInitialValues : loginByUsernameInitialValues,
+    validationSchema:
+      type === "email"
+        ? loginValidationSchema
+        : loginByUsernameValidationSchema,
+    onSubmit: async (values) => {
+      let response = await loginAPi("user/sign-in", values, "POST");
+      if (response?.status === 200) {
+        setSnackOpen(true);
+        setMessageType("success");
+        setSnackMessage(response?.data?.message);
+      } else {
+        setSnackOpen(true);
+        setMessageType("error");
+        setSnackMessage(response?.data?.message);
+      }
+    },
+  });
+
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { modelOpen, setModelOpen } = useContext(CommonContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-  };
 
   useEffect(() => {
     if (pathname === "/login") {
@@ -53,37 +80,68 @@ const Login = () => {
             </p>
 
             {/* Login Form */}
-            <form onSubmit={handleLogin}>
+            <form onSubmit={formik.handleSubmit}>
               <div className="mb-3">
                 <SelectBox
-                  // onChange={(e) => setEmail(e.target.value)}
+                  name={"type"}
+                  value={formik.values.type}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    setType(e.target.value);
+                  }}
+                  onBlur={formik.handleBlur}
                   className="w-full"
-                  label="Enter Authentication type"
-                  options={[{ title: "Email" }, { title: "Username" }]}
+                  label="Select Authentication type"
+                  options={authenticationOptions}
                   required
                 />
+                {formik.errors.type && formik.touched.type && (
+                  <ErrorMessage message={formik.errors.type} />
+                )}
               </div>
 
               <div className="mb-3">
                 <InputBox
+                  name={type === "email" ? `email` : "username"}
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={
+                    type === "email"
+                      ? formik.values.email
+                      : formik.values.username
+                  }
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   className="w-full"
-                  label="Enter your email"
+                  label={`Enter your ${
+                    type === "email" ? "email" : "username"
+                  }`}
                   required
                 />
+                {type === "email"
+                  ? formik.errors.email &&
+                    formik.touched.email && (
+                      <ErrorMessage message={formik.errors.email} />
+                    )
+                  : formik.errors.username &&
+                    formik.touched.username && (
+                      <ErrorMessage message={formik.errors.username} />
+                    )}
               </div>
 
               <div className="mb-3">
                 <InputBox
+                  name="password"
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   className="w-full"
                   label="Enter your Password"
                   required
                 />
+                {formik.errors.password && formik.touched.password && (
+                  <ErrorMessage message={formik.errors.password} />
+                )}
               </div>
 
               <div className="flex justify-between items-center mb-6">
@@ -97,17 +155,19 @@ const Login = () => {
                     Remember me
                   </label>
                 </div>
-                <a
+                <Link
                   href="#"
                   className="text-sm text-blue-600 hover:text-blue-800"
                 >
                   Forgot Password?
-                </a>
+                </Link>
               </div>
 
               <div className="flex justify-center gap-2">
                 <button
-                onClick={() => {navigate('/')}}
+                  onClick={() => {
+                    navigate("/");
+                  }}
                   type="submit"
                   className="w-full py-3 bg-white text-black border border-gray-300 rounded-lg shadow-md mb-5"
                 >
