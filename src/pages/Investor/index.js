@@ -2,9 +2,36 @@ import React, { useEffect } from "react";
 import Header from "../../components/layouts/Header";
 import Footer from "../../components/layouts/Footer";
 import { Link } from "react-router-dom";
+import jsPDF from "jspdf";
 
 const Investor = () => {
-  useEffect(()=>{
+  // Function to generate PDF
+  const generatePDF = () => {
+    const doc = new jsPDF();
+
+    // Add title
+    doc.setFontSize(16);
+    doc.text("Investor Report", 20, 20);
+
+    // Add content - list of investors
+    const investors = [
+      { name: "Vikash Yadav", share: "30%" },
+      { name: "Rohit Sharma", share: "20%" },
+      { name: "Virat Kohli", share: "50%" },
+    ];
+
+    doc.setFontSize(12);
+    let yPosition = 30;
+    investors.forEach((investor, index) => {
+      doc.text(`${investor.name}: ${investor.share}`, 20, yPosition);
+      yPosition += 10;
+    });
+
+    // Save the PDF
+    doc.save("investor_report.pdf");
+  };
+
+  useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth", // Add smooth scroll animation
@@ -22,10 +49,12 @@ const Investor = () => {
           <div className="md:flex block">
             <p className="text-lg mb-3 md:mb-0">Year 2024-25</p>
 
-            <p className="text-lg md:px-8 mb-3 md:mb-0">RideBuddy Software Private Limited</p>
+            <p className="text-lg md:px-8 mb-3 md:mb-0">
+              RideBuddy Software Private Limited
+            </p>
 
             <p className="text-orange-600 hover:text-orange-500 hover:underline mb-3 md:mb-0">
-              <Link href="#">Go To Download</Link>
+              <Link onClick={generatePDF}>Go To Download</Link>
             </p>
           </div>
         </div>

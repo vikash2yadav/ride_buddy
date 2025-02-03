@@ -8,10 +8,12 @@ const TextArea = ({
   value,
   handleChange,
   placeholder,
+  name,
 }) => {
   return (
     <>
       <TextareaAutosize
+        name={name}
         minRows={minRows}
         maxRows={maxRows}
         value={value}

@@ -9,3 +9,8 @@ export const loginAPi = async (url, body, method, headers) => {
   let response = await callApi({ url, body, method, headers });
   return response;
 };
+
+export const logoutAPi = async (url, body, method, headers) => {
+  let response = await callApi({ url, body, method, headers });
+  return response;
+};

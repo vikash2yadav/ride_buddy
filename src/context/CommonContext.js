@@ -5,8 +5,11 @@ export const CommonContextProvider = ({ children }) => {
   const [modelOpen, setModelOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   const [messageType, setMessageType] = useState(null);
-  const [message, setMessage] = useState(null);
+  const [snackMessage, setSnackMessage] = useState(null);
+  const [currentLang, setCurrentLang] = useState("English");
+  const [currentLangCode, setCurrentLangCode] = useState("eng");
 
   return (
     <CommonContext.Provider
@@ -17,10 +20,16 @@ export const CommonContextProvider = ({ children }) => {
         setIsLoading,
         snackOpen,
         setSnackOpen,
-        message,
-        setMessage,
+        snackMessage,
+        setSnackMessage,
         messageType,
         setMessageType,
+        isLogin,
+        setIsLogin,
+        currentLang,
+        setCurrentLang,
+        currentLangCode,
+        setCurrentLangCode,
       }}
     >
       {children}

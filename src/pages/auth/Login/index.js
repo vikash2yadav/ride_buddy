@@ -18,7 +18,7 @@ import { authenticationOptions } from "../../../utils/helper";
 
 const Login = () => {
   const [type, setType] = useState("email");
-  const { setSnackOpen, setSnackMessage, setMessageType } =
+  const { setSnackOpen, setSnackMessage, setMessageType, setIsLogin, setIsLoading } =
     useContext(CommonContext);
 
   const formik = useFormik({
@@ -29,12 +29,23 @@ const Login = () => {
         ? loginValidationSchema
         : loginByUsernameValidationSchema,
     onSubmit: async (values) => {
+      setIsLoading(true);
       let response = await loginAPi("user/sign-in", values, "POST");
+
       if (response?.status === 200) {
+        setIsLoading(false);
         setSnackOpen(true);
         setMessageType("success");
         setSnackMessage(response?.data?.message);
+        setModelOpen(false);
+        setIsLogin(true);
+        localStorage.setItem(
+          "authorization",
+          (response?.data?.data?.token)
+        );
+        navigate("/");
       } else {
+        setIsLoading(true);
         setSnackOpen(true);
         setMessageType("error");
         setSnackMessage(response?.data?.message);
@@ -88,6 +99,14 @@ const Login = () => {
                   onChange={(e) => {
                     formik.handleChange(e);
                     setType(e.target.value);
+
+                    if (type === "email") {
+                      formik.setFieldValue("email", "");
+                      formik.setFieldValue("password", "");
+                    } else {
+                      formik.setFieldValue("username", "");
+                      formik.setFieldValue("password", "");
+                    }
                   }}
                   onBlur={formik.handleBlur}
                   className="w-full"
@@ -103,7 +122,7 @@ const Login = () => {
               <div className="mb-3">
                 <InputBox
                   name={type === "email" ? `email` : "username"}
-                  type="email"
+                  type={type === "email" ? `email` : "text"}
                   value={
                     type === "email"
                       ? formik.values.email

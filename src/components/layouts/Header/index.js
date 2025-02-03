@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Menu as MenuIcon,
   AccountCircle,
@@ -19,15 +19,32 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { navLinks } from "../../../config/sampleData";
 import { CommonContext } from "../../../context/CommonContext";
 import Login from "../../../pages/auth/Login";
+import { logoutAPi } from "../../../apis/auth";
+import { LocationContext } from "../../../context/LocationContext";
+import { HindiDataList } from "../../../language/hindi";
+import { GujaratiDataList } from "../../../language/gujarati";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [langEl, setLangEl] = useState(null);
   const [cityEl, setCityEl] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const isLogin = false;
-  const { setModelOpen } = useContext(CommonContext);
+  const {
+    setModelOpen,
+    isLogin,
+    setIsLoading,
+    setIsLogin,
+    setSnackOpen,
+    setMessageType,
+    setSnackMessage,
+    currentLang,
+    setCurrentLang,
+    currentLangCode,
+    setCurrentLangCode
+  } = useContext(CommonContext);
+  const { cityList, allCities } = useContext(LocationContext);
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -64,6 +81,60 @@ const Header = () => {
     alert("Searching for:", searchQuery); // Here you can implement actual search logic
   };
 
+  const handleLogout = async () => {
+    setIsLoading(true);
+    let access_token = localStorage.getItem("authorization");
+
+    let response = await logoutAPi(
+      "user/logout",
+      { token: access_token },
+      "post"
+    );
+    if (response?.status === 200) {
+      setIsLoading(false);
+      setSnackOpen(true);
+      setMessageType("success");
+      localStorage.clear("authorization");
+      setIsLogin(false);
+      setSnackMessage(response?.data?.message);
+    } else {
+      setSnackOpen(true);
+      setMessageType("error");
+      setSnackMessage(response?.data?.message);
+    }
+  };
+
+  const handleSelectLang = async (value) => {
+    localStorage.setItem("lang", value);
+    setAnchorEl(null);
+    setLangEl(null);
+    setCityEl(null);
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    let lang = localStorage.getItem("lang");
+    setCurrentLangCode(lang);
+    if (lang === "eng") {
+      setCurrentLang("English");
+    } else if (lang === "hn") {
+      setCurrentLang("हिन्दी");
+    } else {
+      setCurrentLang("ગુજરાતી");
+    }
+  }, []);
+
+  useEffect(() => {
+    allCities();
+  }, []);
+
+  useEffect(() => {
+    let user = localStorage.getItem("authorization");
+    if (user) {
+      setIsLogin(true);
+    }
+  }, []);
+
   return (
     <>
       <header className="bg-white sticky shadow-md top-0 left-0 w-full z-50">
@@ -71,7 +142,11 @@ const Header = () => {
           <div className="flex items-center justify-between py-4">
             <div className="flex items-center space-x-2">
               <Link className="text-2xl font-semibold text-orange-600" to="/">
-                RideBuddy
+                {currentLangCode === "hn"
+                  ? HindiDataList.header.title
+                  : currentLangCode === "guj"
+                  ? GujaratiDataList.header.title
+                  : "RideBuddy"}
               </Link>
             </div>
 
@@ -81,7 +156,13 @@ const Header = () => {
                 <form onSubmit={handleSearch}>
                   <InputBase
                     className="border border-gray-300 pl-6 pr-2 py-2 rounded-3xl w-96 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                    placeholder="Search via name, model or brand..."
+                    placeholder={
+                      currentLangCode === "hn"
+                        ? HindiDataList.header.search_placeholder
+                        : currentLangCode === "guj"
+                        ? GujaratiDataList.header.search_placeholder
+                        : "Search via name, model or brand..."
+                    }
                     value={searchQuery}
                     onChange={handleSearchChange}
                     inputProps={{
@@ -103,21 +184,22 @@ const Header = () => {
             <div className="hidden md:flex items-center space-x-6">
               <div>
                 <p className="flex justify-center items-center text-xs underline">
-                  English <ArrowDropDownIcon onClick={handleLangMenuOpen} />
+                  {currentLang}{" "}
+                  <ArrowDropDownIcon onClick={handleLangMenuOpen} />
                 </p>
                 <Menu
                   anchorEl={langEl}
                   open={Boolean(langEl)}
                   onClose={handleMenuClose}
                 >
-                  <MenuItem onClick={handleMenuClose}>
+                  <MenuItem onClick={() => handleSelectLang("eng")}>
                     <span className="text-xs">English</span>
                   </MenuItem>
-                  <MenuItem onClick={handleMenuClose}>
-                    <span className="text-xs">Hindi</span>
+                  <MenuItem onClick={() => handleSelectLang("hn")}>
+                    <span className="text-xs">हिन्दी</span>
                   </MenuItem>
-                  <MenuItem onClick={handleMenuClose}>
-                    <span className="text-xs">Gujarati</span>
+                  <MenuItem onClick={() => handleSelectLang("guj")}>
+                    <span className="text-xs">ગુજરાતી</span>
                   </MenuItem>
                 </Menu>
               </div>
@@ -135,7 +217,11 @@ const Header = () => {
                     onClick={handleLoginFormOpen}
                     size="large"
                   >
-                    Register / Login
+                    {currentLangCode === "hn"
+                      ? HindiDataList.header.register_login
+                      : currentLangCode === "guj"
+                      ? GujaratiDataList.header.register_login
+                      : "Register / Login"}
                   </button>
                 </>
               ) : (
@@ -153,10 +239,10 @@ const Header = () => {
                       open={Boolean(anchorEl)}
                       onClose={handleMenuClose}
                     >
-                      <MenuItem onClick={handleMenuClose}>
+                      <MenuItem onClick={() => navigate("/profile")}>
                         <span className="text-sm">My Profile</span>
                       </MenuItem>
-                      <MenuItem onClick={handleMenuClose}>
+                      <MenuItem onClick={handleLogout}>
                         <span className="text-sm">LogOut</span>
                       </MenuItem>
                     </Menu>
@@ -169,21 +255,22 @@ const Header = () => {
             <div className="md:hidden flex items-center">
               <div>
                 <p className="flex justify-center items-center text-xs underline">
-                  English <ArrowDropDownIcon onClick={handleLangMenuOpen} />
+                  {setCurrentLang}{" "}
+                  <ArrowDropDownIcon onClick={handleLangMenuOpen} />
                 </p>
                 <Menu
                   anchorEl={langEl}
                   open={Boolean(langEl)}
                   onClose={handleMenuClose}
                 >
-                  <MenuItem onClick={handleMenuClose}>
+                  <MenuItem onClick={() => handleSelectLang("eng")}>
                     <span className="text-xs">English</span>
                   </MenuItem>
-                  <MenuItem onClick={handleMenuClose}>
-                    <span className="text-xs">Hindi</span>
+                  <MenuItem onClick={() => handleSelectLang("hn")}>
+                    <span className="text-xs">हिन्दी</span>
                   </MenuItem>
-                  <MenuItem onClick={handleMenuClose}>
-                    <span className="text-xs">Gujarati</span>
+                  <MenuItem onClick={() => handleSelectLang("guj")}>
+                    <span className="text-xs">ગુજરાતી</span>
                   </MenuItem>
                 </Menu>
               </div>
@@ -259,15 +346,11 @@ const Header = () => {
                       open={Boolean(cityEl)}
                       onClose={handleMenuClose}
                     >
-                      <MenuItem onClick={handleMenuClose}>
-                        <span className="text-sm">Ahmedabad</span>
-                      </MenuItem>
-                      <MenuItem onClick={handleMenuClose}>
-                        <span className="text-sm">Vadodara</span>
-                      </MenuItem>
-                      <MenuItem onClick={handleMenuClose}>
-                        <span className="text-sm">Surat</span>
-                      </MenuItem>
+                      {cityList?.map((city) => (
+                        <MenuItem key={city?.id}>
+                          <span className="text-sm">{city.name}</span>
+                        </MenuItem>
+                      ))}
                     </Menu>
                   </div>
 
@@ -366,15 +449,11 @@ const Header = () => {
                 open={Boolean(cityEl)}
                 onClose={handleMenuClose}
               >
-                <MenuItem onClick={handleMenuClose}>
-                  <span className="text-sm">Ahmedabad</span>
-                </MenuItem>
-                <MenuItem onClick={handleMenuClose}>
-                  <span className="text-sm">Vadodara</span>
-                </MenuItem>
-                <MenuItem onClick={handleMenuClose}>
-                  <span className="text-sm">Surat</span>
-                </MenuItem>
+                {cityList?.map((city) => (
+                  <MenuItem key={city?.id}>
+                    <span className="text-sm">{city.name}</span>
+                  </MenuItem>
+                ))}
               </Menu>
             </div>
           </nav>
@@ -405,7 +484,7 @@ const Header = () => {
           </nav>
         )}
       </header>
-      <Login/>
+      <Login />
     </>
   );
 };

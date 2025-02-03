@@ -13,10 +13,11 @@ import { LocationContext } from "../../context/LocationContext";
 import { VehicleContext } from "../../context/VehicleContext";
 import { CommonContext } from "../../context/CommonContext";
 import Loader from "../../components/layouts/Loader";
+import { HindiDataList } from "../../language/hindi";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const { isLoading } = useContext(CommonContext);
+  const { isLoading, currentLangCode } = useContext(CommonContext);
   const { brandList, allBrands } = useContext(BrandContext);
   const { cityList, allCities } = useContext(LocationContext);
   const { mostlySearchedVehicles, getVehicleList } = useContext(VehicleContext);
@@ -124,14 +125,39 @@ const Home = () => {
 
       {/* mostly Searched Vehicles */}
       <List
-        title="The most searched Vehicles"
+        title={`${
+          currentLangCode === "hn"
+            ? "सबसे ज्यादा सर्च की गई गाड़ियां"
+            : currentLangCode === "guj"
+            ? "સૌથી વધુ શોધાયેલ વાહનો"
+            : "The most searched Vehicles"
+        }`}
         categories={CarCategories}
         vehicleList={mostlySearchedVehicles}
       />
 
-      <Brand title="Popular brands" brandList={brandList} />
+      <Brand
+        title={`${
+          currentLangCode === "hn"
+            ? "लोकप्रिय ब्रांड"
+            : currentLangCode === "guj"
+            ? "લોકપ્રિય બ્રાન્ડ્સ"
+            : "Popular brands"
+        }`}
+        brandList={brandList}
+      />
 
-      <Location title="Get trusted rents nearby" locationList={cityList} />
+      <Location
+        title={`${
+          currentLangCode === "hn"
+            ? "आस-पास विश्वसनीय किराये प्राप्त करें"
+            : currentLangCode === "guj"
+            ? "નજીકના વિશ્વસનીય ભાડા મેળવો"
+            : "Get trusted rents nearby"
+        }`}
+        brandList={brandList}
+        locationList={cityList}
+      />
       <Footer />
     </>
   ) : (

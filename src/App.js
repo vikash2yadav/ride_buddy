@@ -1,5 +1,7 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
+import SnackBar from "./components/SnackBar";
+import { CommonContext } from "./context/CommonContext";
 
 // Lazy load the pages
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -14,9 +16,12 @@ const Login = lazy(() => import("./pages/auth/Login"));
 const VehicleDetails = lazy(() => import("./pages/VehicleDetails"));
 const Home = lazy(() => import("./pages/Home"));
 const Loader = lazy(() => import("./components/layouts/Loader"));
-const Checkout = lazy(()=> import("./pages/Checkout"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const Profile = lazy(() => import("./pages/Profile"));
 
 const App = () => {
+  const { snackOpen, messageType, snackMessage, setSnackOpen } =
+    useContext(CommonContext);
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
@@ -32,7 +37,14 @@ const App = () => {
         <Route path="/partner_request" element={<BecomePartnerDealer />} />
         <Route path="/terms-conditions" element={<TermsConditions />} />
         <Route path="/:brand/:model/:id/checkout" element={<Checkout />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
+      <SnackBar
+        open={snackOpen}
+        message={snackMessage}
+        type={messageType}
+        setSnackOpen={setSnackOpen}
+      />
     </Suspense>
   );
 };

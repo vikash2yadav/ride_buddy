@@ -23,6 +23,7 @@ const Register = () => {
         setSnackOpen(true);
         setMessageType("success");
         setSnackMessage(response?.data?.message);
+        navigate("/login");
       } else {
         setSnackOpen(true);
         setMessageType("error");
