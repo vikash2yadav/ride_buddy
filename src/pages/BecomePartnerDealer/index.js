@@ -11,19 +11,29 @@ import {
   ourOffices,
 } from "../../config/sampleData";
 import { useFormik } from "formik";
-import { partnerInitialValues, partnerValidationSchema } from "./schema";
+import {
+  partnerInitialValues,
+  partnerValidationSchema,
+  partnerValidationSchemaGujarati,
+  partnerValidationSchemaHindi,
+} from "./schema";
 import ErrorMessage from "../../components/form/ErrorMessage";
 import { addPartnerRequestAPi } from "../../apis/partner_request";
 import { CommonContext } from "../../context/CommonContext";
 
 const BecomePartnerDealer = () => {
-  const { setSnackOpen, setSnackMessage, setMessageType } =
+  const { setSnackOpen, setSnackMessage, setMessageType, currentLangCode } =
     useContext(CommonContext);
 
   const formik = useFormik({
     initialValues: partnerInitialValues,
-    validationSchema: partnerValidationSchema,
-    onSubmit: async (values, {resetForm}) => {
+    validationSchema:
+      currentLangCode === "hn"
+        ? partnerValidationSchemaHindi
+        : currentLangCode === "guj"
+        ? partnerValidationSchemaGujarati
+        : partnerValidationSchema,
+    onSubmit: async (values, { resetForm }) => {
       let response = await addPartnerRequestAPi(
         "partner_request/add",
         values,
@@ -58,7 +68,11 @@ const BecomePartnerDealer = () => {
     <>
       <Header />
       <h1 className="text-2xl mx-4 md:mx-20 lg:mx-40 font-semibold text-left text-gray-800 mt-10">
-        Request To Become Partner
+        {currentLangCode === "hn"
+          ? "भागीदार बनने का अनुरोध"
+          : currentLangCode === "guj"
+          ? "ભાગીદાર બનવા વિનંતી"
+          : "Request To Become Partner"}
       </h1>
       <div className="bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mx-40 mt-4 text-gray-800 md:mb-5 mb-3">
         <form onSubmit={formik.handleSubmit}>
@@ -72,7 +86,13 @@ const BecomePartnerDealer = () => {
                   onBlur={formik.handleBlur}
                   id="outlined-basic"
                   variant="outlined"
-                  label="Enter Your Name"
+                  label={`${
+                    currentLangCode === "hn"
+                      ? "अपना नाम दर्ज करें"
+                      : currentLangCode === "guj"
+                      ? "તમારું નામ દાખલ કરો"
+                      : "Enter Your Name"
+                  }`}
                   className="w-full"
                 />
                 {formik.errors.name && formik.touched.name && (
@@ -87,7 +107,13 @@ const BecomePartnerDealer = () => {
                   onBlur={formik.handleBlur}
                   id="outlined-basic"
                   variant="outlined"
-                  label="Enter Name Of Dealership"
+                  label={`${
+                    currentLangCode === "hn"
+                      ? "डीलरशिप का नाम दर्ज करें"
+                      : currentLangCode === "guj"
+                      ? "ડીલરશીપનું નામ દાખલ કરો"
+                      : "Enter Name Of Dealership"
+                  }`}
                   className="w-full"
                 />
                 {formik.errors.dealership && formik.touched.dealership && (
@@ -104,7 +130,13 @@ const BecomePartnerDealer = () => {
                   onBlur={formik.handleBlur}
                   id="outlined-basic"
                   variant="outlined"
-                  label="Enter Mobile Number"
+                  label={`${
+                    currentLangCode === "hn"
+                      ? "मोबाइल नंबर दर्ज करें"
+                      : currentLangCode === "guj"
+                      ? "મોબાઈલ નંબર દાખલ કરો"
+                      : "Enter Mobile Number"
+                  }`}
                   className="w-full"
                 />
                 {formik.errors.phone && formik.touched.phone && (
@@ -119,7 +151,13 @@ const BecomePartnerDealer = () => {
                   onBlur={formik.handleBlur}
                   id="outlined-basic"
                   variant="outlined"
-                  label="Enter Your Email"
+                  label={`${
+                    currentLangCode === "hn"
+                      ? "अपना ईमेल दर्ज करें"
+                      : currentLangCode === "guj"
+                      ? "તમારો ઈમેલ દાખલ કરો"
+                      : "Enter Your Email"
+                  }`}
                   className="w-full"
                 />
                 {formik.errors.email && formik.touched.email && (
@@ -136,7 +174,13 @@ const BecomePartnerDealer = () => {
                   onBlur={formik.handleBlur}
                   id="outlined-basic"
                   variant="outlined"
-                  label="Enter City Of Dealership"
+                  label={`${
+                    currentLangCode === "hn"
+                      ? "डीलरशिप का शहर दर्ज करें"
+                      : currentLangCode === "guj"
+                      ? "ડીલરશીપનું શહેર દાખલ કરો"
+                      : "Enter City Of Dealership"
+                  }`}
                   options={[
                     {
                       title: "Ahmedabad",
@@ -161,7 +205,13 @@ const BecomePartnerDealer = () => {
                 maxRows={6}
                 className="w-full p-3 border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
-                placeholder="Comment"
+                placeholder={`${
+                  currentLangCode === "hn"
+                    ? "टिप्पणी"
+                    : currentLangCode === "guj"
+                    ? "ટિપ્પણી"
+                    : "Comment"
+                }`}
               />
             </div>
 
@@ -169,9 +219,19 @@ const BecomePartnerDealer = () => {
               <div className="flex ">
                 <CheckBox className="text-orange-600" />
                 <p className="mx-2">
-                  I agree to{" "}
+                  {currentLangCode === "hn"
+                    ? "मैं सहमत हूं"
+                    : currentLangCode === "guj"
+                    ? "હું સંમત છું"
+                    : "I agree to"}
                   <span className="text-blue-600">
-                    <Link onClick={handleShowForTerms}>Terms & Conditions</Link>
+                    <Link onClick={handleShowForTerms}>
+                      {currentLangCode === "hn"
+                        ? " नियम एवं शर्तें"
+                        : currentLangCode === "guj"
+                        ? " નિયમો અને શરતો"
+                        : " Terms & Conditions"}
+                    </Link>
                   </span>
                 </p>
               </div>
@@ -182,7 +242,11 @@ const BecomePartnerDealer = () => {
                 type="submit"
                 className="w-80 px-12 py-3 rounded-lg text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
               >
-                Submit
+                {currentLangCode === "hn"
+                  ? "सबमिट"
+                  : currentLangCode === "guj"
+                  ? "સબમિટ"
+                  : "Submit"}
               </button>
             </div>
           </div>
@@ -191,7 +255,11 @@ const BecomePartnerDealer = () => {
 
       <div className="bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mx-40 mt-4 text-gray-800">
         <h1 className="text-xl font-semibold mx-4 text-left text-gray-800 mt-4">
-          Bussiness With RideBuddy
+          {currentLangCode === "hn"
+            ? "RideBuddy के साथ व्यापार"
+            : currentLangCode === "guj"
+            ? "RideBuddy સાથે વ્યવસાય"
+            : "Bussiness With RideBuddy"}
         </h1>
 
         <div className="flex md:flex-row flex-col flex-wrap">
@@ -199,17 +267,36 @@ const BecomePartnerDealer = () => {
             <>
               <div className="px-6 py-6">
                 <span className="text-orange-600"> {item?.icon} </span>
-                <span className="">{item?.title}</span>
-
+                <span className="">
+                  {currentLangCode === "hn"
+                    ? item?.titleHindi
+                    : currentLangCode === "guj"
+                    ? item?.titleGujarati
+                    : item?.title}
+                </span>
                 <p
                   className={`${
                     item?.monstor ? "md:text-5xl text-3xl" : "md:text-xl"
                   } mt-2 mx-7`}
                 >
-                  <Link>{item?.link}</Link>
+                  <Link>
+                    {currentLangCode === "hn"
+                      ? item?.linkHindi
+                      : currentLangCode === "guj"
+                      ? item?.linkGujarati
+                      : item?.link}
+                  </Link>
                 </p>
                 {item?.description && (
-                  <p className="mx-7 mt-2">({item?.description})</p>
+                  <p className="mx-7 mt-2">
+                    (
+                    {currentLangCode === "hn"
+                      ? item?.descriptionHindi
+                      : currentLangCode === "guj"
+                      ? item?.descriptionGujarati
+                      : item?.description}
+                    )
+                  </p>
                 )}
               </div>
               {index < bussinessWithRidebuddyPartnerRequest.length - 1 && (
@@ -222,7 +309,11 @@ const BecomePartnerDealer = () => {
         <hr className="md:mt-10 mt-5 md:mb-10 mb-5 mx-4" />
 
         <h1 className="text-xl font-semibold mx-4 text-left text-gray-800 mt-4 ">
-          Our Offices
+          {currentLangCode === "hn"
+            ? "हमारे कार्यालय"
+            : currentLangCode === "guj"
+            ? "અમારા કચેરીઓ"
+            : "Our Offices"}
         </h1>
 
         <div className="flex md:flex-row flex-col md:mb-5 mb-3">
@@ -230,9 +321,19 @@ const BecomePartnerDealer = () => {
             <>
               <div className="mx-4 py-4 md:flex-3 md:w-64 w-full">
                 <p className="text-sm font-semibold md:mb-5 mb-3">
-                  {item?.name}
+                  {currentLangCode === "hn"
+                    ? item.nameHindi
+                    : currentLangCode === "guj"
+                    ? item.nameGujarati
+                    : item.name}
                 </p>
-                <p className="text-sm">{item?.address}</p>
+                <p className="text-sm">
+                  {currentLangCode === "hn"
+                    ? item.addressHindi
+                    : currentLangCode === "guj"
+                    ? item.addressGujarati
+                    : item.address}
+                </p>
               </div>
               {index < ourOffices.length - 1 && (
                 <div className="hidden md:block border-l border-gray-300 mx-10"></div>

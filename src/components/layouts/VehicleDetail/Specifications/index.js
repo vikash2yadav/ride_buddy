@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Rows from "../Overview/Rows";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { CommonContext } from "../../../../context/CommonContext";
 
 const Specifications = ({ title, data }) => {
+  const { currentLangCode } = useContext(CommonContext);
   const [openSections, setOpenSections] = useState(new Set()); // Use Set to store open sections
   const [show, setShow] = useState(false);
 
@@ -79,13 +81,25 @@ const Specifications = ({ title, data }) => {
       </div>
 
       {/* View All Button */}
-      <p
-        onClick={() => setShow(!show)}
-        className="mx-8 text-orange-600 text-sm font-medium cursor-pointer mt-6"
-      >
-        {show ? "Collapse" : "View All Specifications"}
-        <ChevronRightIcon className="text-orange-600 rounded-2xl" />
-      </p>
+      {Object.keys(groupedData).length > 1 && (
+        <p
+          onClick={() => setShow(!show)}
+          className="mx-8 text-orange-600 text-sm font-medium cursor-pointer mt-6"
+        >
+          {show
+            ? currentLangCode === "hn"
+              ? "संकुचित करें"
+              : currentLangCode === "guj"
+              ? "સંકુચિત કરો"
+              : "Collapse"
+            : currentLangCode === "hn"
+            ? "सभी सुविधाएँ देखें"
+            : currentLangCode === "guj"
+            ? "બધી સુવિધાઓ જુઓ"
+            : "View All Features"}
+          <ChevronRightIcon className="text-orange-600 rounded-2xl" />
+        </p>
+      )}
     </div>
   );
 };

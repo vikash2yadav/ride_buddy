@@ -34,7 +34,7 @@ const Footer = () => {
                     to={item?.url}
                     className="text-sm text-gray-500 hover:text-orange-600"
                   >
-                    {item?.title}
+                    {currentLangCode === 'hn' ? item?.titleHindi : currentLangCode === 'guj' ? item?.titleGujarati : item?.title}
                   </Link>
                 </li>
               ))}
@@ -57,8 +57,8 @@ const Footer = () => {
                     to={item?.url}
                     className="text-sm text-gray-500 hover:text-orange-600"
                   >
-                    {item?.title}
-                  </Link>
+                    {currentLangCode === 'hn' ? item?.titleHindi : currentLangCode === 'guj' ? item?.titleGujarati : item?.title}
+                    </Link>
                 </li>
               ))}
             </ul>
@@ -67,7 +67,7 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">
               {currentLangCode === "hn"
-                ? "त्वरित सम्पक"
+                ? "त्वरित संपर्क"
                 : currentLangCode === "guj"
                 ? "ઝડપી લિંક્સ"
                 : "QUICK LINKS"}
@@ -79,8 +79,8 @@ const Footer = () => {
                     to={item?.url}
                     className="text-sm text-gray-500 hover:text-orange-600"
                   >
-                    {item?.title}
-                  </Link>
+                    {currentLangCode === 'hn' ? item?.titleHindi : currentLangCode === 'guj' ? item?.titleGujarati : item?.title}
+                    </Link>
                 </li>
               ))}
             </ul>

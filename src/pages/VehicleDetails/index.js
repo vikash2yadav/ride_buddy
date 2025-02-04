@@ -17,7 +17,7 @@ import { CommonContext } from "../../context/CommonContext";
 
 const VehicleDetails = () => {
   const params = useParams();
-  const { isLoading } = useContext(CommonContext);
+  const { isLoading, currentLangCode } = useContext(CommonContext);
   const navigate = useNavigate();
   const {
     vehicleSpecification,
@@ -81,25 +81,58 @@ const VehicleDetails = () => {
 
           {/* overview */}
           <div ref={overviewRef}>
-            <Overview title="Overview" data={vehicleData} />
+            <Overview
+              title={
+                currentLangCode === "hn"
+                  ? "सिंहावलोकन"
+                  : currentLangCode === "guj"
+                  ? "વિહંગાવલોકન"
+                  : "Overview"
+              }
+              data={vehicleData}
+            />
           </div>
 
           {/* {features} */}
           <div ref={featuresRef}>
-            <Features title={"Features"} data={vehicleFeature} />
+            <Features
+              title={
+                currentLangCode === "hn"
+                  ? "विशेषताएँ"
+                  : currentLangCode === "guj"
+                  ? "લક્ષણો"
+                  : "Features"
+              }
+              data={vehicleFeature}
+            />
           </div>
 
           {/* Specifications */}
           <div>
             <Specifications
-              title="Specifications"
+              title={
+                currentLangCode === "hn"
+                  ? "विशेष विवरण"
+                  : currentLangCode === "guj"
+                  ? "વિશિષ્ટતાઓ"
+                  : "Specifications"
+              }
               data={vehicleSpecification}
             />
           </div>
 
           {/* Review */}
           <div ref={reviewsRef}>
-            <ReviewBox title="Reviews & Ratings" data={vehicleReview} />
+            <ReviewBox
+              title={
+                currentLangCode === "hn"
+                  ? "समीक्षाएं एवं रेटिंग"
+                  : currentLangCode === "guj"
+                  ? "સમીક્ષાઓ અને રેટિંગ્સ"
+                  : "Reviews & Ratings"
+              }
+              data={vehicleReview}
+            />
           </div>
         </div>
 
@@ -158,22 +191,42 @@ const VehicleDetails = () => {
                   : "bg-orange-600 text-white"
               } rounded-lg shadow-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 mb-5`}
             >
-              Place Order
+              {currentLangCode === "hn"
+                ? "आदेश दें"
+                : currentLangCode === "guj"
+                ? "ઓર્ડર મૂકો"
+                : "Place Order"}
             </button>
 
             <div className="flex justify-evenly text-gray-600 text-xs ">
-              <p className="underline cursor-pointer">Report Ad</p>
+              <p className="underline cursor-pointer">
+                {currentLangCode === "hn"
+                  ? "रिपोर्ट विज्ञापन"
+                  : currentLangCode === "guj"
+                  ? "જાહેરાતની જાણ કરો"
+                  : "Report Ad"}
+              </p>
               <p
                 className="underline cursor-pointer"
                 onClick={() => alert("we are working on this feature")}
               >
-                Chat With Owner
+                {currentLangCode === "hn"
+                  ? "मालिक के साथ चैट करें"
+                  : currentLangCode === "guj"
+                  ? "માલિક સાથે ચેટ કરો"
+                  : "Chat With Owner"}
               </p>
-              <p className="underline cursor-pointer">Share</p>
+              <p className="underline cursor-pointer">
+                {currentLangCode === "hn"
+                  ? "शेयर करना"
+                  : currentLangCode === "guj"
+                  ? "શેર કરો"
+                  : "Share"}
+              </p>
             </div>
           </div>
         ) : (
-          <p>Loading..</p>
+          <Loader />
         )}
       </div>
       <Footer />

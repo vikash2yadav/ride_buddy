@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Header from "../../components/layouts/Header";
 import Footer from "../../components/layouts/Footer";
 import { faqs } from "../../config/sampleData";
+import { CommonContext } from "../../context/CommonContext";
 
 const FAQ = () => {
-  useEffect(()=> {
+  const { currentLangCode } = useContext(CommonContext);
+
+  useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth", // Add smooth scroll animation
@@ -16,16 +19,30 @@ const FAQ = () => {
       <div className="bg-white shadow-md border border-gray-300 rounded-2xl md:mx-20 lg:mr-96 lg:ml-40 mt-4 lg:mt-10 text-gray-800">
         <div className="max-w-full mx-auto px-6 py-6">
           <h1 className="text-2xl font-semibold text-left text-gray-800 mb-3">
-            Mostly Asked Questions
+            {currentLangCode === "hn"
+              ? "अधिकतर पूछे जाने वाले प्रश्न"
+              : currentLangCode === "guj"
+              ? "મોટે ભાગે પૂછાતા પ્રશ્નો"
+              : "Mostly Asked Questions"}
           </h1>
           <section className="mb-6">
             {faqs.map((item) => (
               <>
                 <p className="text-left text-m font-bold text-gray-600 mb-2">
-                  Q.{item?.id}: {item?.question}
+                  Q.{item?.id}:{" "}
+                  {currentLangCode === "hn"
+                    ? item.questionHindi
+                    : currentLangCode === "guj"
+                    ? item?.questionGujarati
+                    : item?.question}
                 </p>
                 <p className="text-left text-m text-gray-600 mb-3">
-                  <span className="font-semibold">Ans</span>: {item?.answer}
+                  <span className="font-semibold">Ans</span>:{" "}
+                  {currentLangCode === "hn"
+                    ? item.answerHindi
+                    : currentLangCode === "guj"
+                    ? item?.answerGujarati
+                    : item?.answer}
                 </p>
                 <hr className="mb-4" />
               </>

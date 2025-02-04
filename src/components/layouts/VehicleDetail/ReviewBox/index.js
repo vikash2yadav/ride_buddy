@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import GradeIcon from "@mui/icons-material/Grade";
 import { Avatar } from "@mui/material";
 import { format } from "date-fns";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
+import { CommonContext } from "../../../../context/CommonContext";
 
 const ReviewBox = ({ title, data }) => {
+  const { currentLangCode } = useContext(CommonContext);
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return format(date, "dd MMM yyyy");
@@ -33,14 +35,23 @@ const ReviewBox = ({ title, data }) => {
 
             <p className="mx-2 font-medium">{averageRating}</p>
             <p className="text-sm w-32">
-              Overall Rating Based on{" "}
+              {currentLangCode === "hn"
+                ? "समग्र रेटिंग के आधार पर"
+                : currentLangCode === "guj"
+                ? "પર આધારિત એકંદર રેટિંગ"
+                : "Overall Rating Based on"}
               <span className="font-medium">{data?.length} reviews</span>
             </p>
           </div>
 
           <div className="">
             <h1 className="text-lg font-medium mb-5">
-              {data?.length} Reviews and Ratings
+              {data?.length}
+              {currentLangCode === "hn"
+                ? "समीक्षाएं और रेटिंग"
+                : currentLangCode === "guj"
+                ? "સમીક્ષાઓ અને રેટિંગ્સ"
+                : "Reviews and Ratings"}
             </h1>
 
             {data?.length > 0 &&
@@ -68,14 +79,18 @@ const ReviewBox = ({ title, data }) => {
                     {item?.review_text}
                   </p>
                   <div className="flex gap-2 items-center text-xs">
-                    <p>Is this helpful?</p>
-                    {
-                      React.cloneElement(<ThumbUpOutlinedIcon/>, {
-                        style: {fontSize: '18px'},
-                        className: "cursor-pointer text-gray-600"
-                      })
-                    }
-                    {item?.helpful_count} 
+                    <p>
+                      {currentLangCode === "hn"
+                        ? "क्या यह मददगार है?"
+                        : currentLangCode === "guj"
+                        ? "શું આ મદદરૂપ છે?"
+                        : " Is this helpful?"}
+                    </p>
+                    {React.cloneElement(<ThumbUpOutlinedIcon />, {
+                      style: { fontSize: "18px" },
+                      className: "cursor-pointer text-gray-600",
+                    })}
+                    {item?.helpful_count}
                   </div>
                 </div>
               ))}

@@ -137,45 +137,65 @@ export const account_deletion_step = [
 export const ridebuddyLinks = [
   {
     title: "About",
+    titleHindi: "बारे में",
+    titleGujarati: "વિશે",
     url: "/about",
   },
   {
     title: "Careers With Us",
+    titleHindi: "हमारे साथ करियर",
+    titleGujarati: "અમારી સાથે કારકિર્દી",
     url: "",
   },
   {
     title: "Terms & Conditions",
+    titleHindi: "नियम एवं शर्तें",
+    titleGujarati: "નિયમો અને શરતો",
     url: "/terms-conditions",
   },
   {
     title: "Privacy Policy",
+    titleHindi: "गोपनीयता नीति",
+    titleGujarati: "ગોપનીયતા નીતિ",
     url: "/privacy-policy",
   },
   {
     title: "Investors",
+    titleHindi: "निवेशकों",
+    titleGujarati: "રોકાણકારો",
     url: "/investors",
   },
   {
     title: "FAQs",
+    titleHindi: "पूछे जाने वाले प्रश्न",
+    titleGujarati: "પૂછવા માટેના પ્રશ્નો",
     url: "/FAQ",
   },
 ];
 
 export const connectWithUsLinks = [
   {
-    title: " Facebook",
+    title: "Facebook",
+    titleHindi: "फेसबुक",
+    titleGujarati: "ફેસબુક",
     url: "/",
   },
   {
     title: "Contact Us",
+    titleHindi: "हमसे संपर्क करें",
+    titleGujarati: "અમારો સંપર્ક કરો",
     url: "/contact_us",
   },
   {
     title: "Advertise With Us",
+    titleHindi: "हमारे साथ विज्ञापन करें",
+    titleGujarati: "અમારી સાથે જાહેરાત કરો",
     url: "/",
   },
   {
     title: "Become Partner Dealer",
+    titleHindi: "पार्टनर डीलर बनें",
+    titleGujarati: "ભાગીદાર ડીલર બનો",
     url: "/partner_request",
   },
 ];
@@ -183,6 +203,8 @@ export const connectWithUsLinks = [
 export const quickLinks = [
   {
     title: "Home",
+    titleHindi: "घर",
+    titleGujarati: "ઘર",
     url: "/",
   },
 ];
@@ -191,40 +213,74 @@ export const faqs = [
   {
     id: 1,
     question: "What is RideBuddy.com?",
+    questionHindi: "RideBuddy.com क्या है?",
+    questionGujarati: "RideBuddy.com શું છે",
     answer:
       "RideBuddy is an online service community that offers auto enthusiasts a friendly home where they can find car or bike on rent.",
+    answerHindi:
+      "राइडबडी एक ऑनलाइन सेवा समुदाय है जो ऑटो उत्साही लोगों को एक दोस्ताना घर प्रदान करता है जहां वे किराए पर कार या बाइक पा सकते हैं।",
+    answerGujarati:
+      "RideBuddy એ એક ઑનલાઇન સેવા સમુદાય છે જે ઓટો ઉત્સાહીઓને એક મૈત્રીપૂર્ણ ઘર પ્રદાન કરે છે જ્યાં તેઓ ભાડા પર કાર અથવા બાઇક શોધી શકે છે.",
   },
   {
     id: 2,
     question: "How do I access RideBuddy.com?",
+    questionHindi: "मैं RideBuddy.com तक कैसे पहुँच सकता हूँ?",
+    questionGujarati: "હું RideBuddy.com કેવી રીતે ઍક્સેસ કરી શકું",
     answer:
       "Searching for cars or bike on our website is easier and faster than ever. To begin, just go to our home page and decide how you would like to rent. You can use the buttons ,you can specify several criteria at once, or you can search by keywords that you type in.",
+    answerHindi:
+      "हमारी वेबसाइट पर कार या बाइक खोजना पहले से कहीं अधिक आसान और तेज़ है। आरंभ करने के लिए, बस हमारे होम पेज पर जाएं और तय करें कि आप कैसे किराया लेना चाहेंगे। आप बटनों का उपयोग कर सकते हैं, आप एक साथ कई मानदंड निर्दिष्ट कर सकते हैं, या आप अपने द्वारा टाइप किए गए कीवर्ड द्वारा खोज सकते हैं।",
+    answerGujarati:
+      "અમારી વેબસાઇટ પર કાર અથવા બાઇક શોધવાનું પહેલા કરતાં વધુ સરળ અને ઝડપી છે. શરૂ કરવા માટે, ફક્ત અમારા હોમ પેજ પર જાઓ અને નક્કી કરો કે તમે કેવી રીતે ભાડે લેવા માંગો છો. તમે બટનોનો ઉપયોગ કરી શકો છો, તમે એક સાથે અનેક માપદંડોને સ્પષ્ટ કરી શકો છો, અથવા તમે જે કીવર્ડ્સ લખો છો તેના દ્વારા તમે શોધી શકો છો.",
   },
   {
     id: 3,
     question: "How is RideBuddy content organized?",
+    questionHindi: "राइडबडी सामग्री कैसे व्यवस्थित की जाती है",
+    questionGujarati: "RideBuddy સામગ્રી કેવી રીતે ગોઠવાય છે",
     answer:
       "RideBuddy.com consists of four sub-categories Car Details, New Car Search By Make, Vehicle Type and Price Range, Dealer Details and Latest Car Details.",
+    answerHindi:
+      "RideBuddy.com में चार उप-श्रेणियाँ कार विवरण, मेक द्वारा नई कार खोज, वाहन प्रकार और मूल्य सीमा, डीलर विवरण और नवीनतम कार विवरण शामिल हैं।",
+    answerGujarati:
+      "RideBuddy.com માં ચાર પેટા-કેટેગરીઝ કારની વિગતો, મેક દ્વારા નવી કારની શોધ, વાહનનો પ્રકાર અને કિંમત શ્રેણી, ડીલરની વિગતો અને નવીનતમ કારની વિગતોનો સમાવેશ થાય છે.",
   },
   {
     id: 4,
     question: "How frequently is RideBuddy updated?",
+    questionHindi: "राइडबडी को कितनी बार अपडेट किया जाता है",
+    questionGujarati: "RideBuddy કેટલી વાર અપડેટ થાય છે",
     answer: "WCF is updated weekly !!",
+    answerHindi: "डब्ल्यूसीएफ को साप्ताहिक रूप से अपडेट किया जाता है",
+    answerGujarati: "WCF સાપ્તાહિક અપડેટ થાય છે",
   },
 ];
 
 export const ourOffices = [
   {
     name: "Ahmedabad Office",
+    nameHindi: "अहमदाबाद कार्यालय",
+    nameGujarati: "અમદાવાદ કચેરી",
     address: "23, street, Naman nagar, Ahmedabad, Gujarat-380026",
+    addressHindi: "23, स्ट्रीट, नमन नगर, अहमदाबाद, गुजरात-380026",
+    addressGujarati: "23, સ્ટ્રીટ, નેમન નગર, અમદાવાદ, ગુજરાત-380026",
   },
   {
     name: "New Delhi Office",
+    nameHindi: "नई दिल्ली कार्यालय",
+    nameGujarati: "નવી દિલ્હી કચેરી",
     address: "23, street, Naman nagar, Mira Road, New Delhi-290029",
+    addressHindi: "23, स्ट्रीट, नमन नगर, मीरारोड, नई दिल्ली-290029",
+    addressGujarati: "23, સ્ટ્રીટ, નેમન નગર, મીરા રોડ, નવી દિલ્હી-290029",
   },
   {
     name: "Mumbai Office",
+    nameHindi: "मुंबई कार्यालय",
+    nameGujarati: "મુંબઇ કચેરી",
     address: "23, street, Naman nagar, Mumbai, Maharashtra-380900",
+    addressHindi: "23, स्ट्रीट, नमन नगर, मुंबई, महाराष्ट्र-380900",
+    addressGujarati: "23, સ્ટ્રીટ, નેમન નગર, મુંબઈ, મહારાષ્ટ્ર-380900",
   },
 ];
 
@@ -232,13 +288,21 @@ export const bussinessWithRidebuddy = [
   {
     icon: <EmailIcon />,
     title: "E-MAIL",
+    titleHindi: "ईमेल",
+    titleGujarati: "ઇમેઇલ",
     link: "support@ridebuddy.com",
+    linkHindi: "support@ridebuddy.com",
+    linkGujarati: "support@ridebuddy.com",
     url: "",
   },
   {
     icon: <HandshakeIcon />,
     title: "Rental Bussiness",
+    titleHindi: "किराये का व्यवसाय",
+    titleGujarati: "ભાડાનો વ્યવસાય",
     link: "Become Partner Dealer",
+    linkHindi: "पार्टनर डीलर बनें",
+    linkGujarati: "ભાગીદાર ડીલર બનો",
     url: "",
   },
 ];
@@ -247,20 +311,36 @@ export const bussinessWithRidebuddyPartnerRequest = [
   {
     icon: <CallIcon />,
     title: "CALL US",
+    titleHindi: "हमें कॉल करें",
+    titleGujarati: "અમને કૉલ કરો",
     link: "76986 61812",
+    linkHindi: "76986 61812",
+    linkGujarati: "76986 61812",
     description: "Mon to Sat 9:30 AM to 6 PM",
+    descriptionHindi: "सोम से शनिवार सुबह 9:30 बजे से शाम 6 बजे तक",
+    descriptionGujarati: "સોમ થી શનિ સવારે 9:30 થી સાંજે 6 વાગ્યા સુધી",
     monstor: true,
   },
   {
     icon: <EmailIcon />,
     title: "E-MAIL",
+    titleHindi: "ईमेल",
+    titleGujarati: "ઈમેલ",
     link: "support@ridebuddy.com",
+    linkHindi: "support@ridebuddy.com",
+    linkGujarati: "support@ridebuddy.com",
+    descriptionHindi: "support@ridebuddy.com",
+    descriptionGujarati: "support@ridebuddy.com",
     url: "",
   },
   {
     icon: <HandshakeIcon />,
     title: "Rental Bussiness",
+    titleHindi: "किराये का व्यवसाय",
+    titleGujarati: "ભાડાનો વ્યવસાય",
     link: "Become Partner Dealer",
+    linkHindi: "पार्टनर डीलर बनें",
+    linkGujarati: "ભાગીદાર ડીલર બનો",
     url: "",
   },
 ];
@@ -511,31 +591,35 @@ export const brands = [
 export const vehicleDetailKeyFeatures = [
   {
     title: "OVERVIEW",
+    titleHindi: "सिंहावलोकन",
+    titleGujarati: "વિહંગાવલોકન",
     Value: "overview",
   },
   {
     title: "SPACE & FEATURES",
+    titleHindi: "स्थानीकरण एवं विशेषताएँ",
+    titleGujarati: "અવકાશીકરણ અને વિશેષતાઓ",
     Value: "space_features",
   },
   {
     title: "REVIEWS",
+    titleHindi: "समीक्षाएं",
+    titleGujarati: "સમીક્ષાઓ",
     Value: "reviews",
   },
 ];
 
 export const overviewDetails = {
   register_no: 23323232323,
-  fuel_type: 'Petrol',
-  insurance: 'Expired',
+  fuel_type: "Petrol",
+  insurance: "Expired",
   seats: 4,
   total_km: 20000,
-  rto: 'ahmedabad',
-  ownership: 'first',
+  rto: "ahmedabad",
+  ownership: "first",
   engine_displacement: "200 cc",
-  transmission: 'Manual',
-  manufacture_year: 2002
+  transmission: "Manual",
+  manufacture_year: 2002,
 };
 
-export const features = [
-  
-]
+export const features = [];

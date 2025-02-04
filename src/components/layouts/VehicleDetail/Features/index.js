@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { CommonContext } from "../../../../context/CommonContext";
 
 const Features = ({ title, data }) => {
+  const { currentLangCode } = useContext(CommonContext);
+
   const [openSections, setOpenSections] = useState(new Set());
   const [show, setShow] = useState(false);
 
@@ -32,7 +35,10 @@ const Features = ({ title, data }) => {
   };
 
   return (
-    <div id="features" className="border border-gray-300  text-gray-800 py-4 rounded-2xl shadow-sm mb-3">
+    <div
+      id="features"
+      className="border border-gray-300  text-gray-800 py-4 rounded-2xl shadow-sm mb-3"
+    >
       <h1 className="text-xl font-medium mx-8 mb-5">{title}</h1>
 
       <div className="mx-8">
@@ -77,18 +83,36 @@ const Features = ({ title, data }) => {
             </div>
           ))
         ) : (
-          <p>No data available</p>
+          <p>
+            {currentLangCode === "hn"
+              ? "कोई डेटा मौजूद नहीं"
+              : currentLangCode === "guj"
+              ? "કોઈ ડેટા ઉપલબ્ધ નથી"
+              : "No data available"}
+          </p>
         )}
       </div>
 
       {/* View All Button */}
-      <p
-        onClick={() => setShow(!show)}
-        className="mx-8 text-orange-600 text-sm font-medium cursor-pointer mt-6"
-      >
-        {show ? "Collapse" : "View All Features"}
-        <ChevronRightIcon className="text-orange-600 rounded-2xl" />
-      </p>
+      {Object.keys(groupedData).length > 1 && (
+        <p
+          onClick={() => setShow(!show)}
+          className="mx-8 text-orange-600 text-sm font-medium cursor-pointer mt-6"
+        >
+          {show
+            ? currentLangCode === "hn"
+              ? "संकुचित करें"
+              : currentLangCode === "guj"
+              ? "સંકુચિત કરો"
+              : "Collapse"
+            : currentLangCode === "hn"
+            ? "सभी सुविधाएँ देखें"
+            : currentLangCode === "guj"
+            ? "બધી સુવિધાઓ જુઓ"
+            : "View All Features"}
+          <ChevronRightIcon className="text-orange-600 rounded-2xl" />
+        </p>
+      )}
     </div>
   );
 };

@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CommonContext } from "../../../../context/CommonContext";
 
 const Detailkeys = ({ keys, activeIndex, setActiveIndex }) => {
+  const { currentLangCode } = useContext(CommonContext);
+
   return (
     <>
       <div className="border border-gray-300 py-2 rounded-2xl shadow-sm mb-5 overflow-x-auto">
@@ -17,7 +20,11 @@ const Detailkeys = ({ keys, activeIndex, setActiveIndex }) => {
             }`}
                 onClick={() => setActiveIndex(index)}
               >
-                {keys?.title}
+                {currentLangCode === "hn"
+                  ? keys?.titleHindi
+                  : currentLangCode === "guj"
+                  ? keys?.titleGujarati
+                  : keys?.title}
               </div>
               <span className="absolute left-0 right-0 top-0 h-[2px] bg-orange-600 scale-x-0 group-hover:scale-x-100 transition-all duration-300"></span>
             </>
