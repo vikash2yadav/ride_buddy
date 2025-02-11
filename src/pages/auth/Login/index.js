@@ -9,8 +9,12 @@ import { useFormik } from "formik";
 import {
   loginByUsernameInitialValues,
   loginByUsernameValidationSchema,
+  loginByUsernameValidationSchemaGujarati,
+  loginByUsernameValidationSchemaHindi,
   loginInitialValues,
   loginValidationSchema,
+  loginValidationSchemaGujarati,
+  loginValidationSchemaHindi,
 } from "./Schema";
 import { loginAPi } from "../../../apis/auth";
 import ErrorMessage from "../../../components/form/ErrorMessage";
@@ -18,15 +22,29 @@ import { authenticationOptions } from "../../../utils/helper";
 
 const Login = () => {
   const [type, setType] = useState("email");
-  const { setSnackOpen, setSnackMessage, setMessageType, setIsLogin, setIsLoading } =
-    useContext(CommonContext);
+  const {
+    setSnackOpen,
+    setSnackMessage,
+    setMessageType,
+    setIsLogin,
+    setIsLoading,
+    currentLangCode,
+  } = useContext(CommonContext);
 
   const formik = useFormik({
     initialValues:
       type === "email" ? loginInitialValues : loginByUsernameInitialValues,
     validationSchema:
       type === "email"
-        ? loginValidationSchema
+        ? currentLangCode === "hn"
+          ? loginValidationSchemaHindi
+          : currentLangCode === "guj"
+          ? loginValidationSchemaGujarati
+          : loginValidationSchema
+        : currentLangCode === "hn"
+        ? loginByUsernameValidationSchemaHindi
+        : currentLangCode === "guj"
+        ? loginByUsernameValidationSchemaGujarati
         : loginByUsernameValidationSchema,
     onSubmit: async (values) => {
       setIsLoading(true);
@@ -39,10 +57,7 @@ const Login = () => {
         setSnackMessage(response?.data?.message);
         setModelOpen(false);
         setIsLogin(true);
-        localStorage.setItem(
-          "authorization",
-          (response?.data?.data?.token)
-        );
+        localStorage.setItem("authorization", response?.data?.data?.token);
         navigate("/");
       } else {
         setIsLoading(true);
@@ -84,10 +99,18 @@ const Login = () => {
             )}
 
             <h2 className="text-3xl font-semibold text-center text-gray-800 mb-4">
-              Login
+              {currentLangCode === "hn"
+                ? "लॉग इन"
+                : currentLangCode === "guj"
+                ? "લૉગિન"
+                : "Login"}
             </h2>
             <p className="text-sm text-center text-gray-600 mb-8">
-              Please enter your credentials to continue.
+              {currentLangCode === "hn"
+                ? "जारी रखने के लिए कृपया अपनी साख दर्ज करें।"
+                : currentLangCode === "guj"
+                ? "ચાલુ રાખવા માટે કૃપા કરીને તમારા ઓળખપત્રો દાખલ કરો."
+                : "Please enter your credentials to continue."}
             </p>
 
             {/* Login Form */}
@@ -99,7 +122,6 @@ const Login = () => {
                   onChange={(e) => {
                     formik.handleChange(e);
                     setType(e.target.value);
-
                     if (type === "email") {
                       formik.setFieldValue("email", "");
                       formik.setFieldValue("password", "");
@@ -110,7 +132,13 @@ const Login = () => {
                   }}
                   onBlur={formik.handleBlur}
                   className="w-full"
-                  label="Select Authentication type"
+                  label={
+                    currentLangCode === "hn"
+                      ? "प्रमाणीकरण प्रकार चुनें"
+                      : currentLangCode === "guj"
+                      ? "પ્રમાણીકરણ પ્રકાર પસંદ કરો"
+                      : "Select Authentication type"
+                  }
                   options={authenticationOptions}
                   required
                 />
@@ -131,9 +159,17 @@ const Login = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="w-full"
-                  label={`Enter your ${
-                    type === "email" ? "email" : "username"
-                  }`}
+                  label={
+                    currentLangCode === "hn"
+                      ? `अपना ${
+                          type === "email" ? "ईमेल" : "उपयोगकर्ता नाम"
+                        } दर्ज करें`
+                      : currentLangCode === "guj"
+                      ? `તમારો ${
+                          type === "email" ? "ઈમેલ" : "વપરાશકર્તા નામ"
+                        } દાખલ કરો`
+                      : `Enter your ${type === "email" ? "email" : "username"}`
+                  }
                   required
                 />
                 {type === "email"
@@ -155,7 +191,13 @@ const Login = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="w-full"
-                  label="Enter your Password"
+                  label={
+                    currentLangCode === "hn"
+                      ? "अपना पासवर्ड भरें"
+                      : currentLangCode === "guj"
+                      ? "તમારો પાસવર્ડ દાખલ કરો"
+                      : "Enter your Password"
+                  }
                   required
                 />
                 {formik.errors.password && formik.touched.password && (
@@ -171,14 +213,22 @@ const Login = () => {
                     className="mr-2 rounded text-orange-600"
                   />
                   <label htmlFor="remember" className="text-sm text-gray-600">
-                    Remember me
+                    {currentLangCode === "hn"
+                      ? "मुझे याद करो"
+                      : currentLangCode === "guj"
+                      ? "મને યાદ રાખો"
+                      : "Remember me"}
                   </label>
                 </div>
                 <Link
-                  href="#"
+                  to="/reset-password"
                   className="text-sm text-blue-600 hover:text-blue-800"
                 >
-                  Forgot Password?
+                  {currentLangCode === "hn"
+                    ? "पासवर्ड भूल गए"
+                    : currentLangCode === "guj"
+                    ? "પાસવર્ડ ભૂલી ગયા છો"
+                    : "Forgot Password"}
                 </Link>
               </div>
 
@@ -190,24 +240,40 @@ const Login = () => {
                   type="submit"
                   className="w-full py-3 bg-white text-black border border-gray-300 rounded-lg shadow-md mb-5"
                 >
-                  Back
+                  {currentLangCode === "hn"
+                    ? "पीछे"
+                    : currentLangCode === "guj"
+                    ? "પાછળ"
+                    : "Back"}
                 </button>
                 <button
                   type="submit"
                   className="w-full py-3 bg-orange-600 text-white rounded-lg shadow-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 mb-5"
                 >
-                  Login
+                  {currentLangCode === "hn"
+                    ? "लॉग इन करें"
+                    : currentLangCode === "guj"
+                    ? "લૉગિન કરો"
+                    : "Login"}
                 </button>
               </div>
 
               <hr className="mb-3" />
               <p className="text-sm text-center">
-                Don't have an account?{" "}
+                {currentLangCode === "hn"
+                  ? "कोई खाता नहीं है?"
+                  : currentLangCode === "guj"
+                  ? "ખાતું નથી?"
+                  : "Don't have an account?"}
                 <Link
                   to="/register"
                   className="text-blue-600 hover:text-blue-800"
                 >
-                  Sign Up
+                  {currentLangCode === "hn"
+                    ? " साइन अप करें"
+                    : currentLangCode === "guj"
+                    ? " સાઇન અપ કરો"
+                    : " Sign Up"}
                 </Link>{" "}
               </p>
             </form>

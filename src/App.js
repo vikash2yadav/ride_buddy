@@ -18,6 +18,7 @@ const Home = lazy(() => import("./pages/Home"));
 const Loader = lazy(() => import("./components/layouts/Loader"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const Profile = lazy(() => import("./pages/Profile"));
+const ResetPassword = lazy(() => import("./pages/auth/ResetPassword"));
 
 const App = () => {
   const { snackOpen, messageType, snackMessage, setSnackOpen } =
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/:brand/:model/:id" element={<VehicleDetails />} />
         <Route path="/FAQ" element={<FAQ />} />

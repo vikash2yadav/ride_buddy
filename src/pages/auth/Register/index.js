@@ -11,7 +11,7 @@ import { genderOptions } from "../../../utils/helper";
 import { CommonContext } from "../../../context/CommonContext";
 
 const Register = () => {
-  const { setSnackOpen, setSnackMessage, setMessageType } =
+  const { setSnackOpen, setSnackMessage, setMessageType, currentLangCode } =
     useContext(CommonContext);
 
   const formik = useFormik({
@@ -47,10 +47,18 @@ const Register = () => {
           onClick={(e) => e.stopPropagation()}
         >
           <h2 className="text-3xl font-semibold text-center text-gray-800 mb-4">
-            Register
+            {currentLangCode === "hn"
+              ? "पंजीकरण करवाना"
+              : currentLangCode === "guj"
+              ? "નોંધણી કરો"
+              : "Register"}
           </h2>
           <p className="text-sm text-center text-gray-600 mb-8">
-            Create a new account by filling the form below.
+            {currentLangCode === "hn"
+              ? "नीचे दिया गया फॉर्म भरकर एक नया खाता बनाएं।"
+              : currentLangCode === "guj"
+              ? "નીચેનું ફોર્મ ભરીને નવું ખાતું બનાવો."
+              : "Create a new account by filling the form below."}
           </p>
 
           <form onSubmit={formik.handleSubmit}>
@@ -62,7 +70,13 @@ const Register = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="w-full"
-                  label="Enter First Name"
+                  label={
+                    currentLangCode === "hn"
+                      ? "प्रथम नाम दर्ज करें"
+                      : currentLangCode === "guj"
+                      ? "પ્રથમ નામ દાખલ કરો"
+                      : "Enter First Name"
+                  }
                   required
                 />
                 {formik.errors.firstname && formik.touched.firstname && (
@@ -76,7 +90,13 @@ const Register = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="w-full"
-                  label="Enter Last Name"
+                  label={
+                    currentLangCode === "hn"
+                      ? "अंतिम नाम दर्ज करो"
+                      : currentLangCode === "guj"
+                      ? "છેલ્લું નામ દાખલ કરો"
+                      : "Enter Last Name"
+                  }
                   required
                 />
                 {formik.errors.lastname && formik.touched.lastname && (
@@ -94,7 +114,13 @@ const Register = () => {
                   onBlur={formik.handleBlur}
                   type="email"
                   className="w-full"
-                  label="Enter email"
+                  label={
+                    currentLangCode === "hn"
+                      ? "ईमेल दर्ज करें"
+                      : currentLangCode === "guj"
+                      ? "ઈમેલ દાખલ કરો"
+                      : "Enter email"
+                  }
                   required
                 />
                 {formik.errors.email && formik.touched.email && (
@@ -112,7 +138,13 @@ const Register = () => {
                   onBlur={formik.handleBlur}
                   type="password"
                   className="w-full"
-                  label="Enter Password"
+                  label={
+                    currentLangCode === "hn"
+                      ? "पास वर्ड दर्ज करें"
+                      : currentLangCode === "guj"
+                      ? "પાસવર્ડ દાખલ કરો"
+                      : "Enter Password"
+                  }
                   required
                 />
                 {formik.errors.password && formik.touched.password && (
@@ -128,7 +160,13 @@ const Register = () => {
                   onBlur={formik.handleBlur}
                   type="password"
                   className="w-full"
-                  label="Confirm Password"
+                  label={
+                    currentLangCode === "hn"
+                      ? "पासवर्ड की पुष्टि कीजिये"
+                      : currentLangCode === "guj"
+                      ? "પાસવર્ડની પુષ્ટિ કરો"
+                      : "Confirm Password"
+                  }
                   required
                 />
                 {formik.errors.confirm_password &&
@@ -146,7 +184,13 @@ const Register = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="w-full"
-                  label="Enter Phone"
+                  label={
+                    currentLangCode === "hn"
+                      ? "फ़ोन दर्ज करें"
+                      : currentLangCode === "guj"
+                      ? "ફોન દાખલ કરો"
+                      : "Enter Phone"
+                  }
                   required
                 />
                 {formik.errors.phone && formik.touched.phone && (
@@ -160,7 +204,13 @@ const Register = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="w-full"
-                  label="Enter UserName"
+                  label={
+                    currentLangCode === "hn"
+                      ? "उपयोगकर्ता नाम दर्ज करें"
+                      : currentLangCode === "guj"
+                      ? "વપરાશકર્તા નામ દાખલ કરો"
+                      : "Enter UserName"
+                  }
                   required
                 />
                 {formik.errors.username && formik.touched.username && (
@@ -177,7 +227,13 @@ const Register = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="w-full"
-                  label="Select Gender"
+                  label={
+                    currentLangCode === "hn"
+                      ? "लिंग चुनें"
+                      : currentLangCode === "guj"
+                      ? "લિંગ પસંદ કરો"
+                      : "Select Gender"
+                  }
                   options={genderOptions}
                   required
                 />
@@ -205,9 +261,19 @@ const Register = () => {
               <div className="flex ">
                 <CheckBox className="text-orange-600" />
                 <p className="mx-2">
-                  I agree to{" "}
+                  {currentLangCode === "hn"
+                    ? "मैं सहमत हूं"
+                    : currentLangCode === "guj"
+                    ? "હું સંમત છું"
+                    : "I agree to"}
                   <span className="text-blue-600">
-                    <Link onClick={handleShowForTerms}>Terms & Conditions</Link>
+                    <Link onClick={handleShowForTerms}>
+                      {currentLangCode === "hn"
+                        ? " नियम एवं शर्तें"
+                        : currentLangCode === "guj"
+                        ? " નિયમો અને શરતો"
+                        : " Terms & Conditions"}
+                    </Link>
                   </span>
                 </p>
               </div>
@@ -218,20 +284,36 @@ const Register = () => {
                 onClick={() => navigate("/")}
                 className="w-full py-3 bg-white text-black border border-gray-300 rounded-lg shadow-md mb-5"
               >
-                Back
+                {currentLangCode === "hn"
+                  ? "पीछे"
+                  : currentLangCode === "guj"
+                  ? "પાછળ"
+                  : "Back"}
               </button>
               <button
                 type="submit"
                 className="w-full py-3 bg-orange-600 text-white rounded-lg shadow-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 mb-5"
               >
-                Submit
+                {currentLangCode === "hn"
+                  ? "जमा करना"
+                  : currentLangCode === "guj"
+                  ? "સબમિટ કરો"
+                  : "Submit"}
               </button>
             </div>
             <hr className="mb-3" />
             <p className="text-sm text-center">
-              have an account?{" "}
+              {currentLangCode === "hn"
+                ? "एक खाता है?"
+                : currentLangCode === "guj"
+                ? "ખાતું છે?"
+                : "have an account?"}
               <Link to="/login" className="text-blue-600 hover:text-blue-800">
-                Log In
+                {currentLangCode === "hn"
+                  ? " लॉग इन करें"
+                  : currentLangCode === "guj"
+                  ? " લોગ ઇન કરો"
+                  : " Log In"}
               </Link>
             </p>
           </form>

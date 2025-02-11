@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../../components/layouts/Header";
 import Footer from "../../components/layouts/Footer";
 import InputBox from "../../components/form/InputBox";
+import { CommonContext } from "../../context/CommonContext";
 
 const Checkout = () => {
+  const { currentLangCode } = useContext(CommonContext);
   const [paymentMethod, setPaymentMethod] = useState("Credit Card");
   const [cardDetails, setCardDetails] = useState({
     cardNumber: "",
@@ -37,15 +39,15 @@ const Checkout = () => {
   };
 
   const handleConfirmBankAccountChange = (e) => {
-    setConfirmBankAccount(e.target.value); 
+    setConfirmBankAccount(e.target.value);
   };
 
   const handleIfscChange = (e) => {
-    setIfsc(e.target.value); 
+    setIfsc(e.target.value);
   };
 
   const handleAccountHolderNameChange = (e) => {
-    setAccountHolderName(e.target.value); 
+    setAccountHolderName(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -65,13 +67,13 @@ const Checkout = () => {
     alert("Order placed successfully!");
   };
 
-   useEffect(()=> {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth", // Add smooth scroll animation
-        });
-      }, []);
-      
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Add smooth scroll animation
+    });
+  }, []);
+
   return (
     <>
       <Header />
@@ -82,7 +84,11 @@ const Checkout = () => {
             {/* Payment Method */}
             <div>
               <p className="text-lg text-gray-800 font-semibold mb-4">
-                Payment Method
+                {currentLangCode === "hn"
+                  ? "भुगतान विधि"
+                  : currentLangCode === "guj"
+                  ? "ચુકવણી પદ્ધતિ"
+                  : "Payment Method"}
               </p>
               <div className="flex justify-start items-center gap-4 flex-wrap">
                 <label className="inline-flex items-center">
@@ -94,7 +100,13 @@ const Checkout = () => {
                     onChange={() => setPaymentMethod("Credit Card")}
                     className="form-radio text-blue-600"
                   />
-                  <span className="ml-2 text-gray-800">Credit Card</span>
+                  <span className="ml-2 text-gray-800">
+                    {currentLangCode === "hn"
+                      ? "क्रेडिट कार्ड"
+                      : currentLangCode === "guj"
+                      ? "ક્રેડિટ કાર્ડ"
+                      : "Credit Card"}
+                  </span>
                 </label>
                 <label className="inline-flex items-center">
                   <input
@@ -105,7 +117,13 @@ const Checkout = () => {
                     onChange={() => setPaymentMethod("Debit Card")}
                     className="form-radio text-blue-600"
                   />
-                  <span className="ml-2 text-gray-800">Debit Card</span>
+                  <span className="ml-2 text-gray-800">
+                    {currentLangCode === "hn"
+                      ? "डेबिट कार्ड"
+                      : currentLangCode === "guj"
+                      ? "ડેબિટ કાર્ડ"
+                      : "Debit Card"}
+                  </span>
                 </label>
                 <label className="inline-flex items-center">
                   <input
@@ -116,7 +134,13 @@ const Checkout = () => {
                     onChange={() => setPaymentMethod("PayPal")}
                     className="form-radio text-blue-600"
                   />
-                  <span className="ml-2 text-gray-800">PayPal</span>
+                  <span className="ml-2 text-gray-800">
+                    {currentLangCode === "hn"
+                      ? "पेपैल"
+                      : currentLangCode === "guj"
+                      ? "પેપાલ"
+                      : "PayPal"}
+                  </span>
                 </label>
                 <label className="inline-flex items-center">
                   <input
@@ -127,7 +151,13 @@ const Checkout = () => {
                     onChange={() => setPaymentMethod("Cash")}
                     className="form-radio text-blue-600"
                   />
-                  <span className="ml-2 text-gray-800">Cash</span>
+                  <span className="ml-2 text-gray-800">
+                    {currentLangCode === "hn"
+                      ? "नकद"
+                      : currentLangCode === "guj"
+                      ? "રોકડ"
+                      : "Cash"}
+                  </span>
                 </label>
                 <label className="inline-flex items-center">
                   <input
@@ -138,7 +168,13 @@ const Checkout = () => {
                     onChange={() => setPaymentMethod("Bank Transfer")}
                     className="form-radio text-blue-600"
                   />
-                  <span className="ml-2 text-gray-800">Bank Transfer</span>
+                  <span className="ml-2 text-gray-800">
+                    {currentLangCode === "hn"
+                      ? "बैंक ट्रांसफर"
+                      : currentLangCode === "guj"
+                      ? "બેંક ટ્રાન્સફર"
+                      : "Bank Transfer"}
+                  </span>
                 </label>
               </div>
             </div>
@@ -151,7 +187,13 @@ const Checkout = () => {
                   <InputBox
                     type="text"
                     className="md:w-80 w-full"
-                    label="Card Number"
+                    label={
+                      currentLangCode === "hn"
+                        ? "कार्ड संख्या"
+                        : currentLangCode === "guj"
+                        ? "કાર્ડ નંબર"
+                        : "Card Number"
+                    }
                     name="cardNumber"
                     value={cardDetails.cardNumber}
                     onChange={handleCardChange}
@@ -161,7 +203,13 @@ const Checkout = () => {
                   <InputBox
                     type="text"
                     className="md:w-80 w-full"
-                    label="CVV"
+                    label={
+                      currentLangCode === "hn"
+                        ? "સીવીવી"
+                        : currentLangCode === "guj"
+                        ? "सीवीवी"
+                        : "CVV"
+                    }
                     name="cvv"
                     value={cardDetails.cvv}
                     onChange={handleCardChange}
@@ -178,7 +226,13 @@ const Checkout = () => {
                 <InputBox
                   type="email"
                   className="md:w-80 w-full"
-                  label="PayPal Email"
+                  label={
+                    currentLangCode === "hn"
+                      ? "पेपैल ईमेल"
+                      : currentLangCode === "guj"
+                      ? "પેપાલ ઈમેલ"
+                      : "PayPal Email"
+                  }
                   name="paypalEmail"
                   value={paypalEmail}
                   onChange={handlePaypalChange}
@@ -194,17 +248,29 @@ const Checkout = () => {
                 <InputBox
                   type="text"
                   className="md:w-80 w-full"
-                  label="Bank Account Number"
+                  label={
+                    currentLangCode === "hn"
+                      ? "बैंक खाता संख्या"
+                      : currentLangCode === "guj"
+                      ? "બેંક એકાઉન્ટ નંબર"
+                      : "Bank Account Number"
+                  }
                   name="bankAccount"
                   value={bankAccount}
                   onChange={handleBankAccountChange}
                   placeholder="0000000000000000"
                   required
                 />
-                  <InputBox
+                <InputBox
                   type="text"
                   className="md:w-80 w-full"
-                  label="Confirm Bank Account Number"
+                  label={
+                    currentLangCode === "hn"
+                      ? "बैंक खाता संख्या की पुष्टि करें"
+                      : currentLangCode === "guj"
+                      ? "બેંક એકાઉન્ટ નંબરની પુષ્ટિ કરો"
+                      : "Confirm Bank Account Number"
+                  }
                   name="confirmBankAccount"
                   value={confirmBankAccount}
                   onChange={handleConfirmBankAccountChange}
@@ -214,17 +280,29 @@ const Checkout = () => {
                 <InputBox
                   type="text"
                   className="md:w-80 w-full"
-                  label="IFSC code"
+                  label={
+                    currentLangCode === "hn"
+                      ? "IFSC कोड"
+                      : currentLangCode === "guj"
+                      ? "IFSC કોડ"
+                      : "IFSC code"
+                  }
                   name="ifsc"
                   value={ifsc}
                   onChange={handleIfscChange}
                   placeholder="ABC12039304"
                   required
                 />
-                   <InputBox
+                <InputBox
                   type="text"
                   className="md:w-80 w-full"
-                  label="Account Holder Name"
+                  label={
+                    currentLangCode === "hn"
+                      ? "खाता धारक का नाम"
+                      : currentLangCode === "guj"
+                      ? "એકાઉન્ટ ધારકનું નામ"
+                      : "Account Holder Name"
+                  }
                   name="accountHolderName"
                   value={accountHolderName}
                   onChange={handleAccountHolderNameChange}
@@ -237,7 +315,11 @@ const Checkout = () => {
             {/* Submit Button */}
             <div className="text-right">
               <button className="px-12 py-3 rounded-lg text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                Confirm Order
+                {currentLangCode === "hn"
+                  ? "आदेश की पुष्टि"
+                  : currentLangCode === "guj"
+                  ? "ઓર્ડરની પુષ્ટિ કરો"
+                  : "Confirm Order"}
               </button>
             </div>
           </form>
