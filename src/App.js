@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import SnackBar from "./components/SnackBar";
+// import './App.css'
 import { CommonContext } from "./context/CommonContext";
 
 // Lazy load the pages

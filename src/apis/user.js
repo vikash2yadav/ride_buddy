@@ -1,11 +1,11 @@
 import { callApi } from "."
 
-export const allCityList = async (url, body, method, headers) => {
+export const getProfileData = async (url, body, method, headers) => {
     let response = await callApi({url, body, method, headers});
     return response;
 }
 
-export const allStateList = async (url, body, method, headers) => {
+export const updateProfileData = async (url, body, method, headers) => {
     let response = await callApi({url, body, method, headers});
     return response;
 }
