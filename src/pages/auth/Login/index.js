@@ -58,6 +58,7 @@ const Login = () => {
         setModelOpen(false);
         setIsLogin(true);
         localStorage.setItem("authorization", response?.data?.data?.token);
+        localStorage.setItem("profileImage", response?.data?.data?.profile);
         navigate("/");
       } else {
         setIsLoading(true);

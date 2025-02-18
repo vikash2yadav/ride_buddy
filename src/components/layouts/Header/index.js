@@ -23,6 +23,7 @@ import { logoutAPi } from "../../../apis/auth";
 import { LocationContext } from "../../../context/LocationContext";
 import { HindiDataList } from "../../../language/hindi";
 import { GujaratiDataList } from "../../../language/gujarati";
+import AvatarImage from "../../AvatarImage";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const Header = () => {
   const [cityEl, setCityEl] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [profile, setProfile] = useState("");
   const {
     setModelOpen,
     isLogin,
@@ -42,7 +44,7 @@ const Header = () => {
     currentLang,
     setCurrentLang,
     currentLangCode,
-    setCurrentLangCode
+    setCurrentLangCode,
   } = useContext(CommonContext);
   const { cityList, allCities } = useContext(LocationContext);
 
@@ -122,17 +124,23 @@ const Header = () => {
     } else {
       setCurrentLang("ગુજરાતી");
     }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     allCities();
+       // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     let user = localStorage.getItem("authorization");
+    let profile = localStorage.getItem("profileImage");
+    setProfile(profile);
+
     if (user) {
       setIsLogin(true);
     }
+      // eslint-disable-next-line
   }, []);
 
   return (
@@ -232,7 +240,13 @@ const Header = () => {
                       onClick={handleMenuOpen}
                       size="large"
                     >
-                      <AccountCircle />
+                      <AvatarImage
+                        sx={{
+                          height: 30,
+                          width: 30,
+                        }}
+                        src={profile}
+                      />
                     </button>
                     <Menu
                       anchorEl={anchorEl}
