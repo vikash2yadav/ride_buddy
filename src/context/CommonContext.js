@@ -11,6 +11,7 @@ export const CommonContextProvider = ({ children }) => {
   const [currentLang, setCurrentLang] = useState("English");
   const [currentLangCode, setCurrentLangCode] = useState("eng");
   const [imageModal, setImageModal] = useState(false);
+  const [profile, setProfile] = useState(null);
 
   return (
     <CommonContext.Provider
@@ -31,8 +32,10 @@ export const CommonContextProvider = ({ children }) => {
         setCurrentLang,
         currentLangCode,
         setCurrentLangCode,
-        imageModal, 
-        setImageModal
+        imageModal,
+        setImageModal,
+        profile,
+        setProfile
       }}
     >
       {children}

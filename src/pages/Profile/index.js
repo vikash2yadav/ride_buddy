@@ -6,7 +6,7 @@ import InputBox from "../../components/form/InputBox";
 import SelectBox from "../../components/form/SelectBox";
 import TextArea from "../../components/form/TextArea";
 import { Box, IconButton, Typography } from "@mui/material";
-import { genderOptions } from "../../utils/helper";
+import { dayJsConverter, genderOptions } from "../../utils/helper";
 import { getProfileData, updateProfileData } from "../../apis/user";
 import {
   profileInitialValues,
@@ -22,10 +22,14 @@ import Footer from "../../components/layouts/Footer";
 import { EditOutlined } from "@mui/icons-material";
 import ProfileModel from "../../components/ProfileModel";
 import { updateProfileImage } from "../../apis/util";
+import BasicDatePicker from "../../components/DatePicker";
+import dayjs from "dayjs";
 
 const Profile = () => {
   const fileInputRef = useRef(null);
   const [imageUrl, setImageUrl] = useState("");
+  const [currentImageProfile, setCurrentImageProfile] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(dayjs());
   const {
     currentLangCode,
     setIsLoading,
@@ -34,6 +38,7 @@ const Profile = () => {
     setSnackMessage,
     setImageModal,
     imageModal,
+    setProfile,
   } = useContext(CommonContext);
   const { citiesList, statesList, cities, states } =
     useContext(LocationContext);
@@ -47,7 +52,12 @@ const Profile = () => {
         : profileValidationSchema,
     onSubmit: async (values) => {
       let response = await updateProfileData("user/update", values, "PUT", {});
+
       if (response?.status === 200) {
+        if (currentImageProfile) {
+          localStorage.setItem("profileImage", currentImageProfile);
+          setProfile(currentImageProfile);
+        }
         setSnackOpen(true);
         setMessageType("success");
         setSnackMessage(response?.data?.message);
@@ -64,8 +74,38 @@ const Profile = () => {
     setIsLoading(true);
     let response = await getProfileData("user/profile", {}, "GET", {});
     if (response.status === 200) {
-      formik.setValues(response.data.data);
+      formik.setFieldValue("firstname", response?.data?.data?.firstname);
+      formik.setFieldValue("lastname", response?.data?.data?.lastname);
+      formik.setFieldValue("email", response?.data?.data?.email);
+      formik.setFieldValue("username", response?.data?.data?.username);
+      formik.setFieldValue(
+        "license_number",
+        response?.data?.data?.license_number
+      );
+      formik.setFieldValue(
+        "license_expiry",
+        response?.data?.data?.license_expiry
+      );
+      formik.setFieldValue("phone", response?.data?.data?.phone);
+      formik.setFieldValue(
+        "alternate_phone",
+        response?.data?.data?.alternate_phone
+      );
+      formik.setFieldValue("gender", response?.data?.data?.gender);
+      formik.setFieldValue("state_id", response?.data?.data?.state_id);
+      formik.setFieldValue("city_id", response?.data?.data?.city_id);
+      formik.setFieldValue("postal_code", response?.data?.data?.postal_code);
+      formik.setFieldValue("address", response?.data?.data?.address);
+      formik.setFieldValue(
+        "native_address",
+        response?.data?.data?.native_address
+      );
+      formik.setFieldValue(
+        "date_of_birth",
+        response?.data?.data?.date_of_birth
+      );
       setImageUrl(response.data.data?.profile);
+      setSelectedDate(response?.data?.data?.date_of_birth);
       setIsLoading(false);
     } else {
       setIsLoading(true);
@@ -82,13 +122,18 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("folderName", "/users");
-    
-    await updateProfileImage(
-      "util/upload/single",
+
+    let response = await updateProfileImage(
+      "util/upload/multiple",
       formData,
       "POST",
       null
     );
+
+    if (response?.status === 200) {
+      setCurrentImageProfile(response?.data?.data[0].url);
+      formik.setFieldValue("profile", response?.data?.data[0].name);
+    }
 
     if (file) {
       const reader = new FileReader();
@@ -99,6 +144,12 @@ const Profile = () => {
 
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleDateChange = (newValue) => {
+    let newDate = dayJsConverter(newValue);
+    setSelectedDate(newDate);
+    formik.setFieldValue("date_of_birth", newDate);
   };
 
   useEffect(() => {
@@ -168,7 +219,7 @@ const Profile = () => {
                   </Box>
                   <ProfileModel
                     open={imageModal}
-                    src={formik.values.profile}
+                    src={imageUrl}
                     onClose={() => setImageModal(false)}
                   />
                 </div>
@@ -414,14 +465,13 @@ const Profile = () => {
                       : "Date Of Birth"}
                     <RequiredSpan />
                   </Typography>
-                  <SelectBox
+                  <BasicDatePicker
                     name="date_of_birth"
-                    value={formik.values.date_of_birth}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    // onBlur={formik.handleBlur}
                     id="outlined-basic"
                     variant="outlined"
-                    options={genderOptions}
                     className="w-full"
                   />
                   {formik.errors.date_of_birth &&

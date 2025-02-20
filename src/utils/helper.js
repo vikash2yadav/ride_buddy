@@ -10,3 +10,7 @@ export const authenticationOptions = [
   { title: "Email", value: "email" },
   { title: "UserName", value: "username" },
 ];
+
+export const dayJsConverter = (value) => {
+  return value?.format("MM/DD/YYYY");
+}

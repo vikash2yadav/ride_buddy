@@ -3,20 +3,28 @@ import Header from "../../components/layouts/Header";
 import Footer from "../../components/layouts/Footer";
 import InputBox from "../../components/form/InputBox";
 import { CommonContext } from "../../context/CommonContext";
+import { useParams } from "react-router-dom";
+import { VehicleContext } from "../../context/VehicleContext";
+import BasicDatePicker from "../../components/DatePicker";
 
 const Checkout = () => {
+  const params = useParams();
   const { currentLangCode } = useContext(CommonContext);
+  const { getVehicleDetail, vehicleData } = useContext(VehicleContext);
+  const [durationType, setDurtionType] = useState("hour");
   const [paymentMethod, setPaymentMethod] = useState("Credit Card");
+  const [perHour, setPerHour] = useState("1");
   const [cardDetails, setCardDetails] = useState({
     cardNumber: "",
     cvv: "",
   });
   const [paypalEmail, setPaypalEmail] = useState("");
-  const [creditCard, setCreditCard] = useState("");
+  const [setCreditCard] = useState("");
   const [bankAccount, setBankAccount] = useState("");
   const [confirmBankAccount, setConfirmBankAccount] = useState("");
   const [ifsc, setIfsc] = useState("");
   const [accountHolderName, setAccountHolderName] = useState("");
+  const [startDate, setStartDate] = useState();
 
   const handleCardChange = (e) => {
     const { name, value } = e.target;
@@ -28,10 +36,6 @@ const Checkout = () => {
 
   const handlePaypalChange = (e) => {
     setPaypalEmail(e.target.value);
-  };
-
-  const handleCreditCardChange = (e) => {
-    setCreditCard(e.target.value);
   };
 
   const handleBankAccountChange = (e) => {
@@ -67,6 +71,14 @@ const Checkout = () => {
     alert("Order placed successfully!");
   };
 
+  const handleDateChange = (newValue) => {
+    setStartDate(newValue);
+  };
+
+  useEffect(() => {
+    getVehicleDetail(params?.id);
+  }, []);
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -78,7 +90,176 @@ const Checkout = () => {
     <>
       <Header />
 
-      <div className="bg-white shadow-md border border-gray-300 rounded-2xl md:mx-20 lg:mr-96 lg:ml-40 mt-4 lg:mt-10 text-gray-800">
+      <div className="bg-white  shadow-md border border-gray-300 rounded-2xl md:mx-20 lg:mr-96 lg:ml-40 mt-4 lg:mt-10 text-gray-800">
+        <div className="max-w-full mx-auto px-6 py-6">
+          <p className="text-lg text-gray-800 font-semibold mb-4">
+            {currentLangCode === "hn"
+              ? "भुगतान विधि"
+              : currentLangCode === "guj"
+              ? "ચુકવણી પદ્ધતિ"
+              : "Select Durations"}
+          </p>
+
+          <div className="flex justify-start items-center gap-4 flex-wrap">
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                name="durationType"
+                value="hour"
+                checked={durationType === "hour"}
+                onChange={() => setDurtionType("hour")}
+                className="form-radio text-blue-600"
+              />
+              <span className="ml-2 text-gray-800">
+                {currentLangCode === "hn"
+                  ? "एक घंटे भर के लिए"
+                  : currentLangCode === "guj"
+                  ? "એક કલાક માટે "
+                  : "For One hour"}
+              </span>
+            </label>
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                name="durationType"
+                value="day"
+                checked={durationType === "day"}
+                onChange={() => setDurtionType("day")}
+                className="form-radio text-blue-600"
+              />
+              <span className="ml-2 text-gray-800">
+                {currentLangCode === "hn"
+                  ? "एक दिन के लिए"
+                  : currentLangCode === "guj"
+                  ? "એક દિવસ માટે"
+                  : "For One Day"}
+              </span>
+            </label>
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                name="durationType"
+                value="week"
+                checked={durationType === "week"}
+                onChange={() => setDurtionType("week")}
+                className="form-radio text-blue-600"
+              />
+              <span className="ml-2 text-gray-800">
+                {currentLangCode === "hn"
+                  ? "एक सप्ताह के लिए"
+                  : currentLangCode === "guj"
+                  ? "એક અઠવાડિયા માટે"
+                  : "For One Week"}
+              </span>
+            </label>
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                name="durationType"
+                value="month"
+                checked={durationType === "month"}
+                onChange={() => setDurtionType("month")}
+                className="form-radio text-blue-600"
+              />
+              <span className="ml-2 text-gray-800">
+                {currentLangCode === "hn"
+                  ? "एक महीने के लिए"
+                  : currentLangCode === "guj"
+                  ? "એક મહિના માટે"
+                  : "For One Month"}
+              </span>
+            </label>
+          </div>
+
+          {/* Conditional rendering */}
+          {durationType === "hour" && (
+            <div>
+              <div className="grid grid-cols-1 gap-4 mt-6">
+                <BasicDatePicker
+                  label={"Enter date"}
+                  name="satrt_date"
+                  value={startDate}
+                  onChange={handleDateChange}
+                />
+              </div>
+
+             {
+              startDate && (
+                <div className="grid grid-cols-1 gap-4 mt-6">
+                <div className="flex flex-col justify-start gap-4">
+                  <label className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="perHour"
+                      value="1"
+                      checked={perHour === "1"}
+                      onChange={() => setPerHour("1")}
+                      className="form-radio text-blue-600"
+                    />
+                    <span className="ml-2 text-gray-800">
+                      12 AM - 1 AM
+                    </span>
+                  </label>
+                  <label className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="perHour"
+                      value="2"
+                      checked={perHour === "2"}
+                      onChange={() => setPerHour("2")}
+                      className="form-radio text-blue-600"
+                    />
+                    <span className="ml-2 text-gray-800">
+                      1 AM - 2 AM
+                    </span>
+                  </label>
+                  <label className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="perHour"
+                      value="3"
+                      checked={perHour === "3"}
+                      onChange={() => setPerHour("3")}
+                      className="form-radio text-blue-600"
+                    />
+                    <span className="ml-2 text-gray-800">
+                      2 AM - 3 AM
+                    </span>
+                  </label>
+                  <label className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="perHour"
+                      value="4"
+                      checked={perHour === "4"}
+                      onChange={() => setPerHour("4")}
+                      className="form-radio text-blue-600"
+                    />
+                    <span className="ml-2 text-gray-800">
+                      3 AM - 4 AM
+                    </span>
+                  </label>
+                  <label className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="perHour"
+                      value="5"
+                      checked={perHour === "5"}
+                      onChange={() => setPerHour("5")}
+                      className="form-radio text-blue-600"
+                    />
+                    <span className="ml-2 text-gray-800">
+                      4 AM - 5 AM
+                    </span>
+                  </label>
+                </div>
+              </div>
+              )
+             }
+            </div>
+          )}
+        </div>
+
         <div className="max-w-full mx-auto px-6 py-6">
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Payment Method */}
@@ -325,7 +506,6 @@ const Checkout = () => {
           </form>
         </div>
       </div>
-
       <Footer />
     </>
   );

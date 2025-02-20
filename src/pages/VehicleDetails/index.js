@@ -14,6 +14,7 @@ import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import SelectBox from "../../components/form/SelectBox";
 import Loader from "../../components/layouts/Loader";
 import { CommonContext } from "../../context/CommonContext";
+import { Modal } from "@mui/material";
 
 const VehicleDetails = () => {
   const params = useParams();

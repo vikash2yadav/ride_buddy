@@ -32,7 +32,6 @@ const Header = () => {
   const [cityEl, setCityEl] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [profile, setProfile] = useState("");
   const {
     setModelOpen,
     isLogin,
@@ -45,6 +44,8 @@ const Header = () => {
     setCurrentLang,
     currentLangCode,
     setCurrentLangCode,
+    profile,
+    setProfile,
   } = useContext(CommonContext);
   const { cityList, allCities } = useContext(LocationContext);
 
@@ -117,7 +118,7 @@ const Header = () => {
   useEffect(() => {
     let lang = localStorage.getItem("lang");
     setCurrentLangCode(lang);
-    if (lang === "eng") {
+    if (lang === "eng" || !lang) {
       setCurrentLang("English");
     } else if (lang === "hn") {
       setCurrentLang("हिन्दी");
@@ -129,7 +130,7 @@ const Header = () => {
 
   useEffect(() => {
     allCities();
-       // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -140,7 +141,7 @@ const Header = () => {
     if (user) {
       setIsLogin(true);
     }
-      // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -254,10 +255,22 @@ const Header = () => {
                       onClose={handleMenuClose}
                     >
                       <MenuItem onClick={() => navigate("/profile")}>
-                        <span className="text-sm">My Profile</span>
+                        <span className="text-sm">
+                          {currentLangCode === "hn"
+                            ? "मेरी प्रोफाइल"
+                            : currentLangCode === "guj"
+                            ? "મારી પ્રોફાઇલ"
+                            : "My Profile"}
+                        </span>
                       </MenuItem>
                       <MenuItem onClick={handleLogout}>
-                        <span className="text-sm">LogOut</span>
+                        <span className="text-sm">
+                          {currentLangCode === "hn"
+                            ? "लॉग आउट"
+                            : currentLangCode === "guj"
+                            ? "લોગઆઉટ"
+                            : "LogOut"}
+                        </span>
                       </MenuItem>
                     </Menu>
                   </div>
