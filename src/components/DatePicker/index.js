@@ -13,10 +13,15 @@ export default function BasicDatePicker({
   onChange,
   onBlur,
   dateFormat = "YYYY-MM-DD",
-  label
+  label,
+  minDate,
+  maxDate,
 }) {
   const formattedValue = value && dayjs(value).isValid() ? dayjs(value) : null;
-
+  const formattedStartValue =
+    minDate && dayjs(minDate).isValid() ? dayjs(minDate) : null;
+  const formattedEndValue =
+    maxDate && dayjs(maxDate).isValid() ? dayjs(maxDate) : null;
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={["DatePicker"]}>
@@ -27,6 +32,8 @@ export default function BasicDatePicker({
           value={formattedValue}
           onChange={(newValue) => onChange(newValue)}
           onBlur={onBlur}
+          minDate={formattedStartValue}
+          maxDate={formattedEndValue}
           renderInput={(params) => (
             <TextField
               {...params}

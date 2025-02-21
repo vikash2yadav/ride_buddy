@@ -62,7 +62,7 @@ const Specifications = ({ title, data }) => {
 
               {/* Render items if the section is open or if it's "Basic" */}
               {(openSections.has(specType) || specType === "Basic") && (
-                <div className="grid grid-cols-2 gap-4 text-gray-800 mt-1">
+                <div className="grid md:grid-cols-2 gap-4 text-gray-800 mt-1">
                   {groupedData[specType].map((item) => (
                     <Rows
                       key={item.id}

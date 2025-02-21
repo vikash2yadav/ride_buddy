@@ -65,7 +65,7 @@ const Brand = ({ title, brandList }) => {
             <Link to={brand?.website_url} target="_blank">
               <div
                 key={brand?.id}
-                className="flex-shrink-0 md:w-48 md:h-48 border border-gray-300 rounded-xl cursor-pointer flex flex-col justify-center items-center p-4 mb-3"
+                className="flex-shrink-0 md:w-48 w-28 h-40 md:h-48 border border-gray-300 rounded-xl cursor-pointer flex flex-col justify-center items-center p-4 mb-3"
               >
                 {/* Brand Icon */}
                 <img

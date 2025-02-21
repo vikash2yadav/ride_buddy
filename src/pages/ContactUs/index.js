@@ -281,10 +281,10 @@ const ContactUs = () => {
             : "Our Offices"}
         </h1>
 
-        <div className="flex md:flex-row flex-col md:mb-5 mb-3">
+        <div className="flex md:flex-row flex-col w-full md:mb-5 mb-3">
           {ourOffices.map((item, index) => (
             <>
-              <div className="mx-4 py-4 md:flex-3 md:w-64 w-full">
+              <div className="md:mx-4 p-4 md:flex-3 md:w-64 w-full">
                 <p className="text-sm font-semibold md:mb-5 mb-3">
                   {currentLangCode === "hn"
                     ? item.nameHindi

@@ -4,6 +4,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link } from "react-router-dom";
 import Loader from "../../components/layouts/Loader";
 import { VehicleContext } from "../../context/VehicleContext";
+import { CommonContext } from "../../context/CommonContext";
 
 const List = ({ title, categories, vehicleList }) => {
   const listRef = useRef(null);
@@ -11,7 +12,8 @@ const List = ({ title, categories, vehicleList }) => {
   // State to control the visibility of the left and right buttons
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(true);
-  const {getVehicleList, isVehicleLoading} = useContext(VehicleContext);
+  const { getVehicleList, isVehicleLoading } = useContext(VehicleContext);
+  const { currentLangCode } = useContext(CommonContext);
 
   // Function to scroll the container left
   const scrollLeft = () => {
@@ -58,8 +60,8 @@ const List = ({ title, categories, vehicleList }) => {
   }, [vehicleList]);
 
   const handleCategoryFilter = (id) => {
-    getVehicleList({filters: {category_id: id}});
-  }
+    getVehicleList({ filters: { category_id: id } });
+  };
 
   return (
     <>
@@ -94,7 +96,11 @@ const List = ({ title, categories, vehicleList }) => {
           {/* Categories */}
           <div className="flex mx-4 justify-start items-left text-sm overflow-x-auto scrollbar-hidden mb-3">
             {categories?.map((category) => (
-              <Link key={category?.id} className="mr-8" onClick={()=>handleCategoryFilter(category?.id)}>
+              <Link
+                key={category?.id}
+                className="mr-8"
+                onClick={() => handleCategoryFilter(category?.id)}
+              >
                 <span>{category?.name}</span>
               </Link>
             ))}
@@ -130,19 +136,27 @@ const List = ({ title, categories, vehicleList }) => {
                   </p>
                   <div className="flex justify-center items-center mt-5 md:mb-4 mb-3">
                     <button className="w-full mx-4 md:py-2 py-1 rounded-lg text-orange-600 bg-white border border-orange-600 hover:bg-orange-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-500">
-                      Explore
+                      {currentLangCode === "hn"
+                        ? "अन्वेषण करना"
+                        : currentLangCode === "guj"
+                        ? "અન્વેષણ કરો"
+                        : "Explore"}
                     </button>
                   </div>
                 </div>
               ))
             ) : (
-              <Loader inner={true}/>
+              <Loader inner={true} />
             )}
           </div>
 
           {/* View All Button */}
           <p className="mx-4 text-orange-600 font-medium cursor-pointer">
-            View All
+            {currentLangCode === "hn"
+              ? "सभी देखें"
+              : currentLangCode === "guj"
+              ? "બધી જુઓ"
+              : "View All"}
             <ChevronRightIcon className="text-orange-600 rounded-2xl" />
           </p>
         </div>

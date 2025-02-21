@@ -100,6 +100,7 @@ const Header = () => {
       localStorage.clear("authorization");
       setIsLogin(false);
       setSnackMessage(response?.data?.message);
+      navigate("/login");
     } else {
       setSnackOpen(true);
       setMessageType("error");
@@ -365,7 +366,11 @@ const Header = () => {
                   <div className="flex justify-end items-center">
                     <LocationOnIcon className="text-gray-600" />
                     <button className="text-gray-900 lg:pl-1">
-                      Select city{" "}
+                      {currentLangCode === "hn"
+                        ? "शहर चुनें"
+                        : currentLangCode === "guj"
+                        ? "શહેર પસંદ કરો"
+                        : "Select city"}
                       <ArrowDropDownIcon onClick={handleCityMenuOpen} />
                     </button>
                     <Menu
@@ -469,7 +474,12 @@ const Header = () => {
             <div className="flex justify-end items-center text-m">
               <LocationOnIcon className="text-gray-700" />
               <button className="text-gray-900 lg:pl-1">
-                Select city <ArrowDropDownIcon onClick={handleCityMenuOpen} />
+                {currentLangCode === "hn"
+                  ? "शहर चुनें"
+                  : currentLangCode === "guj"
+                  ? "શહેર પસંદ કરો"
+                  : "Select city"}{" "}
+                <ArrowDropDownIcon onClick={handleCityMenuOpen} />
               </button>
               <Menu
                 anchorEl={cityEl}

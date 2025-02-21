@@ -67,7 +67,7 @@ const BecomePartnerDealer = () => {
   return (
     <>
       <Header />
-      <h1 className="text-2xl mx-4 md:mx-20 lg:mx-40 font-semibold text-left text-gray-800 mt-10">
+      <h1 className="text-2xl mx-4 md:mx-20 lg:mx-40 font-semibold text-left text-gray-800 md:mt-10 mt-4">
         {currentLangCode === "hn"
           ? "भागीदार बनने का अनुरोध"
           : currentLangCode === "guj"
@@ -76,8 +76,8 @@ const BecomePartnerDealer = () => {
       </h1>
       <div className="bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mx-40 mt-4 text-gray-800 md:mb-5 mb-3">
         <form onSubmit={formik.handleSubmit}>
-          <div className="px-6 py-6">
-            <div className="grid lg:grid-cols-2 gap-2 lg:gap-4 mb-2 lg:mb-5 mt-14">
+          <div className="px-6 md:py-6">
+            <div className="grid lg:grid-cols-2 gap-2 lg:gap-4 mb-2 lg:mb-5 md:mt-14 mt-4">
               <div>
                 <InputBox
                   name="name"
@@ -319,7 +319,7 @@ const BecomePartnerDealer = () => {
         <div className="flex md:flex-row flex-col md:mb-5 mb-3">
           {ourOffices.map((item, index) => (
             <>
-              <div className="mx-4 py-4 md:flex-3 md:w-64 w-full">
+              <div className="md:mx-4 p-4 md:flex-3 md:w-64 w-full">
                 <p className="text-sm font-semibold md:mb-5 mb-3">
                   {currentLangCode === "hn"
                     ? item.nameHindi

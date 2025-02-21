@@ -11,6 +11,8 @@ export const VehicleContextProvider = ({ children }) => {
   const [mostlySearchedVehicles, setMostlySearchedVehicles] = useState([]);
 
   const getVehicleDetail = async (id) => {
+    console.log(id);
+    
     let response = await getVehicleDataApi(
       `vehicle/get/${id}`,
       undefined,

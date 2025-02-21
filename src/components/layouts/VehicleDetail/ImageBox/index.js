@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-const ImageBox = ({ images = [] }) => {  // Default to empty array if undefined
+const ImageBox = ({ images = [] }) => {
+  // Default to empty array if undefined
   // State to track the current image index
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -19,7 +20,7 @@ const ImageBox = ({ images = [] }) => {  // Default to empty array if undefined
   };
 
   return (
-    <div className="relative mt-5 rounded-2xl border h-96 mb-5">
+    <div className="relative md:mt-5 mt-2 rounded-2xl border h-96 mb-5">
       {/* Check if images exist before rendering */}
       {images.length > 0 ? (
         <>
@@ -28,23 +29,27 @@ const ImageBox = ({ images = [] }) => {  // Default to empty array if undefined
             alt="Vehicle"
             src={images[currentIndex]?.image_url?.trim()} // Trim any unwanted spaces or newline characters from image_url
           />
-          
-          {/* Previous Button */}
-          <button
-            onClick={prevImage}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white rounded-full p-2 shadow-md"
-          >
-            <ChevronLeftIcon />
-          </button>
-          
-          {/* Next Button */}
-          <button
-            onClick={nextImage}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white rounded-full p-2 shadow-md"
-          >
-            <ChevronRightIcon />
-          </button>
-          
+
+          {images.length > 1 && (
+            <>
+              {/* Previous Button */}
+              <button
+                onClick={prevImage}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white rounded-full p-2 shadow-md"
+              >
+                <ChevronLeftIcon />
+              </button>
+
+              {/* Next Button */}
+              <button
+                onClick={nextImage}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white rounded-full p-2 shadow-md"
+              >
+                <ChevronRightIcon />
+              </button>
+            </>
+          )}
+
           {/* Optional: Dots to show which image is active */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
             {images.map((_, index) => (
@@ -65,7 +70,7 @@ const ImageBox = ({ images = [] }) => {  // Default to empty array if undefined
           </div>
         </>
       ) : (
-        <p>No images available</p>  // Fallback text if no images are available
+        <p>No images available</p> // Fallback text if no images are available
       )}
     </div>
   );

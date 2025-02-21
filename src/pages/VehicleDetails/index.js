@@ -14,7 +14,6 @@ import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import SelectBox from "../../components/form/SelectBox";
 import Loader from "../../components/layouts/Loader";
 import { CommonContext } from "../../context/CommonContext";
-import { Modal } from "@mui/material";
 
 const VehicleDetails = () => {
   const params = useParams();
@@ -45,7 +44,7 @@ const VehicleDetails = () => {
 
   useEffect(() => {
     getVehicleDetail(params?.id);
-  }, [params?.id]);
+  }, []);
 
   useEffect(() => {
     if (activeIndex === 0 && overviewRef.current) {
@@ -69,8 +68,8 @@ const VehicleDetails = () => {
   return !isLoading ? (
     <>
       <Header />
-      <div className="relative grid grid-cols-8 gap-3 mt-4 mx-40">
-        <div className="col-span-5 mx-10">
+      <div className="relative grid md:grid-cols-8 grid-cols-1 gap-3 md:mt-4 md:mx-40 mx-1">
+        <div className="md:col-span-5 md:mx-10">
           {/* {image box } */}
           <ImageBox images={vehicleData?.vehicle_images} />
           {/* {detail keys} */}
@@ -138,7 +137,7 @@ const VehicleDetails = () => {
         </div>
 
         {!loadingPrice ? (
-          <div className="border border-gray-300 mt-4 shadow-md mr-10 md:h-80 p-4 col-span-3 rounded-2xl">
+          <div className="border border-gray-300 w-full md:mt-4 shadow-md md:h-80 p-4 md:col-span-3 rounded-2xl">
             <h1 className="text-2xl mb-1">
               {vehicleData?.brand?.name +
                 " " +
@@ -146,7 +145,7 @@ const VehicleDetails = () => {
                 " " +
                 vehicleData?.modell?.year}
             </h1>
-            <div className="flex text-sm items-center text-gray-600 gap-2 mb-8">
+            <div className="flex text-sm  items-center text-gray-600 gap-2 mb-8 w-full">
               <p>{vehicleData?.km_driven + " km"}</p>-
               <p>{vehicleData?.fuel_type}</p>-<p>{vehicleData?.transmission}</p>
               -<p>{vehicleData?.ownership + " Owner"}</p>
@@ -162,7 +161,6 @@ const VehicleDetails = () => {
                 options={[
                   { title: "per hour", value: vehicleData?.price_per_hour },
                   { title: "per day", value: vehicleData?.price_per_day },
-                  { title: "per week", value: vehicleData?.price_per_week },
                 ]}
               />
             </h1>

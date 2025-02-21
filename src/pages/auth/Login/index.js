@@ -65,6 +65,9 @@ const Login = () => {
         setSnackOpen(true);
         setMessageType("error");
         setSnackMessage(response?.data?.message);
+        localStorage.removeItem("authorization");
+        localStorage.removeItem("profileImage");
+        navigate("/login");
       }
     },
   });

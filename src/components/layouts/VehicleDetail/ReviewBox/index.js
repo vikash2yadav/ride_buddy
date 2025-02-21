@@ -28,73 +28,82 @@ const ReviewBox = ({ title, data }) => {
         <div className="mx-8">
           <h1 className="text-xl font-medium mb-3">{title}</h1>
 
-          <div className="text-5xl items-center flex md:mb-8 mb-5">
-            {React.cloneElement(<GradeIcon className="text-orange-400" />, {
-              style: { fontSize: "40px" },
-            })}
+          {data?.length > 0 ? (
+            <>
+              <div className="text-5xl items-center flex md:mb-8 mb-5">
+                {React.cloneElement(<GradeIcon className="text-orange-400" />, {
+                  style: { fontSize: "40px" },
+                })}
 
-            <p className="mx-2 font-medium">{averageRating}</p>
-            <p className="text-sm w-32">
-              {currentLangCode === "hn"
-                ? "समग्र रेटिंग के आधार पर"
-                : currentLangCode === "guj"
-                ? "પર આધારિત એકંદર રેટિંગ"
-                : "Overall Rating Based on"}
-              <span className="font-medium">{data?.length} reviews</span>
-            </p>
-          </div>
+                <p className="mx-2 font-medium">{averageRating}</p>
+                <p className="text-sm w-32">
+                  {currentLangCode === "hn"
+                    ? "समग्र रेटिंग के आधार पर"
+                    : currentLangCode === "guj"
+                    ? "પર આધારિત એકંદર રેટિંગ"
+                    : "Overall Rating Based on"}
+                  <span className="font-medium">{data?.length} reviews</span>
+                </p>
+              </div>
+              <div className="">
+                <h1 className="text-lg font-medium mb-5">
+                  {data?.length}
+                  {currentLangCode === "hn"
+                    ? "समीक्षाएं और रेटिंग"
+                    : currentLangCode === "guj"
+                    ? "સમીક્ષાઓ અને રેટિંગ્સ"
+                    : "Reviews and Ratings"}
+                </h1>
 
-          <div className="">
-            <h1 className="text-lg font-medium mb-5">
-              {data?.length}
-              {currentLangCode === "hn"
-                ? "समीक्षाएं और रेटिंग"
-                : currentLangCode === "guj"
-                ? "સમીક્ષાઓ અને રેટિંગ્સ"
-                : "Reviews and Ratings"}
-            </h1>
-
-            {data?.length > 0 &&
-              data?.map((item) => (
-                <div className="mb-8">
-                  <div className="flex items-center mb-3 cursor-pointer">
-                    <Avatar />
-                    <div className="mx-3">
-                      <p className="text-xs">
-                        {item?.user?.fullName} wrote a review{" "}
-                        {formatDate(item?.createdAt)}
+                {data?.length > 0 &&
+                  data?.map((item) => (
+                    <div className="mb-8">
+                      <div className="flex items-center mb-3 cursor-pointer">
+                        <Avatar />
+                        <div className="mx-3">
+                          <p className="text-xs">
+                            {item?.user?.fullName} wrote a review{" "}
+                            {formatDate(item?.createdAt)}
+                          </p>
+                          <p className="font-medium">
+                            {item?.rating}
+                            {React.cloneElement(
+                              <GradeIcon className="mx-1 text-orange-400" />,
+                              {
+                                style: { fontSize: "15px" },
+                              }
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-800 font-medium mb-3">
+                        {item?.review_text}
                       </p>
-                      <p className="font-medium">
-                        {item?.rating}
-                        {React.cloneElement(
-                          <GradeIcon className="mx-1 text-orange-400" />,
-                          {
-                            style: { fontSize: "15px" },
-                          }
-                        )}
-                      </p>
+                      <div className="flex gap-2 items-center text-xs">
+                        <p>
+                          {currentLangCode === "hn"
+                            ? "क्या यह मददगार है?"
+                            : currentLangCode === "guj"
+                            ? "શું આ મદદરૂપ છે?"
+                            : " Is this helpful?"}
+                        </p>
+                        {React.cloneElement(<ThumbUpOutlinedIcon />, {
+                          style: { fontSize: "18px" },
+                          className: "cursor-pointer text-gray-600",
+                        })}
+                        {item?.helpful_count}
+                      </div>
                     </div>
-                  </div>
-                  <p className="text-sm text-800 font-medium mb-3">
-                    {item?.review_text}
-                  </p>
-                  <div className="flex gap-2 items-center text-xs">
-                    <p>
-                      {currentLangCode === "hn"
-                        ? "क्या यह मददगार है?"
-                        : currentLangCode === "guj"
-                        ? "શું આ મદદરૂપ છે?"
-                        : " Is this helpful?"}
-                    </p>
-                    {React.cloneElement(<ThumbUpOutlinedIcon />, {
-                      style: { fontSize: "18px" },
-                      className: "cursor-pointer text-gray-600",
-                    })}
-                    {item?.helpful_count}
-                  </div>
-                </div>
-              ))}
-          </div>
+                  ))}
+              </div>
+            </>
+          ) : (
+            <>
+            <div className="flex justify-center items-center">
+                <div className="mt-5">No Data Found</div>
+            </div>
+            </>
+          )}
         </div>
       </div>
     </>

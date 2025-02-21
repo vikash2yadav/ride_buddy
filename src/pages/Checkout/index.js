@@ -6,6 +6,7 @@ import { CommonContext } from "../../context/CommonContext";
 import { useParams } from "react-router-dom";
 import { VehicleContext } from "../../context/VehicleContext";
 import BasicDatePicker from "../../components/DatePicker";
+import SelectBox from "../../components/form/SelectBox";
 
 const Checkout = () => {
   const params = useParams();
@@ -13,18 +14,18 @@ const Checkout = () => {
   const { getVehicleDetail, vehicleData } = useContext(VehicleContext);
   const [durationType, setDurtionType] = useState("hour");
   const [paymentMethod, setPaymentMethod] = useState("Credit Card");
-  const [perHour, setPerHour] = useState("1");
+  const [hourList, setHourList] = useState([]);
   const [cardDetails, setCardDetails] = useState({
     cardNumber: "",
     cvv: "",
   });
   const [paypalEmail, setPaypalEmail] = useState("");
-  const [setCreditCard] = useState("");
   const [bankAccount, setBankAccount] = useState("");
   const [confirmBankAccount, setConfirmBankAccount] = useState("");
   const [ifsc, setIfsc] = useState("");
   const [accountHolderName, setAccountHolderName] = useState("");
   const [startDate, setStartDate] = useState();
+  const [selectedDurationTime, setSelectedDurationTime] = useState();
 
   const handleCardChange = (e) => {
     const { name, value } = e.target;
@@ -71,8 +72,24 @@ const Checkout = () => {
     alert("Order placed successfully!");
   };
 
-  const handleDateChange = (newValue) => {
-    setStartDate(newValue);
+  console.log(startDate);
+
+  const handleDateChange = async (newValue) => {
+    setStartDate(newValue.format("YYYY-MM-DD"));
+
+    const districtOptions = vehicleData?.vehicle_durations
+      ?.filter(
+        (data) =>
+          data?.date !== startDate &&
+          data?.duration_value &&
+          data?.duration_value?.status === "active"
+      )
+      .map((data) => ({
+        title: data.duration_value?.name,
+        value: data.duration_value?.id,
+      }));
+
+    setHourList(districtOptions);
   };
 
   useEffect(() => {
@@ -135,129 +152,49 @@ const Checkout = () => {
                   : "For One Day"}
               </span>
             </label>
-            <label className="inline-flex items-center">
-              <input
-                type="radio"
-                name="durationType"
-                value="week"
-                checked={durationType === "week"}
-                onChange={() => setDurtionType("week")}
-                className="form-radio text-blue-600"
-              />
-              <span className="ml-2 text-gray-800">
-                {currentLangCode === "hn"
-                  ? "एक सप्ताह के लिए"
-                  : currentLangCode === "guj"
-                  ? "એક અઠવાડિયા માટે"
-                  : "For One Week"}
-              </span>
-            </label>
-            <label className="inline-flex items-center">
-              <input
-                type="radio"
-                name="durationType"
-                value="month"
-                checked={durationType === "month"}
-                onChange={() => setDurtionType("month")}
-                className="form-radio text-blue-600"
-              />
-              <span className="ml-2 text-gray-800">
-                {currentLangCode === "hn"
-                  ? "एक महीने के लिए"
-                  : currentLangCode === "guj"
-                  ? "એક મહિના માટે"
-                  : "For One Month"}
-              </span>
-            </label>
           </div>
 
           {/* Conditional rendering */}
-          {durationType === "hour" && (
-            <div>
+          {
+            <div className="w-full md:w-80">
               <div className="grid grid-cols-1 gap-4 mt-6">
                 <BasicDatePicker
-                  label={"Enter date"}
+                  label={
+                    currentLangCode === "hn"
+                      ? "दिनांक दर्ज करें"
+                      : currentLangCode === "guj"
+                      ? "તારીખ દાખલ કરો"
+                      : "Enter date"
+                  }
                   name="satrt_date"
                   value={startDate}
                   onChange={handleDateChange}
+                  className={"w-full"}
+                  minDate={vehicleData?.availability_start_date}
+                  maxDate={vehicleData?.availability_end_date}
                 />
               </div>
 
-             {
-              startDate && (
+              {startDate && durationType === "hour" && (
                 <div className="grid grid-cols-1 gap-4 mt-6">
-                <div className="flex flex-col justify-start gap-4">
-                  <label className="inline-flex items-center">
-                    <input
-                      type="radio"
-                      name="perHour"
-                      value="1"
-                      checked={perHour === "1"}
-                      onChange={() => setPerHour("1")}
-                      className="form-radio text-blue-600"
-                    />
-                    <span className="ml-2 text-gray-800">
-                      12 AM - 1 AM
-                    </span>
-                  </label>
-                  <label className="inline-flex items-center">
-                    <input
-                      type="radio"
-                      name="perHour"
-                      value="2"
-                      checked={perHour === "2"}
-                      onChange={() => setPerHour("2")}
-                      className="form-radio text-blue-600"
-                    />
-                    <span className="ml-2 text-gray-800">
-                      1 AM - 2 AM
-                    </span>
-                  </label>
-                  <label className="inline-flex items-center">
-                    <input
-                      type="radio"
-                      name="perHour"
-                      value="3"
-                      checked={perHour === "3"}
-                      onChange={() => setPerHour("3")}
-                      className="form-radio text-blue-600"
-                    />
-                    <span className="ml-2 text-gray-800">
-                      2 AM - 3 AM
-                    </span>
-                  </label>
-                  <label className="inline-flex items-center">
-                    <input
-                      type="radio"
-                      name="perHour"
-                      value="4"
-                      checked={perHour === "4"}
-                      onChange={() => setPerHour("4")}
-                      className="form-radio text-blue-600"
-                    />
-                    <span className="ml-2 text-gray-800">
-                      3 AM - 4 AM
-                    </span>
-                  </label>
-                  <label className="inline-flex items-center">
-                    <input
-                      type="radio"
-                      name="perHour"
-                      value="5"
-                      checked={perHour === "5"}
-                      onChange={() => setPerHour("5")}
-                      className="form-radio text-blue-600"
-                    />
-                    <span className="ml-2 text-gray-800">
-                      4 AM - 5 AM
-                    </span>
-                  </label>
+                  <SelectBox
+                    label={
+                      currentLangCode === "hn"
+                        ? "समय अवधि का चयन करें"
+                        : currentLangCode === "guj"
+                        ? "સમય અવધિ પસંદ કરો"
+                        : "Select Time Durtion"
+                    }
+                    name={"time"}
+                    value={selectedDurationTime}
+                    options={hourList}
+                    onChange={(e)=> setSelectedDurationTime(e.target.value)}
+                  />{" "}
+                  <div className="flex flex-col justify-start gap-4"></div>
                 </div>
-              </div>
-              )
-             }
+              )}
             </div>
-          )}
+          }
         </div>
 
         <div className="max-w-full mx-auto px-6 py-6">
@@ -494,7 +431,7 @@ const Checkout = () => {
             )}
 
             {/* Submit Button */}
-            <div className="text-right">
+            <div className="md:text-right text-center">
               <button className="px-12 py-3 rounded-lg text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
                 {currentLangCode === "hn"
                   ? "आदेश की पुष्टि"

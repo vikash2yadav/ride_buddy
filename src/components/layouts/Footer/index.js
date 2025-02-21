@@ -121,7 +121,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 border-t border-gray-300 w-full pt-6">
-          <div className="flex justify-between items-center">
+          <div className="md:flex justify-between items-center">
             <div className="flex space-x-6">
               {/* Social Media Links */}
               <a
@@ -158,7 +158,7 @@ const Footer = () => {
               </a>
             </div>
 
-            <div className="text-sm">
+            <div className="text-sm mt-4 md:mt-0">
               <Link
                 to="/privacy-policy"
                 className="text-gray-500 hover:text-orange-600 mr-4"
