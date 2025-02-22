@@ -14,6 +14,7 @@ import {
   InputBase,
   InputAdornment,
 } from "@mui/material";
+import EastIcon from "@mui/icons-material/East";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { navLinks } from "../../../config/sampleData";
@@ -24,6 +25,7 @@ import { LocationContext } from "../../../context/LocationContext";
 import { HindiDataList } from "../../../language/hindi";
 import { GujaratiDataList } from "../../../language/gujarati";
 import AvatarImage from "../../AvatarImage";
+import { globalDataList } from "../../../apis/common";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -32,6 +34,9 @@ const Header = () => {
   const [cityEl, setCityEl] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [globalSearchData, setGlobalSearchData] = useState([]);
+  const [globalSearchDataCount, setGlobalSearchDataCount] = useState(null);
+
   const {
     setModelOpen,
     isLogin,
@@ -71,8 +76,18 @@ const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const handleSearchChange = (event) => {
+  const handleSearchChange = async (event) => {
     setSearchQuery(event.target.value);
+    let filter = {
+      search: searchQuery,
+      vehicles: true,
+    };
+    let response = await globalDataList("util/global_search", filter, "POST");
+    if (response?.status === 200) {
+      setGlobalSearchData(response?.data?.data?.rows);
+      setGlobalSearchDataCount(response?.data?.data?.count);
+    } else {
+    }
   };
 
   const handleLoginFormOpen = () => {
@@ -180,7 +195,7 @@ const Header = () => {
                     }}
                     startAdornment={
                       <InputAdornment position="start">
-                        <IconButton onClick={handleSearch}>
+                        <IconButton>
                           <SearchIcon />
                         </IconButton>
                       </InputAdornment>
@@ -188,6 +203,67 @@ const Header = () => {
                   />
                 </form>
               </div>
+              {searchQuery && (
+                <div className="md:block hidden absolute top-[140px] left-[400px] w-3/6 bg-white h-96 justify-center items-center overflow-y-auto scrollbar-hidden">
+                  <div className="relative">
+                    {globalSearchDataCount ? (
+                      <>
+                        {globalSearchData?.map((vehicle, index) => (
+                          <div
+                            key={vehicle?.id || index}
+                            onClick={() =>
+                              navigate(
+                                `/${vehicle?.brand?.name}/${vehicle?.category?.name}/${vehicle?.id}`
+                              )
+                            }
+                            className="mx-2 py-1 rounded-lg  "
+                          >
+                            <div className="mb-4 cursor-pointer hover:bg-gray-100">
+                              <div className="flex p-1 justify-start">
+                                <img
+                                  alt="image"
+                                  height="100px"
+                                  width="100px"
+                                  src={vehicle?.vehicle_images[0]?.image_url}
+                                />
+                                <div className="px-4">
+                                  <h3 className="text-xl font-[20px] text-dark">
+                                    {vehicle?.brand?.name}{" "}
+                                    {vehicle?.modell?.name} -{" "}
+                                    {vehicle?.category?.name}{" "}
+                                    {vehicle?.fuel_type}
+                                  </h3>
+                                  <p>
+                                    {vehicle?.color} &nbsp;| &nbsp;
+                                    {vehicle?.engine_capacity} cc &nbsp; |{" "}
+                                    &nbsp;
+                                    {vehicle?.availability_status} &nbsp;|{" "}
+                                    &nbsp;
+                                    {`RTO - ${vehicle?.rto}`} &nbsp;| &nbsp;
+                                    {`${vehicle?.seats} seater`} &nbsp;| &nbsp;
+                                    {`${vehicle?.ownership} ownership`}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        <div className="text-center">No data</div>
+                      </>
+                    )}
+                    {/* <div className="sticky bottom-[20px] w-full ">
+                      <div className="my-4 border-t border-gray-300 w-full"></div>
+                      <Link className="mx-4 underline text-gray-500">
+                        Show more results..{" "}
+                        <EastIcon className="text-gray-500" />
+                      </Link>
+                    </div> */}
+                  </div>
+                </div>
+              )}
             </nav>
 
             {/* Right Side: Buttons and User Profile */}
@@ -311,7 +387,7 @@ const Header = () => {
 
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
-            <div className="md:hidden flex flex-col space-y-4 mt-4 bg-white shadow-md px-4 py-4 w-full">
+            <div className="md:hidden relative flex flex-col space-y-4 bg-white shadow-md px-4 w-full">
               <div className="relative flex items-center w-full">
                 <form onSubmit={handleSearch} className="w-full">
                   <InputBase
@@ -431,6 +507,62 @@ const Header = () => {
               </div>
             </div>
           )}
+          {searchQuery && (
+            <div className="md:hidden block absolute top-[120px] left-0 bg-white h-96 justify-center items-center overflow-y-auto scrollbar-hidden">
+              <div className="relative">
+                {globalSearchDataCount ? (
+                  <>
+                    {globalSearchData?.map((vehicle, index) => (
+                      <div
+                        key={vehicle?.id || index}
+                        onClick={() =>
+                          navigate(
+                            `/${vehicle?.brand?.name}/${vehicle?.category?.name}/${vehicle?.id}`
+                          )
+                        }
+                        className="mx-1 py-0.5 rounded-lg  "
+                      >
+                        <div className="mb-4 cursor-pointer hover:bg-gray-100">
+                          <div className="flex p-1 justify-start">
+                            <img
+                              alt="image"
+                              height=""
+                              width="70px"
+                              src={vehicle?.vehicle_images[0]?.image_url}
+                            />
+                            <div className="px-2">
+                              <h3 className="text-m text-dark">
+                                {vehicle?.brand?.name} {vehicle?.modell?.name} -{" "}
+                                {vehicle?.category?.name} {vehicle?.fuel_type}
+                              </h3>
+                              <p className="text-xs">
+                                {vehicle?.color} &nbsp;| &nbsp;
+                                {vehicle?.engine_capacity} cc &nbsp; | &nbsp;
+                                {vehicle?.availability_status} &nbsp;| &nbsp;
+                                {`RTO - ${vehicle?.rto}`} &nbsp;| &nbsp;
+                                {`${vehicle?.seats} seater`} &nbsp;| &nbsp;
+                                {`${vehicle?.ownership} ownership`}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    <div className="text-center">No data</div>
+                  </>
+                )}
+                {/* <div className="sticky bottom-[20px] w-full ">
+                  <div className="my-4 border-t border-gray-300 w-full"></div>
+                  <Link className="mx-4 underline text-gray-500">
+                    Show more results.. <EastIcon className="text-gray-500" />
+                  </Link>
+                </div> */}
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="">
@@ -498,8 +630,8 @@ const Header = () => {
 
         {!isMobileMenuOpen && (
           <nav className="md:hidden xs:flex items-center space-x-8 w-full">
-            <div className="relative flex items-center w-full">
-              <form onSubmit={handleSearch} className="w-full">
+            <div className="relative flex items-center w-full mb-1">
+              <form onSubmit={handleSearch} className="w-full mb-1">
                 <InputBase
                   className="border border-gray-300 pl-6 pr-2 py-2 rounded-3xl text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 w-full"
                   placeholder="Search via name, model or brand..."

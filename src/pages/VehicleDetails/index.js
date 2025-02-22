@@ -138,20 +138,20 @@ const VehicleDetails = () => {
 
         {!loadingPrice ? (
           <div className="border border-gray-300 w-full md:mt-4 shadow-md md:h-80 p-4 md:col-span-3 rounded-2xl">
-            <h1 className="text-2xl mb-1">
+            <h1 className="md:text-2xl text-xl mb-1">
               {vehicleData?.brand?.name +
                 " " +
                 vehicleData?.modell?.name +
                 " " +
                 vehicleData?.modell?.year}
             </h1>
-            <div className="flex text-sm  items-center text-gray-600 gap-2 mb-8 w-full">
+            <div className="flex md:text-sm text-xs  items-center text-gray-600 gap-2 md:mb-8 mb-5 w-full">
               <p>{vehicleData?.km_driven + " km"}</p>-
               <p>{vehicleData?.fuel_type}</p>-<p>{vehicleData?.transmission}</p>
               -<p>{vehicleData?.ownership + " Owner"}</p>
             </div>
 
-            <h1 className="text-2xl mb-5 flex gap-2">
+            <h1 className="md:text-2xl text-xl mb-5 flex gap-2">
               ₹{current_amount}
               <SelectBox
                 handleChange={(e) => {
@@ -165,7 +165,7 @@ const VehicleDetails = () => {
               />
             </h1>
 
-            <p className="mb-5 text-sm">
+            <p className="mb-5 md:text-sm text-xs">
               <FmdGoodOutlinedIcon /> {vehicleData?.rto} RTO
             </p>
             {vehicleData?.availability_status === "Available" ? (
@@ -184,7 +184,7 @@ const VehicleDetails = () => {
                 vehicleData?.availability_status !== "Available" ? true : false
               }
               onClick={() => navigate("checkout")}
-              className={`w-full font-medium py-3 ${
+              className={`w-full font-medium md:py-3 py-2 ${
                 vehicleData?.availability_status !== "Available"
                   ? "bg-white text-dark"
                   : "bg-orange-600 text-white"

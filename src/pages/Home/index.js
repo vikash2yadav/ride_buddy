@@ -50,7 +50,7 @@ const Home = () => {
     <>
       <Header />
 
-      <div className="md:mx-20 md:m-0 m-2 relative md:h-[550px] h-[300px] overflow-hidden rounded-2xl md:rounded-none">
+      <div className="md:mx-20 md:m-0 relative md:h-[550px] h-[300px] overflow-hidden md:rounded-none">
         <div className="absolute top-0 left-0 w-full h-full transition-transform duration-1000">
           <Link to="/">
             <div className="relative w-full h-full">
@@ -88,13 +88,13 @@ const Home = () => {
               {/* Navigation Buttons (Left and Right) */}
               <button
                 onClick={handlePrevSlide}
-                className="absolute md:hidden flex top-1/2 left-1 transform -translate-y-1/2 text-black bg-gray-400 z-10 rounded-full p-1 hover:bg-opacity-90 transition"
+                className="absolute md:hidden flex top-1/2 left-1 transform -translate-y-1/2 text-black bg-white z-10 rounded-full p-1 hover:bg-opacity-90 transition"
               >
                 <ChevronLeftIcon />
               </button>
               <button
                 onClick={handleNextSlide}
-                className="absolute md:hidden flex top-1/2 right-1 transform -translate-y-1/2 text-black bg-gray-400 z-10 rounded-full p-1 hover:bg-opacity-90 transition"
+                className="absolute md:hidden flex top-1/2 right-1 transform -translate-y-1/2 text-black bg-white z-10 rounded-full p-1 hover:bg-opacity-90 transition"
               >
                 <ChevronRightIcon />
               </button>
