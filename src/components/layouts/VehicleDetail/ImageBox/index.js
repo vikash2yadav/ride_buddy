@@ -20,7 +20,7 @@ const ImageBox = ({ images = [] }) => {
   };
 
   return (
-    <div className="relative md:mt-5 mt-2 rounded-2xl border h-96 mb-5">
+    <div className="relative md:mt-5 mt-1 rounded-2xl border h-96 mb-5">
       {/* Check if images exist before rendering */}
       {images.length > 0 ? (
         <>
@@ -64,7 +64,7 @@ const ImageBox = ({ images = [] }) => {
           </div>
 
           <div className="absolute bottom-4 right-0 transform -translate-x-1/2 flex space-x-2">
-            <button className=" text-sm rounded-lg bg-gray-600 text-white p-1">
+            <button className=" text-sm rounded-lg bg-gray-600 text-white p-1 base_font">
               {images.length} images
             </button>
           </div>

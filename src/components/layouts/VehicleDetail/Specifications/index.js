@@ -35,7 +35,7 @@ const Specifications = ({ title, data }) => {
 
   return (
     <div className="border border-gray-300 py-4 text-gray-800 rounded-2xl shadow-sm mb-3">
-      <h1 className="text-xl font-medium mx-8 mb-5">{title}</h1>
+      <h1 className="text-xl font-medium mx-8 mb-5 noto_font">{title}</h1>
 
       <div className="mx-8">
         {Object.keys(groupedData).length > 0 ? (
@@ -84,7 +84,7 @@ const Specifications = ({ title, data }) => {
       {Object.keys(groupedData).length > 1 && (
         <p
           onClick={() => setShow(!show)}
-          className="mx-8 text-orange-600 text-sm font-medium cursor-pointer mt-6"
+          className="mx-8 text-orange-600 text-sm font-medium cursor-pointer mt-6 base_font"
         >
           {show
             ? currentLangCode === "hn"

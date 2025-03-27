@@ -9,6 +9,7 @@ import { registerAPi } from "../../../apis/auth";
 import SelectBox from "../../../components/form/SelectBox";
 import { genderOptions } from "../../../utils/helper";
 import { CommonContext } from "../../../context/CommonContext";
+import "../../../global.css";
 
 const Register = () => {
   const { setSnackOpen, setSnackMessage, setMessageType, currentLangCode } =
@@ -41,12 +42,12 @@ const Register = () => {
 
   return (
     <>
-      <div className="w-full min-h-screen md:py-5 inset-0 bg-gray-800 bg-opacity-60 flex justify-center items-center z-50 overflow-y-auto">
+      <div className="w-full min-h-screen base_font md:py-5 inset-0 bg-gray-800 bg-opacity-60 flex justify-center items-center z-50 overflow-y-auto">
         <div
           className="bg-white w-full sm:2/3 md:w-3/4 lg:w-2/5 rounded-lg p-8 shadow-lg relative"
           onClick={(e) => e.stopPropagation()}
         >
-          <h2 className="text-3xl font-semibold text-center text-gray-800 mb-4">
+          <h2 className="text-3xl font-semibold noto_font text-center text-gray-800 mb-4">
             {currentLangCode === "hn"
               ? "पंजीकरण करवाना"
               : currentLangCode === "guj"
@@ -267,7 +268,7 @@ const Register = () => {
                     ? "હું સંમત છું"
                     : "I agree to"}
                   <span className="text-blue-600">
-                    <Link onClick={handleShowForTerms}>
+                    <Link onClick={handleShowForTerms} className="noto_font">
                       {currentLangCode === "hn"
                         ? " नियम एवं शर्तें"
                         : currentLangCode === "guj"
@@ -282,7 +283,7 @@ const Register = () => {
             <div className="grid md:grid-cols-2 gap-2">
               <button
                 onClick={() => navigate("/")}
-                className="w-full py-3 bg-white text-black border border-gray-300 rounded-lg shadow-md mb-5"
+                className="w-full py-3 bg-white noto_font text-black border border-gray-300 rounded-lg shadow-md mb-5"
               >
                 {currentLangCode === "hn"
                   ? "पीछे"
@@ -292,7 +293,7 @@ const Register = () => {
               </button>
               <button
                 type="submit"
-                className="w-full py-3 bg-orange-600 text-white rounded-lg shadow-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 mb-5"
+                className="w-full py-3 noto_font bg-orange-600 text-white rounded-lg shadow-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 mb-5"
               >
                 {currentLangCode === "hn"
                   ? "जमा करना"
@@ -308,7 +309,7 @@ const Register = () => {
                 : currentLangCode === "guj"
                 ? "ખાતું છે?"
                 : "have an account?"}
-              <Link to="/login" className="text-blue-600 hover:text-blue-800">
+              <Link to="/login" className="text-blue-600 noto_font hover:text-blue-800">
                 {currentLangCode === "hn"
                   ? " लॉग इन करें"
                   : currentLangCode === "guj"

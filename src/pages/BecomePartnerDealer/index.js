@@ -67,14 +67,14 @@ const BecomePartnerDealer = () => {
   return (
     <>
       <Header />
-      <h1 className="text-2xl mx-4 md:mx-20 lg:mx-40 font-semibold text-left text-gray-800 md:mt-10 mt-4">
+      <h1 className="text-2xl noto_font mx-4 md:mx-20 lg:mx-40 text-left text-gray-800 md:mt-10 mt-4">
         {currentLangCode === "hn"
           ? "भागीदार बनने का अनुरोध"
           : currentLangCode === "guj"
           ? "ભાગીદાર બનવા વિનંતી"
           : "Request To Become Partner"}
       </h1>
-      <div className="bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mx-40 mt-4 text-gray-800 md:mb-5 mb-3">
+      <div className="bg-white border base_font border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mx-40 mt-4 text-gray-800 md:mb-5 mb-3">
         <form onSubmit={formik.handleSubmit}>
           <div className="px-6 md:py-6">
             <div className="grid lg:grid-cols-2 gap-2 lg:gap-4 mb-2 lg:mb-5 md:mt-14 mt-4">
@@ -240,7 +240,7 @@ const BecomePartnerDealer = () => {
             <div className="flex justify-center mt-5 mb-5">
               <button
                 type="submit"
-                className="w-80 px-12 py-3 rounded-lg text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-80 px-12 py-3 rounded-lg noto_font text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
               >
                 {currentLangCode === "hn"
                   ? "सबमिट"
@@ -253,8 +253,8 @@ const BecomePartnerDealer = () => {
         </form>
       </div>
 
-      <div className="bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mx-40 mt-4 text-gray-800">
-        <h1 className="text-xl font-semibold mx-4 text-left text-gray-800 mt-4">
+      <div className="bg-white border border-gray-300 shadow-md base_font rounded-2xl md:mx-20 lg:mx-40 mt-4 text-gray-800">
+        <h1 className="text-xl noto_font mx-4 text-left text-gray-800 mt-4">
           {currentLangCode === "hn"
             ? "RideBuddy के साथ व्यापार"
             : currentLangCode === "guj"
@@ -308,7 +308,7 @@ const BecomePartnerDealer = () => {
 
         <hr className="md:mt-10 mt-5 md:mb-10 mb-5 mx-4" />
 
-        <h1 className="text-xl font-semibold mx-4 text-left text-gray-800 mt-4 ">
+        <h1 className="text-xl noto_font mx-4 text-left text-gray-800 mt-4 ">
           {currentLangCode === "hn"
             ? "हमारे कार्यालय"
             : currentLangCode === "guj"

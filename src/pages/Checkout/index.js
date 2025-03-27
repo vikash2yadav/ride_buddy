@@ -107,9 +107,9 @@ const Checkout = () => {
     <>
       <Header />
 
-      <div className="bg-white  shadow-md border border-gray-300 rounded-2xl md:mx-20 lg:mr-96 lg:ml-40 mt-4 lg:mt-10 text-gray-800">
+      <div className="bg-white base_font shadow-md border border-gray-300 rounded-2xl md:mx-20 lg:mr-96 lg:ml-40 mt-4 lg:mt-10 text-gray-800">
         <div className="max-w-full mx-auto px-6 py-6">
-          <p className="text-lg text-gray-800 font-semibold mb-4">
+          <p className="text-lg text-gray-800 noto_font mb-4">
             {currentLangCode === "hn"
               ? "भुगतान विधि"
               : currentLangCode === "guj"
@@ -201,7 +201,7 @@ const Checkout = () => {
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Payment Method */}
             <div>
-              <p className="text-lg text-gray-800 font-semibold mb-4">
+              <p className="text-lg text-gray-800 noto_font mb-4">
                 {currentLangCode === "hn"
                   ? "भुगतान विधि"
                   : currentLangCode === "guj"
@@ -432,7 +432,7 @@ const Checkout = () => {
 
             {/* Submit Button */}
             <div className="md:text-right text-center">
-              <button className="px-12 py-3 rounded-lg text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
+              <button className="px-12 py-3 rounded-lg noto_font text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
                 {currentLangCode === "hn"
                   ? "आदेश की पुष्टि"
                   : currentLangCode === "guj"

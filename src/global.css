@@ -1,0 +1,17 @@
+.noto_font {
+    font-family: 'noto';
+}
+
+.base_font {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.verdana_font {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+::selection {
+    background: #EA850C;
+    color: #FFFF;
+  }
+  

@@ -20,7 +20,7 @@ const Footer = () => {
         {/* Footer Top */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-semibold mb-4">
+            <h3 className="font-semibold mb-4 noto_font">
               {currentLangCode === "hn"
                 ? "राइडबडी के बारे में"
                 : currentLangCode === "guj"
@@ -32,7 +32,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to={item?.url}
-                    className="text-sm text-gray-500 hover:text-orange-600"
+                    className="text-sm text-gray-500 hover:text-orange-600 base_font"
                   >
                     {currentLangCode === 'hn' ? item?.titleHindi : currentLangCode === 'guj' ? item?.titleGujarati : item?.title}
                   </Link>
@@ -43,7 +43,7 @@ const Footer = () => {
 
           {/* Links Section */}
           <div>
-            <h3 className="font-semibold mb-4">
+            <h3 className="font-semibold mb-4 noto_font">
               {currentLangCode === "hn"
                 ? "हमारे साथ जुड़ें"
                 : currentLangCode === "guj"
@@ -55,7 +55,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to={item?.url}
-                    className="text-sm text-gray-500 hover:text-orange-600"
+                    className="text-sm text-gray-500 hover:text-orange-600 base_font"
                   >
                     {currentLangCode === 'hn' ? item?.titleHindi : currentLangCode === 'guj' ? item?.titleGujarati : item?.title}
                     </Link>
@@ -65,7 +65,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">
+            <h3 className="font-semibold mb-4 noto_font">
               {currentLangCode === "hn"
                 ? "त्वरित संपर्क"
                 : currentLangCode === "guj"
@@ -77,7 +77,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to={item?.url}
-                    className="text-sm text-gray-500 hover:text-orange-600"
+                    className="text-sm text-gray-500 hover:text-orange-600 base_font"
                   >
                     {currentLangCode === 'hn' ? item?.titleHindi : currentLangCode === 'guj' ? item?.titleGujarati : item?.title}
                     </Link>
@@ -87,7 +87,7 @@ const Footer = () => {
           </div>
           {/* Contact Section */}
           <div>
-            <h3 className="text-sm font-semibold mb-4">
+            <h3 className="text-sm font-semibold mb-4 noto_font">
               {currentLangCode === "hn"
                 ? "हमसे संपर्क करें"
                 : currentLangCode === "guj"
@@ -95,21 +95,21 @@ const Footer = () => {
                 : "QUICK LINKS"}
             </h3>
             <ul>
-              <li className="text-sm text-gray-500 hover:text-orange-600 mb-2">
+              <li className="text-sm text-gray-500 hover:text-orange-600 mb-2 base_font">
                 {currentLangCode === "hn"
                   ? "📍 पता: 123 स्ट्रीट, हमीदाबाद, भारत"
                   : currentLangCode === "guj"
                   ? "📍 સરનામું: 123 સ્ટ્રીટ, અમદાવાદ, ભારત"
                   : "📍 Address: 123 Street, Ahmedabad, India"}
               </li>
-              <li className="text-sm text-gray-500 hover:text-orange-600 mb-2">
+              <li className="text-sm text-gray-500 hover:text-orange-600 mb-2 base_font">
                 {currentLangCode === "hn"
                   ? "📧 ईमेल: support@readebuddy.com"
                   : currentLangCode === "guj"
                   ? "📧 ઇમેઇલ: support@readybuddy.com"
                   : "📧 Email: support@ridebuddy.com"}
               </li>
-              <li className="text-sm text-gray-500 hover:text-orange-600 mb-2">
+              <li className="text-sm text-gray-500 hover:text-orange-600 mb-2 base_font">
                 {currentLangCode === "hn"
                   ? "📞 फ़ोन: +91 76986 61812"
                   : currentLangCode === "guj"
@@ -161,7 +161,7 @@ const Footer = () => {
             <div className="text-sm mt-4 md:mt-0">
               <Link
                 to="/privacy-policy"
-                className="text-gray-500 hover:text-orange-600 mr-4"
+                className="text-gray-500 hover:text-orange-600 mr-4 base_font"
               >
                 {currentLangCode === "hn"
                   ? "पर्यावरण नीति"
@@ -171,7 +171,7 @@ const Footer = () => {
               </Link>
               <Link
                 to="/terms-conditions"
-                className="text-gray-500 hover:text-orange-600"
+                className="text-gray-500 hover:text-orange-600 base_font"
               >
                 {currentLangCode === "hn"
                   ? "नियम एवं शर्तें"

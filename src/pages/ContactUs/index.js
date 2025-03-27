@@ -79,14 +79,14 @@ const ContactUs = () => {
   return (
     <>
       <Header />
-      <h1 className="text-2xl mx-4 md:mx-20 lg:mx-40 font-semibold text-left text-gray-800 mt-10">
+      <h1 className="text-2xl mx-4 md:mx-20 lg:mx-40 text-left text-gray-800 mt-10 noto_font">
         {currentLangCode === "hn"
           ? "हमसे संपर्क करें"
           : currentLangCode === "guj"
           ? "અમારો સંપર્ક કરો"
           : "Contact Us"}
       </h1>
-      <div className="bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mx-40 mt-4 text-gray-800 grid md:grid-cols-2 md:mb-5 mb-3">
+      <div className="bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mx-40 mt-4 text-gray-800 grid md:grid-cols-2 md:mb-5 mb-3 base_font">
         <div className="mx-4 py-6">
           <EmailIcon className="text-orange-600" />{" "}
           <span className="">{`${
@@ -218,7 +218,7 @@ const ContactUs = () => {
             <div className="flex justify-center mt-10 mb-5">
               <button
                 type="submit"
-                className="w-64 px-12 py-3 rounded-lg text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-64 noto_font px-12 py-3 rounded-lg text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
               >
                 {currentLangCode === "hn"
                   ? "सबमिट"
@@ -232,8 +232,8 @@ const ContactUs = () => {
       </div>
 
       {/* Bussiness with RideBuddy Section */}
-      <div className="bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mx-40 mt-4 text-gray-800">
-        <h1 className="text-xl font-semibold mx-4 text-left text-gray-800 mt-4">
+      <div className="bg-white border border-gray-300 base_font shadow-md rounded-2xl md:mx-20 lg:mx-40 mt-4 text-gray-800">
+        <h1 className="text-xl noto_font mx-4 text-left text-gray-800 mt-4">
           {currentLangCode === "hn"
             ? "RideBuddy के साथ व्यापार"
             : currentLangCode === "guj"
@@ -273,7 +273,7 @@ const ContactUs = () => {
         <hr className="md:mt-10 mt-5 md:mb-10 mb-5 mx-4" />
 
         {/* Offices Section */}
-        <h1 className="text-xl font-semibold mx-4 text-left text-gray-800 mt-4 ">
+        <h1 className="text-xl mx-4 text-left text-gray-800 mt-4 ">
           {currentLangCode === "hn"
             ? "हमारे कार्यालय"
             : currentLangCode === "guj"

@@ -16,9 +16,9 @@ const FAQ = () => {
   return (
     <>
       <Header />
-      <div className="bg-white shadow-md border border-gray-300 rounded-2xl md:mx-20 lg:mr-96 lg:ml-40 mt-4 lg:mt-10 text-gray-800">
+      <div className="bg-white shadow-md border border-gray-300 rounded-2xl md:mx-20 lg:mr-96 lg:ml-40 base_font mt-4 lg:mt-10 text-gray-800">
         <div className="max-w-full mx-auto px-6 py-6">
-          <h1 className="text-2xl font-semibold text-left text-gray-800 mb-3">
+          <h1 className="text-2xl text-left text-gray-800 mb-3 noto_font">
             {currentLangCode === "hn"
               ? "अधिकतर पूछे जाने वाले प्रश्न"
               : currentLangCode === "guj"
@@ -28,7 +28,7 @@ const FAQ = () => {
           <section className="mb-6">
             {faqs.map((item) => (
               <>
-                <p className="text-left text-m font-bold text-gray-600 mb-2">
+                <p className="text-left text-m text-gray-600 mb-2 noto_font">
                   Q.{item?.id}:{" "}
                   {currentLangCode === "hn"
                     ? item.questionHindi

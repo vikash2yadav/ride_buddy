@@ -165,7 +165,7 @@ const Profile = () => {
   return (
     <>
       <Header />
-      <div className="w-full grid grid-cols-1 md:py-4">
+      <div className="w-full grid grid-cols-1 md:py-4 base_font">
         <div className="bg-white border border-gray-300 shadow-md rounded-2xl md:mx-10 lg:mx-60 text-gray-800 md:mb-5 mb-3">
           <form onSubmit={formik.handleSubmit}>
             <div className="px-10 py-6">
@@ -610,7 +610,7 @@ const Profile = () => {
               <div className="flex justify-center mt-5 mb-10">
                 <button
                   type="submit"
-                  className="w-80 px-12 py-3 rounded-lg text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  className="w-80 px-12 py-3 rounded-lg noto_font text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 >
                   {currentLangCode === "hn"
                     ? "सहेजें"

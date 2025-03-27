@@ -13,7 +13,7 @@ import { LocationContext } from "../../context/LocationContext";
 import { VehicleContext } from "../../context/VehicleContext";
 import { CommonContext } from "../../context/CommonContext";
 import Loader from "../../components/layouts/Loader";
-import { HindiDataList } from "../../language/hindi";
+import "./../../global.css";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -50,7 +50,7 @@ const Home = () => {
     <>
       <Header />
 
-      <div className="md:mx-20 md:m-0 relative md:h-[550px] h-[300px] overflow-hidden md:rounded-none">
+      <div className="md:mx-20 md:m-0 relative md:h-[550px] h-[300px] base_font overflow-hidden md:rounded-none">
         <div className="absolute top-0 left-0 w-full h-full transition-transform duration-1000">
           <Link to="/">
             <div className="relative w-full h-full">
@@ -64,7 +64,9 @@ const Home = () => {
               <div className="absolute inset-0 flex flex-col items-center md:justify-center justify-end text-white px-4 z-10">
                 {slides[currentSlide].premiumTitle && (
                   <>
-                    <p className={`w-32 px-1 md:mb-3 mb-1 text-center`}>
+                    <p
+                      className={`w-32 px-1 md:mb-3 mb-1 text-center noto_font`}
+                    >
                       <span className="w-full text-2xl mb-2 text-gray-200">
                         {slides[currentSlide].premiumTitle}
                       </span>
@@ -73,7 +75,7 @@ const Home = () => {
                   </>
                 )}
 
-                <h1 className="md:text-2xl md:flex hidden text-xl text-center font-semibold md:mb-3 mb-1">
+                <h1 className="md:text-2xl md:flex hidden text-xl text-center md:mb-3 mb-1 base_font">
                   {slides[currentSlide].title}
                 </h1>
                 <h1 className="md:text-4xl text-3xl font-bold md:mb-3 mb-1">
@@ -81,7 +83,7 @@ const Home = () => {
                 </h1>
                 <p className="md:text-2xl text-xl font-semibold">
                   {slides[currentSlide].cta}
-                  <ChevronRightIcon className="mx-1 bg-orange-600 rounded-2xl" />{" "}
+                  <ChevronRightIcon className="mx-1 bg-orange-600 rounded-2xl base_font" />{" "}
                 </p>
               </div>
 
@@ -102,7 +104,7 @@ const Home = () => {
           </Link>
         </div>
 
-        <div className="absolute md:flex hidden bottom-2 left-1/2 transform items-end -translate-x-1/2 flex space-x-2 z-20">
+        <div className="absolute md:flex hidden bottom-2 left-1/2 transform items-end -translate-x-1/2 space-x-2 z-20">
           {slides.map((slide, index) => (
             <div
               key={index}
@@ -110,7 +112,7 @@ const Home = () => {
               className={`relative flex flex-col items-start justify-center md:w-32 w-24  rounded-full py-2 px-1 cursor-pointer transition-all duration-300 
       text-white shadow-lg`}
             >
-              <span className="text-sm font-semibold md:mb-2 mb-1">
+              <span className="text-sm font-semibold md:mb-2 mb-1 base_font">
                 {slide.slideTitle}
               </span>
 

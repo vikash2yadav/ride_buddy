@@ -68,7 +68,7 @@ const VehicleDetails = () => {
   return !isLoading ? (
     <>
       <Header />
-      <div className="relative grid md:grid-cols-8 grid-cols-1 gap-3 md:mt-4 md:mx-40 mx-1">
+      <div className="relative grid md:grid-cols-8 grid-cols-1 gap-3 md:mt-4 xl:mx-40 md:mx-10 lg:mx-20 mx-1">
         <div className="md:col-span-5 md:mx-10">
           {/* {image box } */}
           <ImageBox images={vehicleData?.vehicle_images} />
@@ -138,26 +138,27 @@ const VehicleDetails = () => {
 
         {!loadingPrice ? (
           <div className="border border-gray-300 w-full md:mt-4 shadow-md md:h-80 p-4 md:col-span-3 rounded-2xl">
-            <h1 className="md:text-2xl text-xl mb-1">
+            <h1 className="md:text-2xl text-xl mb-1 noto_font">
               {vehicleData?.brand?.name +
                 " " +
                 vehicleData?.modell?.name +
                 " " +
                 vehicleData?.modell?.year}
             </h1>
-            <div className="flex md:text-sm text-xs  items-center text-gray-600 gap-2 md:mb-8 mb-5 w-full">
+            <div className="flex md:text-sm text-xs  items-center text-gray-600 gap-2 md:mb-8 mb-5 w-full base_font">
               <p>{vehicleData?.km_driven + " km"}</p>-
               <p>{vehicleData?.fuel_type}</p>-<p>{vehicleData?.transmission}</p>
               -<p>{vehicleData?.ownership + " Owner"}</p>
             </div>
 
-            <h1 className="md:text-2xl text-xl mb-5 flex gap-2">
-              ₹{current_amount}
+            <h1 className="md:text-2xl text-xl mb-5 flex gap-2 noto_font">
+              <span>₹</span>
+              {current_amount}
               <SelectBox
                 handleChange={(e) => {
                   setCurrentPrice(e?.target?.value);
                 }}
-                className="h-6 w-20"
+                className="h-6 w-20 base_font"
                 options={[
                   { title: "per hour", value: vehicleData?.price_per_hour },
                   { title: "per day", value: vehicleData?.price_per_day },
@@ -165,15 +166,16 @@ const VehicleDetails = () => {
               />
             </h1>
 
-            <p className="mb-5 md:text-sm text-xs">
-              <FmdGoodOutlinedIcon /> {vehicleData?.rto} RTO
+            <p className="mb-5 md:text-sm text-xs base_font">
+              <FmdGoodOutlinedIcon className="text-[#EA850C]" />{" "}
+              {vehicleData?.rto} RTO
             </p>
             {vehicleData?.availability_status === "Available" ? (
-              <p className="text-sm mb-1 text-green-900">
+              <p className="text-sm mb-1 text-green-900 base_font italic">
                 {vehicleData?.availability_status}
               </p>
             ) : (
-              <p className="text-sm mb-1 text-red-900">
+              <p className="text-sm mb-1 text-red-900 base_font">
                 {vehicleData?.availability_status}
               </p>
             )}
@@ -188,7 +190,7 @@ const VehicleDetails = () => {
                 vehicleData?.availability_status !== "Available"
                   ? "bg-white text-dark"
                   : "bg-orange-600 text-white"
-              } rounded-lg shadow-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 mb-5`}
+              } rounded-lg noto_font shadow-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 mb-5`}
             >
               {currentLangCode === "hn"
                 ? "आदेश दें"
@@ -197,7 +199,7 @@ const VehicleDetails = () => {
                 : "Place Order"}
             </button>
 
-            <div className="flex justify-evenly text-gray-600 text-xs ">
+            <div className="flex justify-evenly text-gray-600 text-xs base_font">
               <p className="underline cursor-pointer">
                 {currentLangCode === "hn"
                   ? "रिपोर्ट विज्ञापन"

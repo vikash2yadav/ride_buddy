@@ -4,6 +4,7 @@ import {
   Menu as MenuIcon,
   AccountCircle,
   Search as SearchIcon,
+  Star,
 } from "@mui/icons-material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import {
@@ -14,7 +15,6 @@ import {
   InputBase,
   InputAdornment,
 } from "@mui/material";
-import EastIcon from "@mui/icons-material/East";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { navLinks } from "../../../config/sampleData";
@@ -26,6 +26,8 @@ import { HindiDataList } from "../../../language/hindi";
 import { GujaratiDataList } from "../../../language/gujarati";
 import AvatarImage from "../../AvatarImage";
 import { globalDataList } from "../../../apis/common";
+import "./../../../global.css";
+import FindInPageIcon from "@mui/icons-material/FindInPage";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -166,7 +168,7 @@ const Header = () => {
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
             <div className="flex items-center space-x-2">
-              <Link className="text-2xl font-semibold text-orange-600" to="/">
+              <Link className="text-3xl text-orange-600 noto_font" to="/">
                 {currentLangCode === "hn"
                   ? HindiDataList.header.title
                   : currentLangCode === "guj"
@@ -177,7 +179,7 @@ const Header = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <div className="relative flex items-center">
+              <div className="relative flex items-center ">
                 <form onSubmit={handleSearch}>
                   <InputBase
                     className="border border-gray-300 pl-6 pr-2 py-2 rounded-3xl w-96 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
@@ -204,7 +206,11 @@ const Header = () => {
                 </form>
               </div>
               {searchQuery && (
-                <div className="md:block hidden absolute top-[140px] left-[400px] w-3/6 bg-white h-96 justify-center items-center overflow-y-auto scrollbar-hidden">
+                <div
+                  className={`${
+                    globalSearchDataCount ? "md:block" : "md:flex"
+                  } hidden border absolute top-[140px] left-[400px] w-3/6 bg-white h-96 justify-center items-center overflow-y-auto scrollbar-hidden`}
+                >
                   <div className="relative">
                     {globalSearchDataCount ? (
                       <>
@@ -216,9 +222,9 @@ const Header = () => {
                                 `/${vehicle?.brand?.name}/${vehicle?.category?.name}/${vehicle?.id}`
                               )
                             }
-                            className="mx-2 py-1 rounded-lg  "
+                            className="mx-2 py-1 rounded-lg"
                           >
-                            <div className="mb-4 cursor-pointer hover:bg-gray-100">
+                            <div className="mb-1 cursor-pointer hover:bg-[#ea580c] hover:text-white">
                               <div className="flex p-1 justify-start">
                                 <img
                                   alt="image"
@@ -226,14 +232,14 @@ const Header = () => {
                                   width="100px"
                                   src={vehicle?.vehicle_images[0]?.image_url}
                                 />
-                                <div className="px-4">
-                                  <h3 className="text-xl font-[20px] text-dark">
+                                <div className="px-4 items-center">
+                                  <h3 className="text-xl font-[20px] text-dark noto_font">
                                     {vehicle?.brand?.name}{" "}
                                     {vehicle?.modell?.name} -{" "}
                                     {vehicle?.category?.name}{" "}
                                     {vehicle?.fuel_type}
                                   </h3>
-                                  <p>
+                                  <p className="base_font">
                                     {vehicle?.color} &nbsp;| &nbsp;
                                     {vehicle?.engine_capacity} cc &nbsp; |{" "}
                                     &nbsp;
@@ -251,7 +257,13 @@ const Header = () => {
                       </>
                     ) : (
                       <>
-                        <div className="text-center">No data</div>
+                        <div className="text-center noto_font text-3xl text-[#ea850c]">
+                          <div className="p-4">
+                            {" "}
+                            <FindInPageIcon style={{ fontSize: "60px" }} />
+                          </div>
+                          <div>No data Found </div>
+                        </div>
                       </>
                     )}
                     {/* <div className="sticky bottom-[20px] w-full ">
@@ -268,7 +280,7 @@ const Header = () => {
 
             {/* Right Side: Buttons and User Profile */}
             <div className="hidden md:flex items-center space-x-6">
-              <div>
+              <div className="base_font">
                 <p className="flex justify-center items-center text-xs underline">
                   {currentLang}{" "}
                   <ArrowDropDownIcon onClick={handleLangMenuOpen} />
@@ -279,19 +291,19 @@ const Header = () => {
                   onClose={handleMenuClose}
                 >
                   <MenuItem onClick={() => handleSelectLang("eng")}>
-                    <span className="text-xs">English</span>
+                    <span className="text-xs base_font">English</span>
                   </MenuItem>
                   <MenuItem onClick={() => handleSelectLang("hn")}>
-                    <span className="text-xs">हिन्दी</span>
+                    <span className="text-xs base_font">हिन्दी</span>
                   </MenuItem>
                   <MenuItem onClick={() => handleSelectLang("guj")}>
-                    <span className="text-xs">ગુજરાતી</span>
+                    <span className="text-xs base_font">ગુજરાતી</span>
                   </MenuItem>
                 </Menu>
               </div>
 
               <div>
-                <IconButton className="text-blue-900" size="large">
+                <IconButton className="" size="large">
                   <FavoriteBorderIcon />
                 </IconButton>
               </div>
@@ -299,7 +311,7 @@ const Header = () => {
               {!isLogin ? (
                 <>
                   <button
-                    className="text-gray-900"
+                    className="text-gray-900 hover:text-[#EA850c] transition duration-300 ease-linear"
                     onClick={handleLoginFormOpen}
                     size="large"
                   >
@@ -320,8 +332,8 @@ const Header = () => {
                     >
                       <AvatarImage
                         sx={{
-                          height: 30,
-                          width: 30,
+                          height: 32,
+                          width: 32,
                         }}
                         src={profile}
                       />
@@ -332,7 +344,7 @@ const Header = () => {
                       onClose={handleMenuClose}
                     >
                       <MenuItem onClick={() => navigate("/profile")}>
-                        <span className="text-sm">
+                        <span className="text-sm base_font">
                           {currentLangCode === "hn"
                             ? "मेरी प्रोफाइल"
                             : currentLangCode === "guj"
@@ -341,7 +353,7 @@ const Header = () => {
                         </span>
                       </MenuItem>
                       <MenuItem onClick={handleLogout}>
-                        <span className="text-sm">
+                        <span className="text-sm base_font">
                           {currentLangCode === "hn"
                             ? "लॉग आउट"
                             : currentLangCode === "guj"
@@ -357,8 +369,8 @@ const Header = () => {
 
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center">
-              <div>
-                <p className="flex justify-center items-center text-xs underline">
+              <div className="base_font">
+                <p className="flex justify-center base_font items-center text-xs underline">
                   {setCurrentLang}{" "}
                   <ArrowDropDownIcon onClick={handleLangMenuOpen} />
                 </p>
@@ -565,7 +577,7 @@ const Header = () => {
           )}
         </div>
 
-        <div className="">
+        <div className="border-t-2">
           {/* Desktop Navigation Menu */}
           <nav className="hidden md:flex max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-900">
             <ul className="flex space-x-8 flex-grow">
@@ -573,7 +585,7 @@ const Header = () => {
                 <li key={items.path} className="relative group">
                   <Link
                     to={items?.path}
-                    className="inline-block py-3 text-sm flex justify-center items-center relative"
+                    className="py-3 text-sm flex justify-center items-center relative noto_font"
                   >
                     {items.title} <ArrowDropDownIcon />
                     {/* Orange bar appears on hover */}
@@ -581,7 +593,7 @@ const Header = () => {
                   </Link>
 
                   {/* Dropdown Menu */}
-                  <div className="absolute z-50 left-0 right-0 bg-white w-48 border border-gray-300 rounded hidden group-hover:block">
+                  <div className="absolute z-50 base_font left-0 right-0 bg-white w-48 border border-gray-300 rounded hidden group-hover:block">
                     <ul className="p-1">
                       {items.submenu &&
                         items.submenu.map((subItem, idx) => (
@@ -604,8 +616,8 @@ const Header = () => {
 
             {/* Button Container */}
             <div className="flex justify-end items-center text-m">
-              <LocationOnIcon className="text-gray-700" />
-              <button className="text-gray-900 lg:pl-1">
+              <LocationOnIcon className="text-[#EA850C]" />
+              <button className="text-gray-900 lg:pl-1 noto_font">
                 {currentLangCode === "hn"
                   ? "शहर चुनें"
                   : currentLangCode === "guj"
@@ -620,7 +632,7 @@ const Header = () => {
               >
                 {cityList?.map((city) => (
                   <MenuItem key={city?.id}>
-                    <span className="text-sm">{city.name}</span>
+                    <span className="text-sm base_font">{city.name}</span>
                   </MenuItem>
                 ))}
               </Menu>

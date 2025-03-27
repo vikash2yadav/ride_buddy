@@ -43,9 +43,9 @@ const Investor = () => {
   return (
     <>
       <Header />
-      <div className="md:mx-20 lg:mr-96 lg:ml-40 mt-4 lg:h-80 lg:mt-10 text-gray-800">
+      <div className="md:mx-20 lg:mr-96 lg:ml-40 mt-4 lg:h-80 lg:mt-10 text-gray-800 base_font">
         <div className="max-w-full mx-auto px-6 py-6">
-          <h1 className="text-4xl text-left text-gray-800 mb-6">
+          <h1 className="text-4xl text-left noto_font text-gray-800 mb-6">
             {currentLangCode === "hn"
               ? "हमारे निवेशक"
               : currentLangCode === "guj"

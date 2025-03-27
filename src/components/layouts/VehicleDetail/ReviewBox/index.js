@@ -26,7 +26,7 @@ const ReviewBox = ({ title, data }) => {
     <>
       <div className="border text-gray-800 border-gray-300 py-4 rounded-2xl shadow-sm mb-3">
         <div className="mx-8">
-          <h1 className="text-xl font-medium mb-3">{title}</h1>
+          <h1 className="text-xl font-medium mb-3 noto_font">{title}</h1>
 
           {data?.length > 0 ? (
             <>
@@ -35,19 +35,19 @@ const ReviewBox = ({ title, data }) => {
                   style: { fontSize: "40px" },
                 })}
 
-                <p className="mx-2 font-medium">{averageRating}</p>
-                <p className="text-sm w-32">
+                <p className="mx-2 font-medium noto_font">{averageRating}</p>
+                <p className="text-sm w-32 base_font">
                   {currentLangCode === "hn"
                     ? "समग्र रेटिंग के आधार पर"
                     : currentLangCode === "guj"
                     ? "પર આધારિત એકંદર રેટિંગ"
-                    : "Overall Rating Based on"}
+                    : "Overall Rating Based on"} &nbsp;
                   <span className="font-medium">{data?.length} reviews</span>
                 </p>
               </div>
-              <div className="">
+              <div className="base_font">
                 <h1 className="text-lg font-medium mb-5">
-                  {data?.length}
+                  {data?.length} &nbsp;
                   {currentLangCode === "hn"
                     ? "समीक्षाएं और रेटिंग"
                     : currentLangCode === "guj"
@@ -61,11 +61,11 @@ const ReviewBox = ({ title, data }) => {
                       <div className="flex items-center mb-3 cursor-pointer">
                         <Avatar />
                         <div className="mx-3">
-                          <p className="text-xs">
+                          <p className="text-xs noto_font">
                             {item?.user?.fullName} wrote a review{" "}
                             {formatDate(item?.createdAt)}
                           </p>
-                          <p className="font-medium">
+                          <p className="font-medium noto_font">
                             {item?.rating}
                             {React.cloneElement(
                               <GradeIcon className="mx-1 text-orange-400" />,
@@ -76,7 +76,7 @@ const ReviewBox = ({ title, data }) => {
                           </p>
                         </div>
                       </div>
-                      <p className="text-sm text-800 font-medium mb-3">
+                      <p className="text-sm text-800 font-medium mb-3 base_font">
                         {item?.review_text}
                       </p>
                       <div className="flex gap-2 items-center text-xs">
@@ -100,7 +100,7 @@ const ReviewBox = ({ title, data }) => {
           ) : (
             <>
             <div className="flex justify-center items-center">
-                <div className="mt-5">No Data Found</div>
+                <div className="mt-5 noto_font text-2xl text-[#EA850C]">No Data Found</div>
             </div>
             </>
           )}

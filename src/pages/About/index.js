@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
 import { CommonContext } from "../../context/CommonContext";
+import { Link } from "react-router-dom";
 
 const About = () => {
   const { currentLangCode } = useContext(CommonContext);
@@ -15,9 +16,9 @@ const About = () => {
   return (
     <>
       <Header />
-      <div className="bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mr-96 lg:ml-40 mt-4 lg:mt-10 text-gray-800">
+      <div className="bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mr-96 lg:ml-40 mt-4 lg:mt-10 text-gray-800 base_font">
         <div className="max-w-full mx-auto px-6 py-6">
-          <h1 className="text-2xl font-semibold text-left text-gray-800 mb-4">
+          <h1 className="text-2xl text-left text-gray-800 mb-4 noto_font">
             {currentLangCode === "hn"
               ? "राइडबडी के बारे में"
               : currentLangCode === "guj"
@@ -61,13 +62,13 @@ const About = () => {
               ? "અમારા ઉત્પાદન પ્રસ્તાવોમાં વિવિધતા લાવવા માટે, અમે કાર ઇન્શ્યોરન્સ વ્યવસાયમાં પ્રવેશ કર્યો છે।"
               : "To diversify our product offerings we have ventured into car insurance business through"}{" "}
             <span className="font-semibold underline">
-              <a href="#">RideBuddyInsurance.com</a>
+              <Link href="#" className="hover:text-[#EA850C]">RideBuddyInsurance.com</Link>
             </span>
           </p>
 
           <div className="space-y-10">
             <section>
-              <h1 className="text-2xl font-semibold text-left text-gray-800 mb-4">
+              <h1 className="text-2xl font-semibold text-left text-gray-800 mb-4 noto_font">
                 {currentLangCode === "hn"
                   ? "निवेशक और शेयरधारक"
                   : currentLangCode === "guj"

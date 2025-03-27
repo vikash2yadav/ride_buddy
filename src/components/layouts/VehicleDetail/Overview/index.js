@@ -16,7 +16,7 @@ const Overview = ({ title, data }) => {
   return (
     <>
       <div className="border border-gray-300 text-gray-800 py-4 rounded-2xl shadow-sm mb-3">
-        <h1 className="text-xl font-medium mx-8 mb-5">{title}</h1>
+        <h1 className="text-xl font-medium mx-8 mb-5 noto_font">{title}</h1>
 
         <div className="mx-8 grid md:grid-cols-2 gap-4 text-gray-800 mb-5">
           <Rows

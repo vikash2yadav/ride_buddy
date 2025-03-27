@@ -21,9 +21,9 @@ const PrivacyPolicy = () => {
   return (
     <>
       <Header />
-      <div className="bg-white shadow-md border border-gray-300 rounded-2xl md:mx-20 lg:mr-96 lg:ml-40 mt-4 lg:mt-10 text-gray-800">
+      <div className="bg-white base_font shadow-md border border-gray-300 rounded-2xl md:mx-20 lg:mr-96 lg:ml-40 mt-4 lg:mt-10 text-gray-800">
         <div className="max-w-full mx-auto px-6 py-6">
-          <h1 className="text-2xl font-semibold text-left text-gray-800 mb-4">
+          <h1 className="text-2xl text-left text-gray-800 mb-4 noto_font">
             {currentLangCode === "hn"
               ? "गोपनीयता नीति"
               : currentLangCode === "guj"
@@ -65,7 +65,7 @@ const PrivacyPolicy = () => {
 
           <div className="space-y-10">
             <section>
-              <h1 className="text-2xl font-semibold text-left text-gray-800 mb-4">
+              <h1 className="text-2xl text-left text-gray-800 mb-4 noto_font">
                 {currentLangCode === "hn"
                   ? "नियम और शर्तें:"
                   : currentLangCode === "guj"
@@ -73,7 +73,7 @@ const PrivacyPolicy = () => {
                   : "Terms & Conditions:"}
               </h1>
 
-              <p className="text-lg text-gray-800 font-semibold mb-4">
+              <p className="text-lg text-gray-800 mb-4">
                 {currentLangCode === "hn"
                   ? "स्वीकृति:"
                   : currentLangCode === "guj"
@@ -202,7 +202,7 @@ const PrivacyPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              <h2 className="text-2xl text-gray-800 mb-4 noto_font">
                 {currentLangCode === "hn"
                   ? "हमसे संपर्क करें"
                   : currentLangCode === "guj"

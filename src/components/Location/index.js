@@ -5,7 +5,7 @@ const Location = ({ title, locationList }) => {
   return (
     <div className="relative bg-white border border-gray-300 shadow-md rounded-2xl md:mx-20 lg:mx-40 md:mt-8 mt-3 text-gray-800">
       <div className="max-w-full mx-auto py-4">
-        <h1 className="mx-4 md:text-2xl text-xl text-left font-medium text-gray-800 mb-6">
+        <h1 className="mx-4 md:text-2xl text-xl text-left font-medium text-gray-800 mb-6 noto_font">
           {title}
         </h1>
 
@@ -28,7 +28,7 @@ const Location = ({ title, locationList }) => {
                   Book in
                 </p>
                 {/* City Name */}
-                <p className="text-center md:text-base text-xs text-gray-800">
+                <p className="text-center md:text-base text-xs text-gray-800 base_font">
                   {city?.name}
                 </p>
               </div>

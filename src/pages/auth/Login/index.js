@@ -86,7 +86,7 @@ const Login = () => {
     <>
       {modelOpen && (
         <div
-          className="fixed inset-0 bg-gray-800 bg-opacity-60 flex justify-center items-center z-50"
+          className="fixed inset-0 bg-gray-800 bg-opacity-60 flex justify-center items-center z-50 base_font"
           onClick={() => setModelOpen(false)}
         >
           <div
@@ -102,7 +102,7 @@ const Login = () => {
               </div>
             )}
 
-            <h2 className="text-3xl font-semibold text-center text-gray-800 mb-4">
+            <h2 className="text-3xl font-semibold text-center noto_font text-gray-800 mb-4">
               {currentLangCode === "hn"
                 ? "लॉग इन"
                 : currentLangCode === "guj"
@@ -226,7 +226,7 @@ const Login = () => {
                 </div>
                 <Link
                   to="/reset-password"
-                  className="text-sm text-blue-600 hover:text-blue-800"
+                  className="text-sm text-blue-600 hover:text-blue-800 noto_font"
                 >
                   {currentLangCode === "hn"
                     ? "पासवर्ड भूल गए"
@@ -242,7 +242,7 @@ const Login = () => {
                     navigate("/");
                   }}
                   type="submit"
-                  className="w-full py-3 bg-white text-black border border-gray-300 rounded-lg shadow-md mb-5"
+                  className="w-full py-3 noto_font bg-white text-black border border-gray-300 rounded-lg shadow-md mb-5"
                 >
                   {currentLangCode === "hn"
                     ? "पीछे"
@@ -252,7 +252,7 @@ const Login = () => {
                 </button>
                 <button
                   type="submit"
-                  className="w-full py-3 bg-orange-600 text-white rounded-lg shadow-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 mb-5"
+                  className="w-full py-3 noto_font bg-orange-600 text-white rounded-lg shadow-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 mb-5"
                 >
                   {currentLangCode === "hn"
                     ? "लॉग इन करें"
@@ -271,7 +271,7 @@ const Login = () => {
                   : "Don't have an account?"}
                 <Link
                   to="/register"
-                  className="text-blue-600 hover:text-blue-800"
+                  className="text-blue-600 hover:text-blue-800 noto_font"
                 >
                   {currentLangCode === "hn"
                     ? " साइन अप करें"

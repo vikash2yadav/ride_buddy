@@ -69,14 +69,14 @@ const ResetPassword = () => {
   return (
     modelOpen && (
       <div
-        className="fixed inset-0 bg-gray-800 bg-opacity-60 flex justify-center items-center z-50"
+        className="fixed inset-0 bg-gray-800 bg-opacity-60 flex base_font justify-center items-center z-50"
         onClick={() => setModelOpen(false)}
       >
         <div
           className="bg-white rounded-lg w-full sm:w-96 p-8 shadow-lg relative"
           onClick={(e) => e.stopPropagation()}
         >
-          <h2 className="text-3xl font-semibold text-center text-gray-800 mb-4">
+          <h2 className="text-3xl noto_font font-semibold text-center text-gray-800 mb-4">
             {!verifyModel
               ? currentLangCode === "hn"
                 ? "अपना पासवर्ड रीसेट करें"
@@ -143,7 +143,7 @@ const ResetPassword = () => {
               <div className="flex justify-center gap-2">
                 <button
                   type="submit"
-                  className="w-full py-3 bg-orange-600 text-white rounded-lg shadow-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 mb-5"
+                  className="w-full py-3 bg-orange-600 noto_font text-white rounded-lg shadow-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 mb-5"
                 >
                   {currentLangCode === "hn"
                     ? "ओटीपी भेजें"
@@ -246,7 +246,7 @@ const ResetPassword = () => {
               ? "પાસવર્ડ યાદ રાખો"
               : `Remember password`}
             !{" "}
-            <Link to="/login" className="text-blue-600 hover:text-blue-800">
+            <Link to="/login" className="text-blue-600 noto_font hover:text-blue-800">
               {currentLangCode === "hn"
                 ? "लॉग इन करें"
                 : currentLangCode === "guj"

@@ -12,10 +12,10 @@ const Detailkeys = ({ keys, activeIndex, setActiveIndex }) => {
             <>
               <div
                 key={index}
-                className={`text-sm ml-8 py-1 font-bold cursor-pointer inline-block whitespace-nowrap 
+                className={`text-sm ml-8 py-1 font-bold cursor-pointer inline-block whitespace-nowrap base_font
             ${
               activeIndex === index
-                ? "text-gray-800 border-b-2 border-orange-600"
+                ? "text-[#EA850C] border-b-2 border-[#EA850C] italic font-serif"
                 : "text-gray-500"
             }`}
                 onClick={() => setActiveIndex(index)}
